@@ -16,5 +16,3 @@ export default function MenuBar() {
         </div>
     )
 };
-
-// style={{ textDecoration: 'none' }}
