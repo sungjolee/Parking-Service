@@ -1,14 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
-class Review(models.Model):
-    title = models.CharField((""), max_length=50)
-    content = models.TextField()
-    updated_at = models.DateTimeField(auto_now=True)
-    
-
-
 class TbParkingDetailBlue(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.     
     time = models.DateTimeField(db_column='TIME', blank=True, null=True)  # Field name made lowercase.

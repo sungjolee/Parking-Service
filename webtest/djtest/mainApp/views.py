@@ -1,18 +1,57 @@
+from ast import Or
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import Http404
 
 from .serializers import ReviewSerializer
-from .models import Review
+from .models import TbParkingDetailBlue
+
+from django.db import connection
 # Create your views here.
+def toDict(queryResult,columnResult):
+    if queryResult ==None or columnResult==None:
+        return None
+    Dict = dict(zip(columnResult, queryResult))
+    return Dict
 
 class ReviewList(APIView):
+
     def get(self, request):
-        reviews = Review.objects.all()
+        reviews = TbParkingDetailBlue.objects.all()
+        cursor = connection.cursor()
+        strSQL = "select * from TB_PARKING_DETAIL_BLUE"
+        result = cursor.execute(strSQL)
+        reviews = cursor.fetchall()
         
-        serializer = ReviewSerializer(reviews, many=True)
-        return Response(serializer.data)
+        connection.commit()
+        connection.close()
+        
+        
+        cursor = connection.cursor()
+        columnSQL = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='tb_parking_detail_blue' ORDER BY ORDINAL_POSITION;" 
+        columresult = cursor.execute(columnSQL)
+        columnnames=cursor.fetchall()
+        
+        connection.commit()
+        connection.close()
+        
+        # print(result)
+        keys=[]
+        for columnname in columnnames:
+            keys.append(columnname[0])
+        
+        print(keys)
+        print(reviews)            
+        Dict = toDict(reviews[0],keys)
+        
+        emptyspots=0
+        for i in list(Dict.values())[2:]:
+            if i==0:
+                emptyspots+=1
+        
+        
+        return Response(Dict)
     
     def post(self, request):
         serializer = ReviewSerializer(data = request.data)
@@ -24,8 +63,8 @@ class ReviewList(APIView):
 class ReviewDetail(APIView):
     def get_object(self,pk):
         try:
-            return Review.objects.get(pk=pk)
-        except Review.DoesNotExist:
+            return TbParkingDetailBlue.objects.get(pk=pk)
+        except TbParkingDetailBlue.DoesNotExist:
             raise Http404
         
     def get(self, request,pk, format=None):
