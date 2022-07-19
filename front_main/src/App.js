@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import Parking from "./components/Parking";
 import Search from "./components/Search";
 import MenuBar from "./components/MenuBar";
+import GreenParking from "./map/GreenParking";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Home />} /> 
           <Route path="/Search" element={<Search />} /> 
           <Route path="/Parking" element={<Parking />} />
+          <Route path="/GreenParking" element={<GreenParking />} />
         </Routes>
         <MenuBar />
       </div>
