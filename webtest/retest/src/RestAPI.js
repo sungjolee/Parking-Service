@@ -48,7 +48,7 @@ function RestAPI() {
           <div className="list">
             <span>
               {e.id}번, {e.title}, {e.content}, {e.update_at}
-            </span>
+            </span>W
             <button
               className="btn-delete"
               onClick={() => {

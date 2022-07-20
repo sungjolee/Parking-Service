@@ -15,6 +15,7 @@ def toDict(queryResult,columnResult):
     Dict = dict(zip(columnResult, queryResult))
     return Dict
 
+
 class ReviewList(APIView):
 
     def get(self, request):
@@ -45,13 +46,25 @@ class ReviewList(APIView):
         print(reviews)            
         Dict = toDict(reviews[0],keys)
         
-        emptyspots=0
-        for i in list(Dict.values())[2:]:
-            if i==0:
-                emptyspots+=1
-        
-        
-        return Response(Dict)
+        emptySpots=0
+        totalSpots=0
+        emptySpotList=[]
+        parkedSpotList=[]
+        tmpDict={}
+        for key, value in (Dict.items()):
+            if key[0]=='s':
+                if value==0:
+                    emptySpots+=1
+                    emptySpotList.append(key)    
+                totalSpots+=1
+            else:
+                tmpDict[key]=value
+            
+                
+        tmpDict['emptySpotNow'] = emptySpots
+        tmpDict['totalSpot'] = totalSpots
+        tmpDict['emptySpotList'] = emptySpotList
+        return Response(tmpDict)
     
     def post(self, request):
         serializer = ReviewSerializer(data = request.data)
