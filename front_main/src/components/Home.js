@@ -1,13 +1,9 @@
-import Tmap from './Tmap'
+import Tmap from "./Tmap";
 
-export default function Home() {
+export default function MenuBar() {
     return (
         <div>
-            <div>
-                여긴 메인입니다.
-                <Tmap />
-            </div>
+            <Tmap />
         </div>
     )
 };
-

@@ -1,9 +1,8 @@
 import './App.css';
 import Home from "./components/Home";
 import Parking from "./components/Parking";
-import Search from "./components/Search";
+import SearchPage from "./components/Search/SearchPage";
 import MenuBar from "./components/MenuBar";
-import GreenParking from "./map/GreenParking";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -12,9 +11,8 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} /> 
-          <Route path="/Search" element={<Search />} /> 
+          <Route path="/SearchPage" element={<SearchPage />} /> 
           <Route path="/Parking" element={<Parking />} />
-          <Route path="/GreenParking" element={<GreenParking />} />
         </Routes>
         <MenuBar />
       </div>
