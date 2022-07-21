@@ -1,11 +1,12 @@
-import Box from "../components/Box";
 
+import Box from "./Box";
+import api from "./api";
 
 export default function Parking() {
     return (
         <div>
             <ul>
-                <li> / (빈공간/총대수)</li>
+                <li> {parking.emptySpotNow}/{parking.totalSpot} (빈공간/총대수)</li>
             </ul>
             <ui>
                 <Box name='첫번째'/>
