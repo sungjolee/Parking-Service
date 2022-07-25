@@ -1,6 +1,5 @@
-import styled from 'styled-components';
 
-const Wrapper = styled.div`
+
   .menuBar {
     position: fixed;
     bottom: 20px;
@@ -52,9 +51,6 @@ const Wrapper = styled.div`
     color: white;
   }
 
-`;
-
-export default Wrapper;
 
 /*
 // 버튼이 클릭되었을 때 보라색으로 변경되게 만들기

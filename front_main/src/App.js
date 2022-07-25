@@ -1,8 +1,8 @@
 import './App.css';
-import Home from "./components/Home";
-import Parking from "./components/Parking";
+import Home from "./components/Home/Home";
+import Parking from "./components/Parking/Parking";
 import SearchPage from "./components/Search/SearchPage";
-import MenuBar from "./components/MenuBar";
+import MenuBar from "./components/Static/MenuBar";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
