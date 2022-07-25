@@ -9,7 +9,7 @@ const HeaderContainer = styled.div`
 `
 const Title = styled.span`
   float: left;
-  font-weight: 400;
+  font-weight: 500;
   color: #666;
 `
 const RemoveText = styled.span`
@@ -31,21 +31,33 @@ const KeywordContainer = styled.li`
   }
 `
 
-const RemoveButton = styled.button`
+// RemoveButton 원본
+// const RemoveButton = styled.button`
+//   float: right;
+//   color: gray;
+//   border: 2px solid gray;
+//   background-color: white;
+//   padding: 3px 5px;
+//   border-radius: 12px;
+//   font-size: 11px;
+//   font-weight: 500;
+
+// `
+
+const RemoveButton = styled.span`
   float: right;
-  color: #4F4587;
-  border: 2.5px solid #4F4587;
-  background-color: white;
-  padding: 3px 5px;
-  border-radius: 13px;
-  font-size: 13px;
-  font-weight: 800;
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  background-image: url("/images/clear.png");
 
 `
 
 const Keyword = styled.span`
-  font-size: 18px;
+  float: left;
+  font-size: 16px;
   font-weight: 400;
+  font-family: "NanumGothic-Bold";
 `
 
 function History({ keywords, onRemoveKeyword, onClearKeywords }) {
@@ -71,7 +83,7 @@ function History({ keywords, onRemoveKeyword, onClearKeywords }) {
                   onRemoveKeyword(id)
                 }}
               >
-                삭제
+                
               </RemoveButton>
             </KeywordContainer>
           )

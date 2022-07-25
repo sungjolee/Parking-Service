@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 export default function MenuBar() {
     return (
-        <div>
+        <Wrapper>
             <div className="menuBar">
             <button className="searchPage">
                 <Link to={`/SearchPage`}>Search</Link>
@@ -16,6 +16,6 @@ export default function MenuBar() {
                 <Link to={`/SearchPage`}>Parking</Link>
             </button>
             </div>
-        </div>
+        </Wrapper>
     )
 };

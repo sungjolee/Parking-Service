@@ -1,9 +1,9 @@
 import Tmap from "./Tmap";
 
-export default function MenuBar() {
+export default function Home() {
     return (
         <div>
             <Tmap />
         </div>
     )
-};
+}

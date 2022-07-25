@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
-// import SearchIconSample from './SearchIconSample.png'
 
 const horizontalCenter = css`
   position: absolute;
@@ -32,6 +31,8 @@ const ArrowIcon = styled(Link)`
   background-size: 467px 442px;
   background-repeat: no-repeat;
 `
+
+// const SearchIcon = styled.span`
 // ${horizontalCenter}
 // right: 18px;
 // width: 24px;
@@ -41,20 +42,25 @@ const ArrowIcon = styled(Link)`
 // overflow: hidden;
 // color: transparent;
 // vertical-align: middle;
-// background-image: url(https://s.pstatic.net/static/www/m/uit/2020/sp_search.623c21.png);
+// background-image: url(./SearchIconSample.png);
 // background-size: 467px 442px;
 // background-repeat: no-repeat;
+// `
+
 
 const SearchIcon = styled.span`
-
-  background-image: url("./SearchIconSample.png");
-
+  ${horizontalCenter}
+  right: 18px;
+  width: 27px;
+  height: 27px;
+  background-size: cover;
+  background-image: url("/images/searchIcon.png");
 `
 
 //글자를 입력하면 RemoveIcon이 나오게 되고 누르면 input의 value값이 사라집니다
 const RemoveIcon = styled.span`
   ${horizontalCenter}
-  right: 0px;
+  right: 8px;
   width: 20px;
   height: 20px;
   background-position: -389px -29px;
@@ -71,7 +77,7 @@ const InputContainer = styled.div`
   position: relative;
 `
 
-const Input = styled.input`
+const Input = styled.input`q
   width: 100%;
   height: 30px;
   background-color: #fff;
@@ -97,11 +103,13 @@ export default function SearchBar({ onAddKeyword }) {
   const handleKeyword = (e) => {
     setKeyword(e.target.value)
   }
+
   const handleEnter = (e) => {
     if (keyword && e.keyCode === 13) {
       //엔터일때 부모의 addkeyword에 전달
       onAddKeyword(keyword)
       setKeyword('')
+      console.log(e.keyCode)
     }
   }
 
@@ -129,10 +137,9 @@ export default function SearchBar({ onAddKeyword }) {
           onChange={handleKeyword}
           onKeyDown={handleEnter}
         />
-
         {keyword && <RemoveIcon onClick={handleClearKeyword} />}
       </InputContainer>
-      <SearchIcon />
+      <SearchIcon/>
     </Container>
   )
 }
