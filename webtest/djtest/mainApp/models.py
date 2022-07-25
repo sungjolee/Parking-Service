@@ -35,4 +35,29 @@ class TbParkingMain(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'tb_parking_main'
+        db_table = 'TB_PARKING_MAIN'
+        
+        
+        
+class TbParkingLog(models.Model):
+    time = models.DateTimeField(db_column='TIME', primary_key=True)  # Field name made lowercase.
+    zone_id = models.CharField(db_column='ZONE_ID', max_length=45)  # Field name made lowercase.
+    total_spots = models.CharField(db_column='TOTAL_SPOTS', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    equiped_spots = models.CharField(db_column='EQUIPED_SPOTS', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    equiped_spots_list = models.CharField(db_column='EQUIPED_SPOTS_LIST', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    empty_spots_list = models.CharField(db_column='EMPTY_SPOTS_LIST', max_length=45, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TB_PARKING_LOG'
+        unique_together = (('time', 'zone_id'),)
+        
+        
+class TbParkingDetail(models.Model):
+    serial_id = models.CharField(max_length=45, blank=True, null=True)
+    normal_slots = models.CharField(max_length=45, blank=True, null=True)
+    special_slots = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'TB_PARKING_DETAIL'
