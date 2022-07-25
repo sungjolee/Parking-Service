@@ -96,7 +96,7 @@ class ReviewList(APIView):
         # tmpDict['emptySpotNow'] = emptySpots
         # tmpDict['totalSpot'] = totalSpots
         # tmpDict['emptySpotList'] = emptySpotList
-        return Response(reviews)
+        return Response(1)
     
     def post(self, request):
         serializer = ReviewSerializer(data = request.data)

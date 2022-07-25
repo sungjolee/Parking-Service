@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'parking',
         'USER' : 'root',
         'PASSWORD' : 'parkingC103!',
-        'HOST':'localhost',
+        'HOST':'i7c103.p.ssafy.io',
         'PORT':'3306',
     }
 }

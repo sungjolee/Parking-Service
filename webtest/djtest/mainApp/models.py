@@ -28,17 +28,16 @@ class TbParkingDetailBlue(models.Model):
         db_table = 'tb_parking_detail_blue'
 
 
-class TbParkingMain(models.Model):
-    name = models.CharField(db_column='NAME', max_length=45)  # Field name made lowercase.    
-    latitude = models.CharField(max_length=45)
-    longitude = models.CharField(max_length=45)
+class TbParkingDetail(models.Model):
+    parking_name = models.CharField(max_length=45, blank=True, null=True)
+    normal_slots = models.CharField(max_length=45, blank=True, null=True)
+    special_slots = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'TB_PARKING_MAIN'
-        
-        
-        
+        db_table = 'TB_PARKING_DETAIL'
+
+
 class TbParkingLog(models.Model):
     time = models.DateTimeField(db_column='TIME', primary_key=True)  # Field name made lowercase.
     zone_id = models.CharField(db_column='ZONE_ID', max_length=45)  # Field name made lowercase.
@@ -51,13 +50,14 @@ class TbParkingLog(models.Model):
         managed = False
         db_table = 'TB_PARKING_LOG'
         unique_together = (('time', 'zone_id'),)
-        
-        
-class TbParkingDetail(models.Model):
-    serial_id = models.CharField(max_length=45, blank=True, null=True)
-    normal_slots = models.CharField(max_length=45, blank=True, null=True)
-    special_slots = models.CharField(max_length=45, blank=True, null=True)
+
+
+class TbParkingMain(models.Model):
+    serial_id = models.CharField(primary_key=True, max_length=45)
+    parking_name = models.CharField(max_length=45, blank=True, null=True)
+    latitude = models.CharField(max_length=45, blank=True, null=True)
+    longitude = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'TB_PARKING_DETAIL'
+        db_table = 'TB_PARKING_MAIN'

@@ -40,7 +40,7 @@
         {% for i in mains %}    
         <tr>
             <td>{{forloop.counter}}</td>
-            <td>{{i.id}}</td>
+            <td>{{i.serial_id}}</td>
             <td>{{i.name}}</td>
             <td>{{i.latitude}}</td>
             <td>{{i.longitude}}</td>
@@ -54,7 +54,6 @@
     <thead>
         <tr>
             <th>detail</th>
-            <th>id</th>
             <th>serial</th>
             <th>일반슬롯</th>
             <th>특별슬롯</th>
@@ -65,8 +64,7 @@
         {% for i in details %}    
         <tr>
             <td>{{forloop.counter}}</td>
-            <td>{{i.id}}</td>
-            <td>{{i.serial_id}}</td>
+            <td>{{i.parking_name}}</td>
             <td>{{i.normal_slots}}</td>
             <td>{{i.special_slots}}</td>
         </tr>
