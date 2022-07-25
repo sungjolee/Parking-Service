@@ -45,4 +45,4 @@ cv2.destroyAllWindows()
 ```
 * 결과
 
-![Result](/2TH_PJT/Embedded/Test_1/result.jpg)
+![Result](/Image/result.jpg)
