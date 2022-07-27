@@ -1,25 +1,25 @@
 import React, { useState,useEffect } from "react";
 import axios from 'axios';
 
-const back_url = 'https://3.34.176.114:8000/review'
+const baseUrl = 'https://3.34.176.114:8000/review'
 
 export default function Parking_data() {
   const [parkingData, setParkingData] = useState(null)
 
   const fetchData = async () => {
-    const response = await axios.get(back_url)
+    const response = await axios.get(baseUrl)
     setParkingData(response.data);
     };
 
 
   useEffect(() => {
-    // 아래와 같은 코드
-    // axios.get(back_url)
-    //      .then(response => setParkingData(response.data))
-    axios({
-      method:'GET',
-      url:'back_url',
-    }).then(response => setParkingData(response.data))
+    axios.get(baseUrl)
+         .then(response => setParkingData(response.data))
+    // 위와 같은코드
+    // axios({
+    //   method:'GET',
+    //   url:'baseUrl',
+    // }).then(response => setParkingData(response.data))
   });
 
   // 위의 useEffect()와 같은 코드
@@ -30,7 +30,7 @@ export default function Parking_data() {
   const parkingInfor = async (e) => {
     e.preventDefault();
     const parkingName = e.target.parkingName.value;
-    await axios.post(back_url, { parkingName });
+    await axios.post(baseUrl, { parkingName });
     fetchData();
   };
 

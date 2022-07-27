@@ -1,21 +1,34 @@
 import Box from "./Box";
-// import api from "./api";
+// import api from "./Api";
 
 export default function Parking() {
     return (
         <div>
+            <div>
+              ( 빈공간 / 총대수 )
+            </div>
+                <ul>
+                    <Box> </Box>
+                    <Box />
+                    <Box />
+                    <Box />
+                    <Box />
+                    <Box />
+                    <Box />
+                </ul> 
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             <ul>
-                {/* {parking.emptySpotNow}/{parking.totalSpot}  */}
-                <li>  (빈공간/총대수)</li>
+                <Box />
+                <Box />
+                <Box />
+                <Box />
+                <Box />
             </ul>
-            <ui>
-                <Box />
-                <Box />
-                <Box />
-                <Box />
-                <Box />
-            </ui> <br />
-
         </div>
     )
 };
