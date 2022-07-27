@@ -7,8 +7,8 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .serializers import ReviewSerializer
-from .models import TbParkingDetail,TbParkingDetailBlue,TbParkingLog,TbParkingMain
+# from .serializers import ReviewSerializer
+from .models import TbParkingDetail,TbParkingLog,TbParkingMain
 
 from django.db import connection
 # Create your views here.

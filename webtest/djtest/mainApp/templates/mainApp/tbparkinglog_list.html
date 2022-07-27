@@ -14,12 +14,12 @@
         {% for i in logs %}    
         <tr>
             <td>{{forloop.counter}}</td>
-            <td>{{i.zone_id}}</td>
             <td>{{i.time}}</td>
-            <td>{{i.total_spots}}</td>
-            <td>{{i.equiped_spots}}</td>
-            <td>{{i.equiped_spots_list}}</td>
-            <td>{{i.empty_spots_list}}</td>
+            <td>{{i.serial_id}}</td>
+            <td>{{i.enable}}</td>
+            <td>{{i.ocupiedlist}}</td>
+            <td>{{i.total}}</td>
+            <td>{{i.enablelist}}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -40,7 +40,7 @@
         {% for i in mains %}    
         <tr>
             <td>{{forloop.counter}}</td>
-            <td>{{i.serial_id}}</td>
+            <td>{{i.id}}</td>
             <td>{{i.name}}</td>
             <td>{{i.latitude}}</td>
             <td>{{i.longitude}}</td>
@@ -64,9 +64,9 @@
         {% for i in details %}    
         <tr>
             <td>{{forloop.counter}}</td>
-            <td>{{i.parking_name}}</td>
-            <td>{{i.normal_slots}}</td>
-            <td>{{i.special_slots}}</td>
+            <td>{{i.serial_id}}</td>
+            <td>{{i.id}}</td>
+            <td>{{i.totalspots}}</td>
         </tr>
         {% endfor %}
     </tbody>
