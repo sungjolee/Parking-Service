@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, BrowserRouter, Route } from 'react-router-dom'
+import axios from 'axios'
+
 
 const horizontalCenter = css`
   position: absolute;
@@ -92,6 +94,9 @@ const Input = styled.input`q
   `}
 `
 
+const baseURL = 'http://i7c103.p.ssafy.io:8000/review/' // 기본 url
+
+
 export default function SearchBar({ onAddKeyword }) {
   // 1. 검색어를 state 로 다루도록 변경
   // 2. 이벤트 연결
@@ -104,14 +109,28 @@ export default function SearchBar({ onAddKeyword }) {
     setKeyword(e.target.value)
   }
 
+
+  let latitude = 0    // 위도
+  let longitude = 0   // 경도
   const handleEnter = (e) => {
     if (keyword && e.keyCode === 13) {
       //엔터일때 부모의 addkeyword에 전달
       onAddKeyword(keyword)
       setKeyword('')
       console.log(e.keyCode)
+
+      if (datas.NAME === keyword) {
+        latitude = datas.LATITUDE
+        longitude =datas.LONGITUDE
+        console.log(latitude)
+        console.log(longitude)
+        window.location.href = '/'
+      }
     }
   }
+
+
+
 
   const handleClearKeyword = () => {
     setKeyword('')
@@ -124,7 +143,18 @@ export default function SearchBar({ onAddKeyword }) {
       //keyword가 있으면 true, 없으면 false가 리턴이 되는 것을 확인 할 수 있습니다
       console.log(!!keyword)
     }  
+
   }
+
+
+  const [datas, setDatas] = useState([]); // useState를 통한 값 저장
+  
+  useEffect(() => {
+    axios.get(baseURL)
+      .then(response => {
+        setDatas(response.data);
+      });
+  }, [])
 
   return (
     <Container>

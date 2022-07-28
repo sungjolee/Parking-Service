@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 import styled from 'styled-components'
 
 const SetMyLocation = styled.div`
@@ -16,6 +16,7 @@ const SetMyLocation = styled.div`
 
 export default function Tmap() {
 
+  // 다시 랜더링
   function setMyLocation(e) {
     window.location.href = '/'
   }
@@ -24,23 +25,13 @@ export default function Tmap() {
 
     // 현재위치 불러오기 (전체 함수를 감싼다)
     // 나중에 getCurrentPosition -> watchPosition으로 바꾸기
-    // let latitude = useRef(null);
-    // let longitude = useRef(null);
-
-
-    // let latitude
-    // let longitude
     navigator.geolocation.getCurrentPosition(function(pos) {
       console.log(pos);
       let latitude = pos.coords.latitude;        // 위도
       let longitude = pos.coords.longitude;      // 경도
 
-
-
-
     let map;
-    // 지도 실행
-    // 지도 관련 함수는 모두 initTamp() 함수 안에 들어가있어야 한다.
+    // 지도 실행 - 지도 관련 함수는 모두 initTamp() 함수 안에 들어가있어야 한다.
     function initTmap() {
       const Tmapv2 = window.Tmapv2    // Tmap API 에서 Tmapv2를 불러 저장함     
       map = new Tmapv2.Map("map_div", {
@@ -50,6 +41,7 @@ export default function Tmap() {
           zoom:15
       });
 
+      map.setOptions({ zoomControl: true }); // 지도 옵션 줌컨트롤 표출 활성화
 
       // 지도의 드래그 이동을 가능하게 하는 함수
       function Drag(){
