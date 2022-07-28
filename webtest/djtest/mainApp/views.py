@@ -61,22 +61,22 @@ class ReviewList(APIView):
         connection.close()
         
         
-        # cursor = connection.cursor()
-        # columnSQL = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='TB_PARKING_LOG' ORDER BY ORDINAL_POSITION;" 
-        # columresult = cursor.execute(columnSQL)
-        # columnnames=cursor.fetchall()
+        cursor = connection.cursor()
+        columnSQL = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='TB_PARKING_LOG' ORDER BY ORDINAL_POSITION;" 
+        columresult = cursor.execute(columnSQL)
+        columnnames=cursor.fetchall()
         
-        # connection.commit()
-        # connection.close()
+        connection.commit()
+        connection.close()
         
         # print(result)
-        # keys=[]
-        # for columnname in columnnames:
-        #     keys.append(columnname[0])
+        keys=[]
+        for columnname in columnnames:
+            keys.append(columnname[0])
         
         # print(keys)
         # print(reviews)            
-        # Dict = toDict(reviews[0],keys)
+        Dict = toDict(reviews[0],keys)
         
         # emptySpots=0
         # totalSpots=0
@@ -96,7 +96,7 @@ class ReviewList(APIView):
         # tmpDict['emptySpotNow'] = emptySpots
         # tmpDict['totalSpot'] = totalSpots
         # tmpDict['emptySpotList'] = emptySpotList
-        return Response(1)
+        return Response(Dict)
     
     def post(self, request):
         serializer = ReviewSerializer(data = request.data)
