@@ -1,7 +1,6 @@
 // import {Box1, Box2, Box3, Box4, Box5, Box6, Box7, Box8, Box9, Box10, Box11, Box12} from "./Box";
 // import api from "./Api";
 import styled from 'styled-components'
-import FetchMyPage from './Api'
 
 const Box1 = styled.button`
   top : 30px;
@@ -118,15 +117,16 @@ const Myzone = styled.button`
 `
 
 
-const clickMe = ()=>{
-    alert ('이미 주차된 자리입니다.')
+const clickMe = ({datas})=>{  
+  
+  alert ('이미 주차된 자리입니다.')
   }
 
-export default function Parking() {
+const Parking = ({datas}) => {
     return (
         <div>
             <div>
-              ( 빈 대수 / 총 대수 )
+              ( {datas.ENABLE} / {datas.TOTAL} )
             </div >
                 <ul>
                     <Box1 onClick={clickMe}>
@@ -174,7 +174,8 @@ export default function Parking() {
                     <Myzone>클릭</Myzone>
                 </Box12>
             </ul>
-            <Myzone onClick={FetchMyPage} >여기 클릭</Myzone>
         </div>
     )
 };
+
+export default Parking
