@@ -1,8 +1,25 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components'
 
+// background-image: url(${LogoSrc});
+
+// const Map = styled.div`
+//   position: "fixed";
+//   height: "100%";
+//   width: "100%";
+// `
+
 const Button = styled.button`
-  background-color: red;
+  position: fixed;
+  bottom: 20px;
+  display: flex;
+  right: 5%;
+  transform: translate(0, -95%);
+  background-image: url("./images/reset_location.png");
+  background-color: transparent;
+  width: 51px;
+  height: 51px;
+  border: 0;
 `
 
 export default function Tmap() {
@@ -83,18 +100,12 @@ export default function Tmap() {
     document.head.appendChild(script);
   }, []);
 
+
+
   return (
     <div>
-      <Button>현재위치 조정</Button>
-      <div
-        id="map_div"
-        style={{
-          height: "100%",
-          width: "100%",
-          position: "fixed",
-        }}>
-
-        </div>
+      <div id="map_div" style={{height: "100%", width: "100%", position: "fixed"}}></div>
+      <Button/>
     </div>
 
   );
