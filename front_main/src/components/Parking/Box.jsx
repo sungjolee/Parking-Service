@@ -9,6 +9,8 @@ const Box = styled.button`
   display: inline-block;
   background-color: gray;
 `
+
+
 // transform: rotate(45deg); 주차장 기울이질 때 사용(숫자부분에 각도 넣기)
 
 const Myzone = styled.button`
