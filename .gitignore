@@ -1,0 +1,2 @@
+*.pyc
+webtest/djtest/nohup.out
