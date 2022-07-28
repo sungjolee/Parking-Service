@@ -1,5 +1,3 @@
-// import {Box1, Box2, Box3, Box4, Box5, Box6, Box7, Box8, Box9, Box10, Box11, Box12} from "./Box";
-// import api from "./Api";
 import styled from 'styled-components'
 
 const Box1 = styled.button`
@@ -116,6 +114,7 @@ const Myzone = styled.button`
   border: 2px solid black;
 `
 
+const emptySpotNow = ({datas}) => {}
 
 const clickMe = ({datas})=>{  
   
@@ -127,7 +126,11 @@ const Parking = ({datas}) => {
         <div>
             <div>
               ( {datas.ENABLE} / {datas.TOTAL} )
+             {/* 빈 주차공간 / 총 주차공간 표시 */}
             </div >
+            <div>
+              {datas.ENABLELIST}
+            </div>
                 <ul>
                     <Box1 onClick={clickMe}>
                         <Myzone>클릭</Myzone>
