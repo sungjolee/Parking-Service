@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
-import { Link, BrowserRouter, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
+import { getKeyword } from '../Redux/getSearchName'
+
 
 
 const horizontalCenter = css`
@@ -97,10 +100,16 @@ const Input = styled.input`q
 const baseURL = 'http://i7c103.p.ssafy.io:8000/review/' // 기본 url
 
 
+
 export default function SearchBar({ onAddKeyword }) {
   // 1. 검색어를 state 로 다루도록 변경
   // 2. 이벤트 연결
   // 3. Link to 설명
+
+  // redux 
+  const name = useSelector(state => state.keyword.value)
+  const dispatch = useDispatch()
+
 
   //form을 관련 요소를 다룰때는 2-way 데이터 바인딩을 해줍니다! (input 의 value에 state를 넣는 것)
   const [keyword, setKeyword] = useState('')
@@ -119,12 +128,14 @@ export default function SearchBar({ onAddKeyword }) {
       setKeyword('')
       console.log(e.keyCode)
 
+      dispatch(getKeyword())
+      console.log(name)
       if (datas.NAME === keyword) {
         latitude = datas.LATITUDE
         longitude =datas.LONGITUDE
         console.log(latitude)
         console.log(longitude)
-        window.location.href = '/'
+        // window.location.href = '/'
       }
     }
   }
