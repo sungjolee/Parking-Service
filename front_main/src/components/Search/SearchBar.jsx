@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
-import { useSelector, useDispatch } from 'react-redux'
-import { getKeyword } from '../Redux/getSearchName'
-
-
+import React, { useState, useEffect } from "react";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { getKeyword } from "../Redux/getSearchName";
 
 const horizontalCenter = css`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-`
+`;
 
 const Container = styled.div`
   position: relative;
   width: 100%;
-  background-color: #C5A5F9;
+  background-color: #c5a5f9;
   padding: 20px 60px;
   box-sizing: border-box;
-`
+`;
 
 //Link태그의 스타일을 입히는거임(페이지이동하는 버튼)
 //horizontalCenter 스타일 컴포넌트를 믹스인하여 속성값 전달
@@ -35,7 +33,7 @@ const ArrowIcon = styled(Link)`
   background-image: url(https://s.pstatic.net/static/www/m/uit/2020/sp_search.623c21.png);
   background-size: 467px 442px;
   background-repeat: no-repeat;
-`
+`;
 
 // const SearchIcon = styled.span`
 // ${horizontalCenter}
@@ -52,7 +50,6 @@ const ArrowIcon = styled(Link)`
 // background-repeat: no-repeat;
 // `
 
-
 const SearchIcon = styled.span`
   ${horizontalCenter}
   right: 18px;
@@ -60,7 +57,7 @@ const SearchIcon = styled.span`
   height: 27px;
   background-size: cover;
   background-image: url("/images/searchIcon.png");
-`
+`;
 
 //글자를 입력하면 RemoveIcon이 나오게 되고 누르면 input의 value값이 사라집니다
 const RemoveIcon = styled.span`
@@ -76,11 +73,11 @@ const RemoveIcon = styled.span`
   background-image: url(https://s.pstatic.net/static/www/m/uit/2020/sp_search.623c21.png);
   background-size: 467px 442px;
   background-repeat: no-repeat;
-`
+`;
 
 const InputContainer = styled.div`
   position: relative;
-`
+`;
 
 const Input = styled.input`q
   width: 100%;
@@ -95,77 +92,77 @@ const Input = styled.input`q
     `
     padding-right: 25px; 
   `}
-`
+`;
 
-const baseURL = 'http://i7c103.p.ssafy.io:8000/review/' // 기본 url
-
-
+const baseURL = "http://i7c103.p.ssafy.io:8000/totaldata/"; // 기본 url
 
 export default function SearchBar({ onAddKeyword }) {
   // 1. 검색어를 state 로 다루도록 변경
   // 2. 이벤트 연결
   // 3. Link to 설명
 
-  // redux 
-  const name = useSelector(state => state.keyword.value)
-  const dispatch = useDispatch()
-
+  // redux
+  const name = useSelector((state) => state.keyword.value);
+  const dispatch = useDispatch();
 
   //form을 관련 요소를 다룰때는 2-way 데이터 바인딩을 해줍니다! (input 의 value에 state를 넣는 것)
-  const [keyword, setKeyword] = useState('')
+  const [keyword, setKeyword] = useState("");
 
   const handleKeyword = (e) => {
-    setKeyword(e.target.value)
-  }
+    setKeyword(e.target.value);
+  };
 
-
-  let latitude = 0    // 위도
-  let longitude = 0   // 경도
+  // let latitude = 0; // 위도
+  // let longitude = 0; // 경도
   const handleEnter = (e) => {
     if (keyword && e.keyCode === 13) {
       //엔터일때 부모의 addkeyword에 전달
-      onAddKeyword(keyword)
-      setKeyword('')
-      console.log(e.keyCode)
+      onAddKeyword(keyword);
+      setKeyword("");
+      console.log(e.keyCode);
 
-      dispatch(getKeyword())
-      console.log(name)
-      if (datas.NAME === keyword) {
-        latitude = datas.LATITUDE
-        longitude =datas.LONGITUDE
-        console.log(latitude)
-        console.log(longitude)
-        // window.location.href = '/'
+      // Redux 실험중
+      // dispatch(getKeyword(keyword));
+
+      console.log(name);
+      // 전체 데이터 확인
+      console.log(datas);
+      for (const parkingData of datas) {
+        if (keyword === parkingData.NAME) {
+          dispatch(getKeyword(parkingData));
+        }
       }
+      console.log(name);
+      // if (datas.NAME === keyword) {
+      //   latitude = datas.LATITUDE;
+      //   longitude = datas.LONGITUDE;
+      //   console.log(latitude);
+      //   console.log(longitude);
+      //   // window.location.href = '/'
+      // }
     }
-  }
-
-
-
+  };
 
   const handleClearKeyword = () => {
-    setKeyword('')
-  }
+    setKeyword("");
+  };
 
   //느낌표로 키워드를 갖고있냐 없냐로 boolean 형태로 나옴
   //키워드를 가지고 있다면 active가 발생하여 padding이 발생함. // 패딩이 없으면 x 아이콘까지 글자가 침법하기 때문
   const hasKeyword = () => {
     if (!!keyword) {
       //keyword가 있으면 true, 없으면 false가 리턴이 되는 것을 확인 할 수 있습니다
-      console.log(!!keyword)
-    }  
-
-  }
-
+      console.log(!!keyword);
+    }
+  };
 
   const [datas, setDatas] = useState([]); // useState를 통한 값 저장
-  
+
   useEffect(() => {
-    axios.get(baseURL)
-      .then(response => {
-        setDatas(response.data);
-      });
-  }, [])
+    axios.get(baseURL).then((response) => {
+      setDatas(response.data);
+    });
+  }, []);
 
   return (
     <Container>
@@ -180,7 +177,7 @@ export default function SearchBar({ onAddKeyword }) {
         />
         {keyword && <RemoveIcon onClick={handleClearKeyword} />}
       </InputContainer>
-      <SearchIcon/>
+      <SearchIcon />
     </Container>
-  )
+  );
 }
