@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import ReviewList, ReviewDetail,insertDB,DBCreateView,create
+from .views import ReviewList, ReviewDetail,insertDB,DBCreateView,create,TotalData
 
 urlpatterns = [
     path('home/',insertDB,name='list'),
@@ -23,6 +23,7 @@ urlpatterns = [
     path('main/',DBCreateView.as_view(),name='main'),
     path('review/',ReviewList.as_view()),
     path('review/<int:pk>',ReviewDetail.as_view()),
+    path('totaldata/',TotalData.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
