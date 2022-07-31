@@ -17,7 +17,7 @@ const Menubar = styled.div`
     width: 280px;
     height: 50px;
     border-radius: 30px;
-    background-color: blue;
+    background-color: lightgray;
     position: fixed;
 `
 
@@ -29,6 +29,18 @@ const Home = styled.button`
     border: 0;
     outline: 0;  
     margin: 3px;
+    a:link {
+    color : pink;
+    }
+    a:visited {
+    color : lightblue;
+    }
+    a:hover {
+    color : red;
+    }
+    a:active {
+    color : green
+    }
 `
 
 const Search = styled.button`
@@ -39,6 +51,18 @@ const Search = styled.button`
     border: 0;
     outline: 0;  
     margin: 3px;
+    a:link {
+    color : pink;
+    }
+    a:visited {
+    color : lightblue;
+    }
+    a:hover {
+    color : red;
+    }
+    a:active {
+    color : green
+    }
 `
 
 const Parking = styled.button`
@@ -49,6 +73,18 @@ const Parking = styled.button`
     border: 0;
     outline: 0;  
     margin: 3px;
+    a:link {
+    color : pink;
+    }
+    a:visited {
+    color : lightblue;
+    }
+    a:hover {
+    color : red;
+    }
+    a:active {
+    color : green
+    }
 `
 
 

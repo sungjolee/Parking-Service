@@ -1,42 +1,46 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
 import Parking from './Parking' // props를 위한 Parking import
+import Parking2 from '../Maps/JungheungdongPublicServiceRoad'
 
 const baseURL = 'http://i7c103.p.ssafy.io:8000/review/' // 기본 url
 
 
-const Datas = () => {
-  const [datas, setDatas] = useState({}); // useState를 통한 datas 값 저장
+const ParkingData = () => {
+  const [ParkingData, setParkingData] = useState({}); // useState를 통한 datas 값 저장
 
   // 재사용을 위한 함수 선언
-  const getDatas = async() => {
+  const getParkingData = async() => {
     const response = await axios.get(baseURL);
-    setDatas(response.data)
+    setParkingData(response.data)
   }
+
 
   // useEffect 안 함수 작동
   useEffect(() => {
-    getDatas()
+    getParkingData()
   }, [])
 
   return (
     <>
-    <Parking datas={datas}/>
-    {/* Parking.jsx에 props를 하기 위한 코드 작성(부모 자식 사이) */}
+    {console.log(ParkingData)}
+    {!!(ParkingData) ? (
+      <>
+    < Parking ParkingData={ParkingData}/>
+    {/* < Parking2 ParkingData={ParkingData}/> */}
+      {/* Parking.jsx에 props를 하기 위한 코드 작성(부모 자식 사이) */}
       <div>
-        <button onClick={getDatas}>클릭 시 업데이트</button>
+        <button onClick={setParkingData}>클릭 시 업데이트</button>
         {/* 클릭시 getDatas 함수 실행하여 서버에서 받은 데이터 화면에 출력 */}
       </div>
-      {console.log(datas.ENABLELIST?.[0])}
       <div>
-        {/* {console.log(5)} */}
-        {datas.ENABLELIST?.[0]}
-      </div>
+      </div></>) 
+      : (<></>)}
     </>
   )
 }
 
-export default Datas
+export default ParkingData
 // api 정보(확정X)
 // "TIME": "2022-07-25T06:13:12",
 // "SERIAL_ID": "idsample",
