@@ -19,7 +19,8 @@ const SetMyLocation = styled.div`
 
 export default function Tmap() {
   const keyword = useSelector((state) => state.keyword.value);
-  console.log(keyword);
+
+  // console.log(keyword);
   // let latitude = useSelector((state) => state.latitude.value);
   // let longitude = useSelector((state) => state.longitude.value);
   // const dispatch = useDispatch();
@@ -27,6 +28,20 @@ export default function Tmap() {
   function setMyLocation(e) {
     window.location.href = "/";
   }
+
+  // navigator.geolocation.getCurrentPosition((pos) => {
+  //   if (keyword) {
+  //     latitude = dispatch(myLatitude(pos.coords.latitude));
+  //     longitude = dispatch(myLongitude(pos.coords.latitude));
+  //     console.log(latitude);
+  //     console.log(longitude);
+  //   } else {
+  //     latitude = pos.coords.latitude; // 위도
+  //     longitude = pos.coords.longitude; // 경도
+  //   }
+  // });
+  // let latitude = 35.160002898116915;
+  // let longitude = 126.85170148105905;
   let latitude;
   let longitude;
   navigator.geolocation.getCurrentPosition((pos) => {
@@ -38,6 +53,7 @@ export default function Tmap() {
       latitude = pos.coords.latitude; // 위도
       longitude = pos.coords.longitude; // 경도
     }
+
     // let latitude = pos.coords.latitude; // 위도
     // let longitude = pos.coords.longitude; // 경도
 
@@ -54,13 +70,13 @@ export default function Tmap() {
 
       map.setOptions({ zoomControl: true }); // 지도 옵션 줌컨트롤 표출 활성화
 
-      // 지도의 드래그 이동을 가능하게 하는 함수
-      function Drag() {
-        map.setOptions({ draggable: true }); //지도 드래그 이동을 활성화 합니다.
-      }
+      // // 지도의 드래그 이동을 가능하게 하는 함수
+      // function Drag() {
+      //   map.setOptions({ draggable: true }); //지도 드래그 이동을 활성화 합니다.
+      // }
 
       // 마커 생성(이미지)
-      var marker = new Tmapv2.Marker({
+      new Tmapv2.Marker({
         position: new Tmapv2.LatLng(latitude, longitude), //Marker의 중심좌표 설정.
         icon: "./images/location.png", //Marker의 아이콘.
         map: map, //Marker가 표시될 Map 설정.
@@ -72,9 +88,9 @@ export default function Tmap() {
         "<div class='info-box' style='margin-left : 10px'>" +
         "<p style='margin-bottom: 7px;'>" +
         "<span class='tit' style=' font-size: 16px; font-weight: bold;'>" +
-        "{keyword.NAME}" +
+        keyword.NAME +
         "</span>" +
-        "<a href='http://tmapapi.sktelecom.com/' target='_blank' class='link' style='color: #3D6DCC; font-size: 13px; margin-left: 10px;'>홈페이지</a></p>" +
+        "<a href='http://tmapapi.sktelecom.com/' target='_blank' class='link' style='color: #3D6DCC; font-size: 13px; margin-left: 10px;'>주차장 상세</a></p>" +
         "<p>" +
         "<span class='new-addr'>서울 중구 삼일대로 343 (우)04538</span>" +
         "</p>" +
@@ -121,7 +137,7 @@ export default function Tmap() {
       ></div>
       <SetMyLocation onClick={setMyLocation}>
         <img
-          src="./images/reset_location.png"
+          src="./images/set_location.png"
           alt=""
           style={{ width: "80%", height: "80%", objectFit: "cover" }}
         />
