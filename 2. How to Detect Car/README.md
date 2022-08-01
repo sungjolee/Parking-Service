@@ -16,12 +16,18 @@
 ## 자동차 감지 프로그램 구현
 1. 주차장에 설치된 카메라로 매주기마다 사진을 촬영해주는 기능 구현
 ```py
-import cv2
+import cv2, os
 import numpy as np
 import schedule
 
 # 웹캠에 연결하여 촬영 중인 모습을 cap에 저장
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
+# 현재 실행 중인 1_STEP_Take_Pic.py이 있는 폴더 위치
+folder_path = os.path.dirname(os.path.realpath(__file__))
+# 저장할 jpg 파일명
+jpg_name = 'Parking_Area_Pic.jpg'
+# jpg 파일이 있는 경로
+full_path = folder_path + '/' + jpg_name
 
 # 사진을 찍어 파일로 저장하는 함수
 def take_picture():
@@ -33,7 +39,7 @@ def take_picture():
 
     # 찍힌 영상의 프레임을 사진으로 저장
     # 사진을 저장할 경로와 이름 지정 필수
-    cv2.imwrite('Your_Save_Path\File_Name.jpg', frame)
+    cv2.imwrite(full_path, frame)
 
 # 10초마다 사진찍는 함수를 실행
 schedule.every(10).seconds.do(take_picture)
