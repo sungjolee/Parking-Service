@@ -23,16 +23,11 @@ const ParkingData = () => {
 
   return (
     <>
-    {console.log(ParkingData)}
     {!!(ParkingData) ? (
       <>
     < Parking ParkingData={ParkingData}/>
     {/* < Parking2 ParkingData={ParkingData}/> */}
       {/* Parking.jsx에 props를 하기 위한 코드 작성(부모 자식 사이) */}
-      <div>
-        <button onClick={setParkingData}>클릭 시 업데이트</button>
-        {/* 클릭시 getDatas 함수 실행하여 서버에서 받은 데이터 화면에 출력 */}
-      </div>
       <div>
       </div></>) 
       : (<></>)}

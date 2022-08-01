@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
+import ParkingData from './Api';
 
 const Box = styled.button`
   top : 30px;
@@ -44,3 +45,7 @@ export default function BoxClick() {
     </Box>
   )
 };
+
+
+
+
