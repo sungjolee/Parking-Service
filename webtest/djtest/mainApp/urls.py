@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import ReviewList, ReviewDetail,insertDB,DBCreateView,create,TotalData
+from .views import ReviewList, TotalData
 
 urlpatterns = [
-    path('home/',insertDB,name='list'),
-    path('create/',create,name='create'),
-    path('main/',DBCreateView.as_view(),name='main'),
+    # path('home/',insertDB,name='list'),
+    # path('create/',create,name='create'),
+    # path('main/',DBCreateView.as_view(),name='main'),
     path('review/',ReviewList.as_view()),
-    path('review/<int:pk>',ReviewDetail.as_view()),
+    # path('review/<int:pk>',ReviewDetail.as_view()),
     path('totaldata/',TotalData.as_view())
 ]
 

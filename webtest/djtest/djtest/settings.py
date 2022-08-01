@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'mainApp',
     'rest_framework',
     'corsheaders',
+    'parkingAdmin',
 ]
 
 MIDDLEWARE = [

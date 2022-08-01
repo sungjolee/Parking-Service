@@ -73,10 +73,10 @@
 </table>
 
 
-<form action="{% url 'create' %}" method="post">
+{% comment %} <form action="{% url 'create' %}" method="post">
     {% csrf_token %}
     <input type="text" name="name">
     <input type="text" name="latitude">
     <input type="text" name="longitude">
     <button type="submit">제출하기</button>
-</form>
+</form> {% endcomment %}
