@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
 import Parking from './Parking' // props를 위한 Parking import
-import Parking2 from '../Maps/JungheungdongPublicServiceRoad'
+// import Parking2 from '../Maps/JungheungdongPublicServiceRoad'
 
 const baseURL = 'http://i7c103.p.ssafy.io:8000/review/' // 기본 url
 

@@ -1,8 +1,7 @@
 // import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-// import { myLatitude } from "../Redux/getLatitude";
-// import { myLongitude } from "../Redux/getLongitude";
+import { useNavigate } from "react-router-dom";
 
 const SetMyLocation = styled.div`
   position: absolute;
@@ -19,15 +18,13 @@ const SetMyLocation = styled.div`
 
 export default function Tmap() {
   const keyword = useSelector((state) => state.keyword.value);
-
+  console.log(keyword)
   // console.log(keyword);
   // let latitude = useSelector((state) => state.latitude.value);
   // let longitude = useSelector((state) => state.longitude.value);
   // const dispatch = useDispatch();
 
-  function setMyLocation(e) {
-    window.location.href = "/";
-  }
+
 
   // navigator.geolocation.getCurrentPosition((pos) => {
   //   if (keyword) {
@@ -44,11 +41,16 @@ export default function Tmap() {
   // let longitude = 126.85170148105905;
   let latitude;
   let longitude;
+  let map;
+  const Tmapv2 = window.Tmapv2; // Tmap API 에서 Tmapv2를 불러 저장함
+
   navigator.geolocation.getCurrentPosition((pos) => {
     if (keyword) {
-      // 35.160002898116915, 126.85170148105905
-      latitude = 35.160002898116915;
-      longitude = 126.85170148105905;
+      latitude = Number(keyword.LATITUDE);
+      longitude = Number(keyword.LONGITUDE);
+
+      console.log(latitude)
+      console.log(typeof(latitude))
     } else {
       latitude = pos.coords.latitude; // 위도
       longitude = pos.coords.longitude; // 경도
@@ -57,10 +59,10 @@ export default function Tmap() {
     // let latitude = pos.coords.latitude; // 위도
     // let longitude = pos.coords.longitude; // 경도
 
-    let map;
+
     // 지도 실행 - 지도 관련 함수는 모두 initTamp() 함수 안에 들어가있어야 한다.
     function initTmap() {
-      const Tmapv2 = window.Tmapv2; // Tmap API 에서 Tmapv2를 불러 저장함
+      // const Tmapv2 = window.Tmapv2; // Tmap API 에서 Tmapv2를 불러 저장함
       map = new Tmapv2.Map("map_div", {
         center: new Tmapv2.LatLng(latitude, longitude),
         width: "100%",
@@ -68,6 +70,7 @@ export default function Tmap() {
         zoom: 15,
       });
 
+      
       map.setOptions({ zoomControl: true }); // 지도 옵션 줌컨트롤 표출 활성화
 
       // // 지도의 드래그 이동을 가능하게 하는 함수
@@ -82,24 +85,31 @@ export default function Tmap() {
         map: map, //Marker가 표시될 Map 설정.
       });
 
+
+
+      
+      // navigate(`/${keyword.PARKING}`) +
       var content =
-        "<div class='m-pop' style='position: static; top: 180px; left : 320px; display: flex; font-size: 14px; box-shadow: 5px 5px 5px #00000040; border-radius: 10px; width : 400px; height:100px; background-color: #FFFFFF; align-items: center; padding: 5px;'>" +
+        "<div onClick='moveParkingPage' class='m-pop' style='position: static; top: 180px; left : 320px; display: flex; font-size: 14px; box-shadow: 5px 5px 5px #00000040; border-radius: 10px; width : 400px; height:100px; background-color: #FFFFFF; align-items: center; padding: 5px;'>" +
         "<div class='img-box' style='width: 110px; height: 90px; border-radius: 10px; background: #f5f5f5 url(resources/images/sample/p-sk-logo.png) no-repeat center;'></div>" +
         "<div class='info-box' style='margin-left : 10px'>" +
         "<p style='margin-bottom: 7px;'>" +
-        "<span class='tit' style=' font-size: 16px; font-weight: bold;'>" +
+        "<div class='tit' style=' font-size: 16px; font-weight: bold;'>" +
         keyword.NAME +
-        "</span>" +
-        "<a href='http://tmapapi.sktelecom.com/' target='_blank' class='link' style='color: #3D6DCC; font-size: 13px; margin-left: 10px;'>주차장 상세</a></p>" +
-        "<p>" +
-        "<span class='new-addr'>서울 중구 삼일대로 343 (우)04538</span>" +
-        "</p>" +
-        "<p>" +
-        "<span class='old-addr' style='color: #707070;'>(지번) 저동1가 114</span>" +
-        "</p>" +
         "</div>" +
-        "<a href='javascript:void(0)' onclick='onClose()' class='btn-close' style='position: absolute; top: 10px; right: 10px; display: block; width: 15px; height: 15px; background: url(resources/images/sample/btn-close-b.svg) no-repeat center;'></a>" +
-        "</div>";
+        "<a href='http://tmapapi.sktelecom.com/' target='_blank' class='link' style='color: #3D6DCC; font-size: 13px; margin-left: 10px;'>주차장 상세</a></p>" +
+        // "<p>" +
+        "<div class='new-addr'>" + keyword.ADDRESS + "</div>" +
+        "</p>" +
+        "<p>" +
+        "<span class='old-addr' style='color: #707070;'>"+ "여기에 주차 대수, 가능대수 넣기" + "</span>" +
+        "</p>";
+        // "<p>" +
+        // "<span class='old-addr' style='color: #707070;'>(지번) 저동1가 114</span>" +
+        // "</p>"
+        // "</div>" +
+        // "<a href='javascript:void(0)' onclick='onClose()' class='btn-close' style='position: absolute; top: 10px; right: 10px; display: block; width: 15px; height: 15px; background: url(resources/images/sample/btn-close-b.svg) no-repeat center;'></a>" +
+        // "</div>";
 
       //Popup 객체 생성.
       if (keyword) {
@@ -124,6 +134,33 @@ export default function Tmap() {
     // return map
     initTmap();
   });
+
+  // 현재위치로 위치 조정 버튼  
+  function setMyLocation(e) {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      latitude = pos.coords.latitude; // 위도
+      longitude = pos.coords.longitude; // 경도
+      map._status.center._lat = latitude
+      map._status.center._lng = longitude
+      map.setCenter(new Tmapv2.LatLng(latitude,longitude));
+
+      new Tmapv2.Marker({
+        position: new Tmapv2.LatLng(latitude, longitude), //Marker의 중심좌표 설정.
+        icon: "./images/location.png", //Marker의 아이콘.
+        map: map, //Marker가 표시될 Map 설정.
+      });
+      console.log(map)
+      
+    })
+  }
+
+  const navigate = useNavigate();
+  const moveParkingPage = () => {
+    navigate(`/${keyword.PARKING}`);
+  };
+
+
+
   // useEffect(() => {
 
   // useState 끝

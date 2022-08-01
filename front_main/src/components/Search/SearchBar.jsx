@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { getKeyword } from "../Redux/getSearchName";
@@ -35,20 +35,6 @@ const ArrowIcon = styled(Link)`
   background-repeat: no-repeat;
 `;
 
-// const SearchIcon = styled.span`
-// ${horizontalCenter}
-// right: 18px;
-// width: 24px;
-// height: 50px;
-// background-position: -356px -260px;
-// display: inline-block;
-// overflow: hidden;
-// color: transparent;
-// vertical-align: middle;
-// background-image: url(./SearchIconSample.png);
-// background-size: 467px 442px;
-// background-repeat: no-repeat;
-// `
 
 const SearchIcon = styled.span`
   ${horizontalCenter}
@@ -112,8 +98,8 @@ export default function SearchBar({ onAddKeyword }) {
     setKeyword(e.target.value);
   };
 
-  // let latitude = 0; // 위도
-  // let longitude = 0; // 경도
+  // 링크 이동을 위해 useNavigate 사용
+  const navigate = useNavigate();
   const handleEnter = (e) => {
     if (keyword && e.keyCode === 13) {
       //엔터일때 부모의 addkeyword에 전달
@@ -123,25 +109,32 @@ export default function SearchBar({ onAddKeyword }) {
 
       // Redux 실험중
       // dispatch(getKeyword(keyword));
-
+      console.log("아래는 데이터베이스")
+      console.log(datas)
+      console.log("아래는 입력한 키워드")
       console.log(name);
       // 전체 데이터 확인
-      console.log(datas);
+      let flag = 0
       for (const parkingData of datas) {
         if (keyword === parkingData.NAME) {
           dispatch(getKeyword(parkingData));
+        } else{
+          flag = flag + 1
         }
       }
-      console.log(name);
-      // if (datas.NAME === keyword) {
-      //   latitude = datas.LATITUDE;
-      //   longitude = datas.LONGITUDE;
-      //   console.log(latitude);
-      //   console.log(longitude);
-      //   // window.location.href = '/'
-      // }
+      if (flag === datas.length) {
+        // 검색 실패시
+        alert("등록되지 않은 주차장입니다.")
+        flag = 0
+      } else {
+        //검색 성공시
+        navigate(`/`)
+        flag = 0
+        // window.location.href = "/";
+      }
     }
   };
+
 
   const handleClearKeyword = () => {
     setKeyword("");
