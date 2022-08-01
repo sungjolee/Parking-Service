@@ -13,6 +13,15 @@ from .models import TbParkingDetail,TbParkingLog,TbParkingMain
 from django.db import connection
 # Create your views here.
 
+
+
+####################################
+# 맵페이지용 토탈 데이터
+########################
+#
+#
+#
+#
 class TotalData(APIView):
     
     # def post(self, request):
@@ -85,33 +94,33 @@ class TotalData(APIView):
         
         return Response(resultarray)
 
-def insertDB(request):
-    model1 = TbParkingLog.objects.all()
-    model2 = TbParkingMain.objects.all()
-    model3 = TbParkingDetail.objects.all()
-    context = {'logs' : model1,
-               'mains': model2,
-               'details':model3,} #context에 모든 후보에 대한 정보를 저장
-    return render(request, 'mainApp/tbparkinglog_list.html', context)
+# def insertDB(request):
+#     model1 = TbParkingLog.objects.all()
+#     model2 = TbParkingMain.objects.all()
+#     model3 = TbParkingDetail.objects.all()
+#     context = {'logs' : model1,
+#                'mains': model2,
+#                'details':model3,} #context에 모든 후보에 대한 정보를 저장
+#     return render(request, 'mainApp/tbparkinglog_list.html', context)
 
-def create(request):
-    new_main = TbParkingMain() # 데이터 저장을 위한 객체 생성
-    new_main.name = request.POST['name']
-    new_main.latitude = request.POST['latitude']
-    new_main.longitude = request.POST['longitude']
+# def create(request):
+#     new_main = TbParkingMain() # 데이터 저장을 위한 객체 생성
+#     new_main.name = request.POST['name']
+#     new_main.latitude = request.POST['latitude']
+#     new_main.longitude = request.POST['longitude']
 
-    cursor = connection.cursor()
-    strSQL = f"insert into TB_PARKING_MAIN (Name,latitude,longitude) values({new_main.name},{new_main.latitude},{new_main.longitude})"
-    result = cursor.execute(strSQL)
-    reviews = cursor.fetchall()
+#     cursor = connection.cursor()
+#     strSQL = f"insert into TB_PARKING_MAIN (Name,latitude,longitude) values({new_main.name},{new_main.latitude},{new_main.longitude})"
+#     result = cursor.execute(strSQL)
+#     reviews = cursor.fetchall()
         
-    connection.commit()
-    connection.close()
-    print('commit 하냐')
-    return redirect('list')
+#     connection.commit()
+#     connection.close()
+#     print('commit 하냐')
+#     return redirect('list')
 
-class DBCreateView(ListView):
-    model = TbParkingMain
+# class DBCreateView(ListView):
+#     model = TbParkingMain
     
 def toDict(queryResult,columnResult):
     if queryResult ==None or columnResult==None:
@@ -184,35 +193,35 @@ class ReviewList(APIView):
         
         return Response(Dict)
     
-    def post(self, request):
-        serializer = ReviewSerializer(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
-        return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)
+    # def post(self, request):
+    #     serializer = ReviewSerializer(data = request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data,status=status.HTTP_201_CREATED)
+    #     return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)
     
-class ReviewDetail(APIView):
-    def get_object(self,pk):
-        try:
-            return TbParkingDetailBlue.objects.get(pk=pk)
-        except TbParkingDetailBlue.DoesNotExist:
-            raise Http404
+# class ReviewDetail(APIView):
+#     def get_object(self,pk):
+#         try:
+#             return TbParkingDetailBlue.objects.get(pk=pk)
+#         except TbParkingDetailBlue.DoesNotExist:
+#             raise Http404
         
-    def get(self, request,pk, format=None):
-        review = self.get_object(pk)
-        serializer=ReviewSerializer(review)
-        return Response(serializer.data)
+#     def get(self, request,pk, format=None):
+#         review = self.get_object(pk)
+#         serializer=ReviewSerializer(review)
+#         return Response(serializer.data)
     
-    def put(self, request, pk, format=None):
-        review = self.get_object(pk)
-        serializer=ReviewSerializer(review, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+#     def put(self, request, pk, format=None):
+#         review = self.get_object(pk)
+#         serializer=ReviewSerializer(review, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request, pk, format=None):
-        review = self.get_object(pk)
-        review.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+#     def delete(self, request, pk, format=None):
+#         review = self.get_object(pk)
+#         review.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
         
