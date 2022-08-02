@@ -22,8 +22,8 @@ parking_zone_empty = [213456790] * len(posList)
 # 주차 가능한 칸 저장 리스트
 parking_zone_info = [-1] * len(posList)
 # DB 서버에 접속
-db = mysql.connector.connect(host='218.149.65.219', port=3307, user='root', password='Accel_eraty30!', database='sakila', auth_plugin='mysql_native_password')
-cur = db.cursor()
+# db = mysql.connector.connect(host='my_ip', port=my_port, user='my_name', password='my_password', database='my_DB_name', auth_plugin='mysql_native_password')
+# cur = db.cursor()
 
 
 def Set_empty_init():
@@ -103,5 +103,5 @@ while True:
     if keyVal == ord('q'): # 'q'를 입력하면 반복 종료
         break
     
-cur.close()
-db.close()
+# cur.close()
+# db.close()
