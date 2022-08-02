@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 
@@ -40,3 +40,10 @@ class TbParkingMain(models.Model):
     class Meta:
         managed = False
         db_table = 'TB_PARKING_MAIN'
+        
+        # askcompany/accounts/models.py
+
+
+class User(AbstractUser):
+    website_url = models.URLField(blank=True)
+    bio = models.TextField(blank=True)
