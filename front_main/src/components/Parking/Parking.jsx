@@ -252,7 +252,7 @@ const Parking = ({ParkingData}) => {
 
   function CheckBox11(ParkingData){
     let ocupiedarray = ParkingData?.OCUPIEDLIST
-    if(bgColor == "Green") return "Green"
+    if(bgColor === "Green") return "Green"
     for (let i=0; i < ocupiedarray?.length; i++){
         if (ocupiedarray[i] === 's11') {
           return "Red" } 
@@ -262,7 +262,7 @@ const Parking = ({ParkingData}) => {
 
   function CheckBox12(ParkingData){
     let ocupiedarray = ParkingData?.OCUPIEDLIST
-    if(bgColor == "Green") return "Green"
+    if(bgColor === "Green") return "Green"
     for (let i=0; i < ocupiedarray?.length; i++){
         if (ocupiedarray[i] === 's12') {
           return "Red" } 

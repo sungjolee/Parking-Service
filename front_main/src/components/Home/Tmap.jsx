@@ -1,7 +1,9 @@
 // import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import { render } from "react-dom";
 
 const SetMyLocation = styled.div`
   position: absolute;
@@ -15,6 +17,14 @@ const SetMyLocation = styled.div`
   borderradius: 20%;
   backgroundcolor: white;
 `;
+
+// const ParkingInfo = styled.div`
+//   position: absolute;
+//   width: 200px;
+//   height: 200px;
+
+// `;
+
 
 export default function Tmap() {
   const keyword = useSelector((state) => state.keyword.value);
@@ -42,6 +52,7 @@ export default function Tmap() {
   let latitude;
   let longitude;
   let map;
+  let flag = 1
   const Tmapv2 = window.Tmapv2; // Tmap API 에서 Tmapv2를 불러 저장함
 
   navigator.geolocation.getCurrentPosition((pos) => {
@@ -90,20 +101,22 @@ export default function Tmap() {
       
       // navigate(`/${keyword.PARKING}`) +
       var content =
-        "<div onClick='moveParkingPage' class='m-pop' style='position: static; top: 180px; left : 320px; display: flex; font-size: 14px; box-shadow: 5px 5px 5px #00000040; border-radius: 10px; width : 400px; height:100px; background-color: #FFFFFF; align-items: center; padding: 5px;'>" +
+        "<div class='m-pop' style='position: static; top: 180px; left : 320px; display: flex; font-size: 14px; box-shadow: 5px 5px 5px #00000040; border-radius: 10px; width : 400px; height:100px; background-color: #FFFFFF; align-items: center; padding: 5px;'>" +
         "<div class='img-box' style='width: 110px; height: 90px; border-radius: 10px; background: #f5f5f5 url(resources/images/sample/p-sk-logo.png) no-repeat center;'></div>" +
         "<div class='info-box' style='margin-left : 10px'>" +
         "<p style='margin-bottom: 7px;'>" +
         "<div class='tit' style=' font-size: 16px; font-weight: bold;'>" +
         keyword.NAME +
         "</div>" +
-        "<a href='http://tmapapi.sktelecom.com/' target='_blank' class='link' style='color: #3D6DCC; font-size: 13px; margin-left: 10px;'>주차장 상세</a></p>" +
+        "<a href='http://localhost:3000/" + keyword.PARKING +"' target='_blank' class='link' style='color: #3D6DCC; font-size: 13px; margin-left: 10px;'>주차장 상세</a></p>" +
         // "<p>" +
         "<div class='new-addr'>" + keyword.ADDRESS + "</div>" +
         "</p>" +
         "<p>" +
-        "<span class='old-addr' style='color: #707070;'>"+ "여기에 주차 대수, 가능대수 넣기" + "</span>" +
+        "<span class='old-addr' style='color: #D42F2F; font-weight: bold'>남은 자리 : "+ keyword.ENABLE +" (총 " + keyword.TOTAL + ")</span>" +
         "</p>";
+
+
         // "<p>" +
         // "<span class='old-addr' style='color: #707070;'>(지번) 저동1가 114</span>" +
         // "</p>"
@@ -111,7 +124,7 @@ export default function Tmap() {
         // "<a href='javascript:void(0)' onclick='onClose()' class='btn-close' style='position: absolute; top: 10px; right: 10px; display: block; width: 15px; height: 15px; background: url(resources/images/sample/btn-close-b.svg) no-repeat center;'></a>" +
         // "</div>";
 
-      //Popup 객체 생성.
+      // Popup 객체 생성.
       if (keyword) {
         new Tmapv2.InfoWindow({
           position: new Tmapv2.LatLng(latitude, longitude), //Popup 이 표출될 맵 좌표
@@ -120,12 +133,12 @@ export default function Tmap() {
           type: 2, //Popup의 type 설정.
           map: map, //Popup이 표시될 맵 객체
 
-          // let infoWindow = new Tmapv2.InfoWindow({
-          //   position: new Tmapv2.LatLng(latitude, longitude), //Popup 이 표출될 맵 좌표
-          //   content: content, //Popup 표시될 text
-          //   border: "0px solid #FF0000", //Popup의 테두리 border 설정.
-          //   type: 2, //Popup의 type 설정.
-          //   map: map, //Popup이 표시될 맵 객체
+      // //     // let infoWindow = new Tmapv2.InfoWindow({
+      // //     //   position: new Tmapv2.LatLng(latitude, longitude), //Popup 이 표출될 맵 좌표
+      // //     //   content: content, //Popup 표시될 text
+      // //     //   border: "0px solid #FF0000", //Popup의 테두리 border 설정.
+      // //     //   type: 2, //Popup의 type 설정.
+      // //     //   map: map, //Popup이 표시될 맵 객체
         });
       }
 
@@ -144,27 +157,63 @@ export default function Tmap() {
       map._status.center._lng = longitude
       map.setCenter(new Tmapv2.LatLng(latitude,longitude));
 
-      new Tmapv2.Marker({
-        position: new Tmapv2.LatLng(latitude, longitude), //Marker의 중심좌표 설정.
-        icon: "./images/location.png", //Marker의 아이콘.
-        map: map, //Marker가 표시될 Map 설정.
-      });
-      console.log(map)
-      
+      // 현재 위치 마커가 여러개 실행되는 것을 방지)  
+      if (flag === 0) {
+        flag = 1
+        new Tmapv2.Marker({
+          position: new Tmapv2.LatLng(latitude, longitude), //Marker의 중심좌표 설정.
+          icon: "./images/location.png", //Marker의 아이콘.
+          map: map, //Marker가 표시될 Map 설정.
+        });
+        console.log(map)
+      }      
     })
   }
 
-  const navigate = useNavigate();
-  const moveParkingPage = () => {
-    navigate(`/${keyword.PARKING}`);
-  };
 
+  // const moveParkingPage = () => {
+  //   navigate(`/${keyword.PARKING}`);
+  // };
 
+  // const navigate = useNavigate();
+  // function moveParkingMap() {
+  //   console.log('아래는 성공 키워드')
+  //   console.log(keyword)
+  //   if (keyword) {
 
-  // useEffect(() => {
+  //     var setMyContent =
+  //     "<div class='m-pop' style='position: static; top: 180px; left : 320px; display: flex; font-size: 14px; box-shadow: 5px 5px 5px #00000040; border-radius: 10px; width : 400px; height:100px; background-color: #FFFFFF; align-items: center; padding: 5px;'>" +
+  //     "<div class='img-box' style='width: 110px; height: 90px; border-radius: 10px; background: #f5f5f5 url(resources/images/sample/p-sk-logo.png) no-repeat center;'></div>" +
+  //     "<div class='info-box' style='margin-left : 10px'>" +
+  //     "<p style='margin-bottom: 7px;'>" +
+  //     "<div class='tit' style=' font-size: 16px; font-weight: bold;'>" +
+  //     keyword.NAME +
+  //     "</div>" +
+  //     "<a href='http://tmapapi.sktelecom.com/' target='_blank' class='link' style='color: #3D6DCC; font-size: 13px; margin-left: 10px;'>주차장 상세</a></p>" +
+  //     // "<p>" +
+  //     "<div class='new-addr'>" + keyword.ADDRESS + "</div>" +
+  //     "</p>" +
+  //     "<p>" +
+  //     "<span class='old-addr' style='color: #D42F2F; font-weight: bold'>남은 자리 : "+ keyword.ENABLE +" (총 " + keyword.TOTAL + ")</span>" +
+  //     "</p>";
 
-  // useState 끝
-  // }, []);
+  //     latitude = Number(keyword.LATITUDE);
+  //     longitude = Number(keyword.LONGITUDE);
+  //     console.log(latitude)
+  //     console.log(longitude)
+
+  //     new Tmapv2.InfoWindow({
+  //       position: new Tmapv2.LatLng(latitude, longitude), //Popup 이 표출될 맵 좌표
+  //       content: setMyContent, //Popup 표시될 text
+  //       border: "0px solid #FF0000", //Popup의 테두리 border 설정.
+  //       type: 2, //Popup의 type 설정.
+  //       map: map, //Popup이 표시될 맵 객체
+
+  //     });
+  //     console.log('여기까진 왔다.')
+  //   }
+  //   // navigate(`/${keyword.PARKING}`);
+  // }
 
   return (
     <div>
@@ -181,4 +230,5 @@ export default function Tmap() {
       </SetMyLocation>
     </div>
   );
+  
 }
