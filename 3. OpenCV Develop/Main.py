@@ -8,6 +8,9 @@ from sre_constants import SUCCESS
 # 초기 설정 및 전역 변수 선언
 # 카메라 연결
 cap = cv2.VideoCapture(0)
+# 카메라 촬영 해상도 설정
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 720)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
 # 현재 실행 중인 Main.py이 있는 폴더 위치
 folder_path = os.path.dirname(os.path.realpath(__file__))
 # 불러올 binary 파일명
