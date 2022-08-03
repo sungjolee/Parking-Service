@@ -109,10 +109,12 @@ export default function SearchBar({ onAddKeyword }) {
 
       // Redux 실험중
       // dispatch(getKeyword(keyword));
-      console.log("아래는 데이터베이스")
+      console.log("불러온 데이터베이스 ↓")
       console.log(datas)
-      console.log("아래는 입력한 키워드")
-      console.log(name);
+      // console.log("아래는 입력한 키워드")
+      // console.log(name);
+      // console.log('성공');
+
       // 전체 데이터 확인
       let flag = 0
       for (const parkingData of datas) {

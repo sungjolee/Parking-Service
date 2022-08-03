@@ -4,7 +4,7 @@ import Parking from "./components/Parking/Parking";
 import SearchPage from "./components/Search/SearchPage";
 import MenuBar from "./components/Static/MenuBar";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Datas from './components/Parking/Api';
+import BoxList from './components/Maps/Chicken/BoxList';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<Home />} /> 
           <Route path="/SearchPage" element={<SearchPage />} /> 
           <Route path="/Parking" element={<Parking />} />
-          <Route path="/Api" element={<Datas />} />
+          <Route path="/Api" element={<BoxList />} />
         </Routes>
         <MenuBar />
       </div>

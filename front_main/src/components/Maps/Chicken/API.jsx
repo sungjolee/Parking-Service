@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
-import Parking from './Parking' // props를 위한 Parking import
+import BoxList from './BoxList' // props를 위한 BoxList import
 // import Parking2 from '../Maps/JungheungdongPublicServiceRoad'
 
-const baseURL = 'http://i7c103.p.ssafy.io:8000/' // 기본 url
+const baseURL = 'http://i7c103.p.ssafy.io:8000/review/' // 기본 url
 
 
 const ParkingData = () => {
@@ -25,9 +25,9 @@ const ParkingData = () => {
     <>
     {!!(ParkingData) ? (
       <>
-    < Parking ParkingData={ParkingData}/>
+    < BoxList ParkingData={ParkingData}/>
     {/* < Parking2 ParkingData={ParkingData}/> */}
-      {/* Parking.jsx에 props를 하기 위한 코드 작성(부모 자식 사이) */}
+      {/* BoxList.jsx에 props를 하기 위한 코드 작성(부모 자식 사이) */}
       <div>
       </div></>) 
       : (<></>)}
