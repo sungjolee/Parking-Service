@@ -10,12 +10,12 @@ const SetMyLocation = styled.div`
   bottom: 10%;
   right: 1.5%;
   display: flex;
-  justifycontent: center;
-  alignitems: center;
+  justify-content: center;
+  align-items: center;
   width: 50px;
   height: 50px;
-  borderradius: 20%;
-  backgroundcolor: white;
+  border-radius: 20%;
+  background-color: white;
 `;
 
 // const ParkingInfo = styled.div`
@@ -52,7 +52,7 @@ export default function Tmap() {
   let latitude;
   let longitude;
   let map;
-  let flag = 1
+  let flag = 0
   const Tmapv2 = window.Tmapv2; // Tmap API 에서 Tmapv2를 불러 저장함
 
   navigator.geolocation.getCurrentPosition((pos) => {
@@ -149,7 +149,7 @@ export default function Tmap() {
   });
 
   // 현재위치로 위치 조정 버튼  
-  function setMyLocation(e) {
+  function setMyLocation() {
     navigator.geolocation.getCurrentPosition((pos) => {
       latitude = pos.coords.latitude; // 위도
       longitude = pos.coords.longitude; // 경도

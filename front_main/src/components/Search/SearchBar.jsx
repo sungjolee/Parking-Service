@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getKeyword } from "../Redux/getSearchName";
 
 const horizontalCenter = css`
@@ -29,11 +29,12 @@ const ArrowIcon = styled(Link)`
   width: 21px;
   height: 18px;
   background-position: -164px -343px;
-  vertical-align: top;
+
   background-image: url(https://s.pstatic.net/static/www/m/uit/2020/sp_search.623c21.png);
   background-size: 467px 442px;
   background-repeat: no-repeat;
 `;
+// vertical-align: top;
 
 
 const SearchIcon = styled.span`
@@ -65,7 +66,7 @@ const InputContainer = styled.div`
   position: relative;
 `;
 
-const Input = styled.input`q
+const Input = styled.input`
   width: 100%;
   height: 30px;
   background-color: #fff;
@@ -88,7 +89,6 @@ export default function SearchBar({ onAddKeyword }) {
   // 3. Link to 설명
 
   // redux
-  const name = useSelector((state) => state.keyword.value);
   const dispatch = useDispatch();
 
   //form을 관련 요소를 다룰때는 2-way 데이터 바인딩을 해줍니다! (input 의 value에 state를 넣는 것)
@@ -96,24 +96,23 @@ export default function SearchBar({ onAddKeyword }) {
 
   const handleKeyword = (e) => {
     setKeyword(e.target.value);
+    console.log(e)
   };
 
-  // 링크 이동을 위해 useNavigate 사용
-  const navigate = useNavigate();
+  // flag2 : 검색 성공 여부 확인
+  const [flag2, setFlag2] = useState(false);
+
   const handleEnter = (e) => {
     if (keyword && e.keyCode === 13) {
       //엔터일때 부모의 addkeyword에 전달
       onAddKeyword(keyword);
+      console.log(onAddKeyword(keyword));
+
       setKeyword("");
       console.log(e.keyCode);
 
-      // Redux 실험중
-      // dispatch(getKeyword(keyword));
       console.log("불러온 데이터베이스 ↓")
       console.log(datas)
-      // console.log("아래는 입력한 키워드")
-      // console.log(name);
-      // console.log('성공');
 
       // 전체 데이터 확인
       let flag = 0
@@ -130,13 +129,20 @@ export default function SearchBar({ onAddKeyword }) {
         flag = 0
       } else {
         //검색 성공시
-        navigate(`/`)
-        flag = 0
-        // window.location.href = "/";
+        flag = 0;
+        setFlag2(true);
+        // flag2 += 1
       }
     }
   };
-
+  // 검색 성공시 지도 화면으로 이동시켜준다.
+  // 링크 이동을 위해 useNavigate 사용
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(flag2) {
+      navigate(`/`)
+    }
+  }, [flag2]);
 
   const handleClearKeyword = () => {
     setKeyword("");
@@ -158,6 +164,7 @@ export default function SearchBar({ onAddKeyword }) {
       setDatas(response.data);
     });
   }, []);
+
 
   return (
     <Container>
