@@ -3,7 +3,7 @@ import numpy as np
 import schedule
 
 # 웹캠에 연결하여 촬영 중인 모습을 cap에 저장
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 # 현재 실행 중인 1_STEP_Take_Pic.py이 있는 폴더 위치
 folder_path = os.path.dirname(os.path.realpath(__file__))
 # 촬영한 주차장 사진을 저장할 폴더 이름

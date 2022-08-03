@@ -1,11 +1,16 @@
+from new_paths import End_Key
+
 import cv2 as OpenCV
 import numpy as np
+import mysql.connector
 
 from new_drawing_utils import draw_contours
-from Colors import blue_color, white_color
+from new_colors import blue_color, white_color
+
+db = mysql.connector.connect(host='i7c103.p.ssafy.io', port='3306', user='root', password='parkingC103!', database='parking', auth_plugin='mysql_native_password')
+cur = db.cursor()
 
 class CreateParkingCoordinates:
-    CLOSE_KEYWORD = ord('q')
     
     def __init__(self, image, coordinates_output):
         self.parking_area = image
@@ -17,15 +22,26 @@ class CreateParkingCoordinates:
         self.coordinates = []
         
         # WINDOW_GUI_EXPANDED : 좌표와 좌표의 RGB 값 확인 가능, 화면 크기 전환 가능 및 비율 유지
-        OpenCV.namedWindow(self.parking_area, OpenCV.WINDOW_GUI_EXPANDED)
+        OpenCV.namedWindow(self.parking_area, OpenCV.WINDOW_AUTOSIZE)
         OpenCV.setMouseCallback(self.parking_area, self.Mouse_Click)
+    
+    def DB_Send_Data(self):
+        self.serial_id = 'temp11111111'
+        self.spotscount = self.id
+        self.enable = 1
+        
+        command = "INSERT INTO TB_PARKING_DETAIL VALUES(%s, %s, %s, %s)"
+        val = (self.serial_id, 'NULL', self.spotscount, self.enable)
+        cur.execute(command, val)
+        db.commit()
     
     def Create_Parking_Zone_INFO(self):
         while True:
             OpenCV.imshow(self.parking_area, self.image)
             
             key = OpenCV.waitKey(0)
-            if key == CreateParkingCoordinates.CLOSE_KEYWORD:
+            if key == ord('q'):
+                self.DB_Send_Data()
                 break
             
         OpenCV.destroyAllWindows()
