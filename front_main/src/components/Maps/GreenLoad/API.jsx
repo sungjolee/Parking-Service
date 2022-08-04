@@ -11,7 +11,7 @@ const ParkingData = () => {
 
   // useEffect 안 함수 작동
   useEffect(() => {
-    axios.get(baseURL).then((response) => {
+    axios.get(baseURL+"greenload").then((response) => {
       setParkingData(response.data);
 
     });

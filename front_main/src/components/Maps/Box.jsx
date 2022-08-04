@@ -7,7 +7,7 @@ const RedBox = styled.div`
   height: 150px;
   font-weight: bold;
   color: white;
-  float : left;
+  display: inline-block;
   text-align: center;
   background-color: #C5A5F9;
 `
@@ -17,10 +17,11 @@ const GrayBox = styled.div`
   width: 100px;
   height: 150px;
   font-weight: bold;
-  float : left;
+  display: inline-block;
   justify-content : center;
   background-color: #D9D9D9;
 `
+
 
 export default function Box( { TestData } ) {
   if (TestData.value === "OCCUPIED"){
