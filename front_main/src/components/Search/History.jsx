@@ -36,19 +36,6 @@ const KeywordContainer = styled.li`
   }
 `
 
-// RemoveButton 원본
-// const RemoveButton = styled.button`
-//   float: right;
-//   color: gray;
-//   border: 2px solid gray;
-//   background-color: white;
-//   padding: 3px 5px;
-//   border-radius: 12px;
-//   font-size: 11px;
-//   font-weight: 500;
-
-// `
-
 const RemoveButton = styled.span`
   float: right;
   width: 20px;
@@ -93,36 +80,6 @@ function History({ keywords, onRemoveKeyword, onClearKeywords, datas }) {
     }
   }
 
-    // let flag = 0
-    // for (const parkingData of datas) {
-    //   if (event === parkingData.NAME) {
-    //     console.log(parkingData.NAME);
-    //     flag = 1
-    //   } 
-    // }
-    // if (flag) {
-    //   //검색 성공시
-    //   flag = 0;
-    //   dispatch(getKeyword(event))
-    //   setFlag2(true);
-    // } else {
-    //   // 검색 실패시
-    //   alert("등록되지 않은 주차장입니다.")
-    //   flag = 0
-    // }
-
-
-    // if (flag === datas.length) {
-    //   // 검색 실패시
-    //   alert("등록되지 않은 주차장입니다.")
-    //   flag = 0
-    // } else {
-    //   //검색 성공시
-    //   flag = 0;
-    //   dispatch(getKeyword(event))
-    //   setFlag2(true);
-    //   // flag2 += 1
-    // }
   }
 
   // 검색 성공시 지도 화면으로 이동시켜준다.
