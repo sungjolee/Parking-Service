@@ -1,5 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 import styled from 'styled-components'
+import { useDispatch } from "react-redux";
+import { getKeyword } from '../Redux/getSearchName';
+
 
 const HistoryContainer = styled.div`
   color: gray;
@@ -61,7 +65,76 @@ const Keyword = styled.span`
   font-family: "NanumGothic-Bold";
 `
 
-function History({ keywords, onRemoveKeyword, onClearKeywords }) {
+function History({ keywords, onRemoveKeyword, onClearKeywords, datas }) {
+
+  // const keyword = useSelector((state) => state.keyword.value);
+  const dispatch = useDispatch();
+
+  // flag2 : 검색 성공 여부 확인
+  const [flag2, setFlag2] = useState(false);
+
+  
+  function handleClick(text) {
+    console.log('History');
+    console.log(datas);
+    console.log(text)
+    console.log(keywords)
+    // 전체 데이터 확인
+
+    for (const parkingData of datas) {
+      if (text === parkingData.NAME) {
+        // 검색 성공시
+        console.log(parkingData.NAME);
+        setFlag2(true)
+        dispatch(getKeyword(parkingData))
+      } else { 
+      // 검색 실패시
+      alert("등록되지 않은 주차장입니다.")
+    }
+  }
+
+    // let flag = 0
+    // for (const parkingData of datas) {
+    //   if (event === parkingData.NAME) {
+    //     console.log(parkingData.NAME);
+    //     flag = 1
+    //   } 
+    // }
+    // if (flag) {
+    //   //검색 성공시
+    //   flag = 0;
+    //   dispatch(getKeyword(event))
+    //   setFlag2(true);
+    // } else {
+    //   // 검색 실패시
+    //   alert("등록되지 않은 주차장입니다.")
+    //   flag = 0
+    // }
+
+
+    // if (flag === datas.length) {
+    //   // 검색 실패시
+    //   alert("등록되지 않은 주차장입니다.")
+    //   flag = 0
+    // } else {
+    //   //검색 성공시
+    //   flag = 0;
+    //   dispatch(getKeyword(event))
+    //   setFlag2(true);
+    //   // flag2 += 1
+    // }
+  }
+
+  // 검색 성공시 지도 화면으로 이동시켜준다.
+  // 링크 이동을 위해 useNavigate 사용
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(flag2) {
+      navigate(`/`)
+    }
+  }, [flag2]);
+
+
   console.log('keyword', keywords)
   if (keywords.length === 0) {
     return <HistoryContainer>최근 검색된 기록이 없습니다.</HistoryContainer>
@@ -75,7 +148,7 @@ function History({ keywords, onRemoveKeyword, onClearKeywords }) {
       <ListContainer>
         {keywords.map(({ id, text }) => {
           return (
-            <KeywordContainer key={id}>
+            <KeywordContainer key={id} onClick={() => handleClick(text)}>
               <Keyword>{text}</Keyword>
               <RemoveButton
                 //눌렸을때 해야하는거라 arrow function을 사용하여 실행
