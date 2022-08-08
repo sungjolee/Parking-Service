@@ -1,7 +1,7 @@
-import cv2, pickle, os
+import cv2, pickle, os, mysql.connector
 import numpy as np
 
-from Common import End_Key, data_path
+from Common import serial_id, End_Key, data_path
 from DrawingUtil import draw_contours
 from Colors import blue_color, white_color
 
@@ -9,6 +9,13 @@ from Colors import blue_color, white_color
 class CreateCoordinateData:
     ### 초기 설정
     def __init__(self, image):
+        # 주차장 정보를 보낼 DB 서버
+        self.db = mysql.connector.connect(host='your_DB_address', port='your_DB_port', user='your_user', password='your_DB_password!', database='your_DB_name', auth_plugin='mysql_native_password')
+        self.cur = self.db.cursor()
+        
+        self.serial_id = serial_id
+        self.enable = '1'
+        
         # 촬영한 주차장 사진
         self.parking_area = image
         
@@ -59,9 +66,26 @@ class CreateCoordinateData:
             key = cv2.waitKey(1)
             # 'q' 키 입력을 감지한 경우
             if key == End_Key:
+                getcommand = "SELECT SERIAL_ID FROM TB_PARKING_DETAIL WHERE SERIAL_ID = %s"
+                get_val = (self.serial_id, )
+                self.cur.execute(getcommand, get_val)
+                get_list = self.cur.fetchall()
+                if len(get_list) == 0:
+                    sendcommand = "INSERT INTO TB_PARKING_DETAIL VALUES(%s, %s, %s, %s)"
+                    val = (self.serial_id, 'NULL', self.id, self.enable)
+                    self.cur.execute(sendcommand, val)
+                    self.db.commit()
+                else:
+                    sendcommand = "UPDATE TB_PARKING_DETAIL SET TOTALSPOTS = %s WHERE SERIAL_ID = %s"
+                    val = (self.id, self.serial_id)
+                    self.cur.execute(sendcommand, val)
+                    self.db.commit()
+                
                 # 무한 반복 종료
                 break
         
+        self.cur.close()
+        self.db.close()
         # 모든 윈도우 창 닫기
         cv2.destroyAllWindows()
     

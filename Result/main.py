@@ -16,7 +16,7 @@ def main():
             print("\n주차장을 촬영합니다.")
             
             # 사진 촬영 함수 실행
-            shoot_pic(0)
+            shoot_pic()
             
             print("주차장 촬영 완료\n")
         

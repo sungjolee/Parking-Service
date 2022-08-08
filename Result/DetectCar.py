@@ -1,7 +1,7 @@
-import cv2, cvzone
+import cv2, mysql.connector, schedule
 import numpy as np
 
-from Common import End_Key
+from Common import serial_id, End_Key
 from Colors import *
 from DrawingUtil import draw_contours
 
@@ -10,6 +10,11 @@ class CarMotionDetector:
     DETECT_DELAY = 1
     
     def __init__(self, coordinates, start_frame):
+        # 주차장 정보를 보낼 DB 서버
+        self.db = mysql.connector.connect(host='your_DB_address', port='your_DB_port', user='your_user', password='your_DB_password!', database='your_DB_name', auth_plugin='mysql_native_password')
+        self.cur = self.db.cursor()
+        self.serial_id = serial_id
+        
         self.coordinates_data = coordinates
         self.start_frame = start_frame
         
@@ -17,6 +22,17 @@ class CarMotionDetector:
         self.contours = []
         self.bounds = []
         self.mask = []
+    
+    def send_log(self, statuses_list):
+        enable_list = [index + 1 for index, value in enumerate(statuses_list) if value != False]
+        enable = ','.join(list(map(str, enable_list)))
+        disable_list = [index + 1 for index, value in enumerate(statuses_list) if value == False]
+        disable = ','.join(list(map(str, disable_list)))
+        
+        sendcommand = "INSERT INTO TB_PARKING_LOG (SERIAL_ID, TOTAL, ENABLE, ENABLELIST, OCUPIEDLIST) VALUES (%s, %s, %s, %s, %s)"
+        val = (self.serial_id, len(statuses_list), len(enable_list) , enable, disable)
+        self.cur.execute(sendcommand, val)
+        self.db.commit()
          
     def detect_motion(self):
         # 카메라 촬영 프레임 설정
@@ -43,9 +59,11 @@ class CarMotionDetector:
         statuses = [False] * len(coordinates_data)
         times = [None] * len(coordinates_data)
         
-        # schedule.every(10).seconds.do(self.DB_Send_Log)
+        schedule.every(20).seconds.do(self.send_log, statuses)
         
         while True:
+            schedule.run_pending()
+            
             ret, frame = self.camera.read()
             if ret == False:
                 raise CaptureReadError("Error reading video capture on frame %s" % str(frame))
@@ -75,16 +93,18 @@ class CarMotionDetector:
                 color = green_color if statuses[index] else red_color
                 draw_contours(frame, c, str(index + 1), white_color, color)
             
-            str1 = f'Available : {[index+1 for index, value in enumerate(statuses) if value != False]}'
-            cvzone.putTextRect(frame, str1, (20, 40), scale = 1.7, thickness = 2, offset = 10, colorR = (0, 200, 0))
+            # print([index+1 for index, value in enumerate(statuses) if value != False])
             cv2.imshow("CAMERA", frame)
             
-            # schedule.run_pending()
-            
             key = cv2.waitKey(1)
+            # 'q' 키를 눌렀을 경우
             if key == End_Key:
+                # 무한 반복 종료
                 break
-            
+        
+        self.cur.close()
+        self.db.close()
+        # 모든 윈도우창 닫기
         cv2.destroyAllWindows()
         
     def __apply(self, grayed, index, p):

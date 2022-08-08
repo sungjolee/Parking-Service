@@ -4,7 +4,7 @@ from time import sleep
 
 from Common import cap, img_folder_path, img_path, End_Key
 
-def shoot_pic(is_first):
+def shoot_pic():
     # 사진 폴더가 없는 경우
     if not os.path.isdir(img_folder_path):
         # 사진 폴더 생성
@@ -23,20 +23,19 @@ def shoot_pic(is_first):
     else:
         print("Failed to load Frame. Please check Camera again")
     
-    if not is_first:
-        # 저장한 사진을 원래 색상으로 불러오기
-        img = cv2.imread(img_path, cv2.IMREAD_COLOR)
+    # 저장한 사진을 원래 색상으로 불러오기
+    img = cv2.imread(img_path, cv2.IMREAD_COLOR)
 
-        # 무한 반복
-        while True:
-            # 윈도우 창에 저장한 사진 띄우기
-            cv2.imshow("Check Parking Image (Press 'q' for Close)", img)
-            
-            # 키보드 입력 감지
-            Key = cv2.waitKey(0)
-            # 'q' 입력을 감지하면 무한 반복 종료
-            if Key == End_Key:
-                break
+    # 무한 반복
+    while True:
+        # 윈도우 창에 저장한 사진 띄우기
+        cv2.imshow("Check Parking Image (Press 'q' for Close)", img)
+        
+        # 키보드 입력 감지
+        Key = cv2.waitKey(0)
+        # 'q' 입력을 감지하면 무한 반복 종료
+        if Key == End_Key:
+            break
     
     # 웹캠 연결 해제
     cap.release()
