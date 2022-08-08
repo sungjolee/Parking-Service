@@ -18,13 +18,6 @@ const SetMyLocation = styled.div`
   background-color: white;
 `;
 
-// const ParkingInfo = styled.div`
-//   position: absolute;
-//   width: 200px;
-//   height: 200px;
-
-// `;
-
 
 export default function Tmap() {
   const keyword = useSelector((state) => state.keyword.value);
@@ -125,6 +118,20 @@ export default function Tmap() {
         // "</div>";
 
       // Popup 객체 생성.
+      // function handlePopUp() {
+      //   new Tmapv2.InfoWindow({
+      //     position: new Tmapv2.LatLng(latitude, longitude), //Popup 이 표출될 맵 좌표
+      //     content: content, //Popup 표시될 text
+      //     border: "0px solid #FF0000", //Popup의 테두리 border 설정.
+      //     type: 2, //Popup의 type 설정.
+      //     map: map, //Popup이 표시될 맵 객체
+      //   });
+      // }
+          // return (<PopUp onClick={`/${datas.PARKING}`}></PopUp>)
+
+
+
+      // Popup 객체 생성.
       if (keyword) {
         new Tmapv2.InfoWindow({
           position: new Tmapv2.LatLng(latitude, longitude), //Popup 이 표출될 맵 좌표
@@ -132,6 +139,9 @@ export default function Tmap() {
           border: "0px solid #FF0000", //Popup의 테두리 border 설정.
           type: 2, //Popup의 type 설정.
           map: map, //Popup이 표시될 맵 객체
+        });
+          // return (<PopUp onClick={`/${datas.PARKING}`}></PopUp>)
+        }
 
       // //     // let infoWindow = new Tmapv2.InfoWindow({
       // //     //   position: new Tmapv2.LatLng(latitude, longitude), //Popup 이 표출될 맵 좌표
@@ -139,8 +149,8 @@ export default function Tmap() {
       // //     //   border: "0px solid #FF0000", //Popup의 테두리 border 설정.
       // //     //   type: 2, //Popup의 type 설정.
       // //     //   map: map, //Popup이 표시될 맵 객체
-        });
-      }
+
+      // }
 
       map.setCenter(new Tmapv2.LatLng(latitude, longitude));
     }
@@ -171,56 +181,13 @@ export default function Tmap() {
   }
 
 
-  // const moveParkingPage = () => {
-  //   navigate(`/${keyword.PARKING}`);
-  // };
-
-  // const navigate = useNavigate();
-  // function moveParkingMap() {
-  //   console.log('아래는 성공 키워드')
-  //   console.log(keyword)
-  //   if (keyword) {
-
-  //     var setMyContent =
-  //     "<div class='m-pop' style='position: static; top: 180px; left : 320px; display: flex; font-size: 14px; box-shadow: 5px 5px 5px #00000040; border-radius: 10px; width : 400px; height:100px; background-color: #FFFFFF; align-items: center; padding: 5px;'>" +
-  //     "<div class='img-box' style='width: 110px; height: 90px; border-radius: 10px; background: #f5f5f5 url(resources/images/sample/p-sk-logo.png) no-repeat center;'></div>" +
-  //     "<div class='info-box' style='margin-left : 10px'>" +
-  //     "<p style='margin-bottom: 7px;'>" +
-  //     "<div class='tit' style=' font-size: 16px; font-weight: bold;'>" +
-  //     keyword.NAME +
-  //     "</div>" +
-  //     "<a href='http://tmapapi.sktelecom.com/' target='_blank' class='link' style='color: #3D6DCC; font-size: 13px; margin-left: 10px;'>주차장 상세</a></p>" +
-  //     // "<p>" +
-  //     "<div class='new-addr'>" + keyword.ADDRESS + "</div>" +
-  //     "</p>" +
-  //     "<p>" +
-  //     "<span class='old-addr' style='color: #D42F2F; font-weight: bold'>남은 자리 : "+ keyword.ENABLE +" (총 " + keyword.TOTAL + ")</span>" +
-  //     "</p>";
-
-  //     latitude = Number(keyword.LATITUDE);
-  //     longitude = Number(keyword.LONGITUDE);
-  //     console.log(latitude)
-  //     console.log(longitude)
-
-  //     new Tmapv2.InfoWindow({
-  //       position: new Tmapv2.LatLng(latitude, longitude), //Popup 이 표출될 맵 좌표
-  //       content: setMyContent, //Popup 표시될 text
-  //       border: "0px solid #FF0000", //Popup의 테두리 border 설정.
-  //       type: 2, //Popup의 type 설정.
-  //       map: map, //Popup이 표시될 맵 객체
-
-  //     });
-  //     console.log('여기까진 왔다.')
-  //   }
-  //   // navigate(`/${keyword.PARKING}`);
-  // }
-
   return (
     <div>
       <div
         id="map_div"
         style={{ height: "100%", width: "100%", position: "fixed" }}
-      ></div>
+      >
+      </div>
       <SetMyLocation onClick={setMyLocation}>
         <img
           src="./images/set_location.png"

@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-// const a = css`
-//     text-decoration: none;
-//     color: white;
-// `
+
 
 const Menubar = styled.div`
     position: fixed;
@@ -91,6 +89,15 @@ const Parking = styled.button`
 
 
 export default function MenuBar() {
+    const keyword = useSelector((state) => state.keyword.value);
+    console.log('여긴 파킹 키워드');
+    console.log(keyword)
+    function warning() {
+        if (keyword == []) {
+        alert('선택된 주차장이 없습니다.')
+        }
+    }
+
     return (
         <Menubar>
             <Search>
@@ -99,9 +106,14 @@ export default function MenuBar() {
             <Home>
                 <Link to={`/`}>Home</Link>
             </Home>
-            <Parking onClick={() => alert('선택한 주차장이 없습니다.')}>
-                <Link to={`/SearchPage`}>Parking</Link>
+            <Parking onClick={warning}>
+                <Link to={keyword ? `/${keyword.PARKING}` : `/SearchPage`}>Parking</Link>
             </Parking>
+            
+
+            {/* <Parking onClick={() => alert('선택한 주차장이 없습니다.')}>
+                <Link to={`/SearchPage`}>Parking</Link>
+            </Parking> */}
         </Menubar>
     )
 };

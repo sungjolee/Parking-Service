@@ -5,6 +5,7 @@ import axios from "axios";
 
 
 
+
 function SearchPage() {
   //string은 map을 사용 할 수 없기때문에 object 형태로 변환 시키기 위해 parsing을 해줘야함
   const [keywords, setKeywords] = useState(

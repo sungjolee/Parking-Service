@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useDispatch,  } from "react-redux";
 import { getKeyword } from "../Redux/getSearchName";
+
 
 const horizontalCenter = css`
   position: absolute;
@@ -115,9 +115,6 @@ const DropDownContainer = styled.ul`
 `;
 
 
-
-// const BASE_URL = "http://i7c103.p.ssafy.io:8000/totaldata/"; // 기본 url
-
 export default function SearchBar({ onAddKeyword, datas }) {
 
   // 1. 검색어를 state 로 다루도록 변경
@@ -126,14 +123,12 @@ export default function SearchBar({ onAddKeyword, datas }) {
 
   // redux
   const dispatch = useDispatch();
-
-  // const [datas, setDatas] = useState([]); // useState를 통한 값 저장
-
   
   // 검색어 자동완성에 사용할 이름 추출
   const deselectedOptions = [
-    'rustic',
-    'antique',
+
+    '센트럴파크',
+    '그린로드',
     'vinyl',
     'vintage',
     'refurbished',
@@ -146,6 +141,7 @@ export default function SearchBar({ onAddKeyword, datas }) {
   
 
   //form을 관련 요소를 다룰때는 2-way 데이터 바인딩을 해줍니다! (input 의 value에 state를 넣는 것)
+
   const [keyword, setKeyword] = useState("");
   const [options, setOptions] = useState(deselectedOptions);//option의 상태는 input값을 포함하는 autocomplete 추천 항목 리스트를 확인하기 위함
   const [selected, setSelected] = useState(-1);//키보드로 option 선택할때 필요한 selected상태
@@ -174,6 +170,7 @@ export default function SearchBar({ onAddKeyword, datas }) {
     setKeyword(clickedOption) //전달받은 option으로 inputValue를 변경해준다.
   };
 
+  // eslint-disable-next-line
   const handleKeyUp = (event) => { //option을 키보드로 선택할 수 있게해주는 핸들러 함수
     if(hasText){ //input에 값이 있을때
       if(event.key === 'ArrowDown' && options.length - 1 > selected){ 
@@ -223,7 +220,7 @@ export default function SearchBar({ onAddKeyword, datas }) {
 
       console.log("불러온 데이터베이스 ↓")
       console.log(datas)
-
+      console.log(deselectedOptions)
       // 전체 데이터 확인
       let flag = 0
       for (const parkingData of datas) {
@@ -247,8 +244,6 @@ export default function SearchBar({ onAddKeyword, datas }) {
   };
 
 
-
-
   // 검색 성공시 지도 화면으로 이동시켜준다.
   // 링크 이동을 위해 useNavigate 사용
   const navigate = useNavigate();
@@ -256,17 +251,9 @@ export default function SearchBar({ onAddKeyword, datas }) {
     if(flag2) {
       navigate(`/`)
     }
+    // eslint-disable-next-line
   }, [flag2]);
 
-
-  // 데이터를 불러옴
-  // useEffect(() => {
-  //   axios.get(BASE_URL).then((response) => {
-  //     setDatas(response.data);
-  //     console.log('진짜 불러온 데이터');
-  //     // console.log(datas[0]);
-  //   });
-  // }, []);
 
 
   useEffect(() => { 
@@ -277,21 +264,18 @@ export default function SearchBar({ onAddKeyword, datas }) {
 
     if(keyword !== ''){ //input값을 입력하면
 
-
-    
     // deselectedOptions = datas.NAME 
-    console.log(deselectedOptions)
+    // console.log(deselectedOptions)
 
-    
     setOptions(deselectedOptions.filter((el) => { //입력된 값을 포함하는 option만 걸러준 상태로 변경한다.
-      console.log(el);
-      console.log(deselectedOptions.filter);
+      // console.log(el);
+      // console.log(deselectedOptions.filter);
 
       return el.includes(keyword)
       })
     )
-
   }
+  // eslint-disable-next-line
   }, [keyword]);
 
 

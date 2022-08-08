@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { getKeyword } from '../Redux/getSearchName';
 
 
+
 const HistoryContainer = styled.div`
   color: gray;
   padding: 18px;
@@ -68,19 +69,40 @@ function History({ keywords, onRemoveKeyword, onClearKeywords, datas }) {
     console.log(keywords)
     // 전체 데이터 확인
 
+    // useEffect(() => {
+
+    // }, [state])
+
     for (const parkingData of datas) {
       if (text === parkingData.NAME) {
-        // 검색 성공시
-        console.log(parkingData.NAME);
-        setFlag2(true)
-        dispatch(getKeyword(parkingData))
-      } else { 
+        console.log('어라 맞는데?')
+        // console.log(text)
+        console.log(datas)
+        dispatch(getKeyword(parkingData));
+        setFlag2(flag2 => !flag2)
+      } 
+      console.log(flag2);
+
+    }
+    if (flag2 === false) {
       // 검색 실패시
+      console.log('여기가 문제냐?');
+      console.log(flag2);
       alert("등록되지 않은 주차장입니다.")
     }
+
+    //   if (text === parkingData.NAME) {
+    //     // 검색 성공시
+    //     console.log(parkingData.NAME);
+    //     setFlag2(true)
+    //     dispatch(getKeyword(parkingData))
+    //   } else { 
+    //   // 검색 실패시
+    //   alert("등록되지 않은 주차장입니다.")
+    // }
   }
 
-  }
+
 
   // 검색 성공시 지도 화면으로 이동시켜준다.
   // 링크 이동을 위해 useNavigate 사용
@@ -88,8 +110,12 @@ function History({ keywords, onRemoveKeyword, onClearKeywords, datas }) {
   useEffect(() => {
     if(flag2) {
       navigate(`/`)
-    }
+    } 
   }, [flag2]);
+
+  // useEffect(() => {
+  // }, []);
+
 
 
   console.log('keyword', keywords)
