@@ -37,7 +37,5 @@ def shoot_pic():
         if Key == End_Key:
             break
     
-    # 웹캠 연결 해제
-    cap.release()
     # 모든 윈도우창 닫기
     cv2.destroyAllWindows()

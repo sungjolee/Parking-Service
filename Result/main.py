@@ -1,6 +1,6 @@
 import pickle
 
-from Common import img_path, data_path
+from Common import cap, img_path, data_path
 from TakePic import shoot_pic
 from CreateData import CreateCoordinateData
 from DetectCar import CarMotionDetector
@@ -48,6 +48,9 @@ def main():
         
         # 프로그램 종료
         elif mode == '4':
+            # 웹캠 연결 해제
+            cap.release()
+            
             print("\n프로그램을 종료합니다. 이용해주셔서 감사합니다.\n")
             break
 
