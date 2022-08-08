@@ -28,7 +28,7 @@ const BrTask = styled.div`
   `
 
 const BoxList = ({ParkingData}) => {
-  console.log(ParkingData)
+  
   const TestData = ParkingData?.LIST
   if (ParkingData) {return(
     <>

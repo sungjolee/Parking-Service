@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useState } from 'react'
 
 const RedBox = styled.div`
   top : 30px;
@@ -23,12 +24,22 @@ const GrayBox = styled.div`
 `
 
 export default function Box( { TestData } ) {
+  const [zoneColor, setZoneColor] = useState(false)
+
+  function myZone(){
+    if (zoneColor) {
+      setZoneColor(false)
+    } else {
+      setZoneColor(true)
+    }
+  }
+
   if (TestData.value === "OCCUPIED"){
     return (
-      <RedBox>{ TestData.ID }</RedBox>
+      <RedBox onClick={myZone} style={{backgroundColor: zoneColor ? 'green' : '#C5A5F9'}}>{ TestData.ID }</RedBox>
     )
   } else if(TestData.value === "ENABLE") {
     return(
-      <GrayBox>{ TestData.ID }</GrayBox>
+      <GrayBox onClick={myZone} style={{backgroundColor: zoneColor ? 'green' : '#C5A5F9'}}>{ TestData.ID }</GrayBox>
     )
   }}

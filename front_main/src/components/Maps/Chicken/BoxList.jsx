@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import React, {useState} from 'react';
 import Box from '../Box'; // props를 위한 Box import
 
 const ParkingSatus = styled.h2`

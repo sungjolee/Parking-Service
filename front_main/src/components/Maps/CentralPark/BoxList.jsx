@@ -18,7 +18,8 @@ const BackParking = styled.div`
   height: 100%;
   margin-left : auto;
   margin-right : auto;
-  margin-top : 200px;
+  margin-top : 150px;
+  margin-bottom : 150px;
   display: flex;
 `
 
@@ -28,7 +29,7 @@ const BrTask = styled.div`
   `
 
 const BoxList = ({ParkingData}) => {
-  console.log(ParkingData)
+  
   const TestData = ParkingData?.LIST
   if (ParkingData) {return(
     <>
@@ -56,7 +57,5 @@ const BoxList = ({ParkingData}) => {
       </div>
     </>
   )}
-
-  
 }
 export default BoxList
