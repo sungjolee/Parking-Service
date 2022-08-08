@@ -1,12 +1,10 @@
-##### 공통 변수 정의 #####
-import cv2, os
+##### 공통 변수 정의
+import cv2, os, sys
 
 # 라즈베리 파이 4의 시리얼 번호를 알아내기 위한 명령어
-# serial_id_command = "cat /proc/cpuinfo | grep Serial | awk '{print $3}'"
+serial_id_command = "cat /proc/cpuinfo | grep Serial | awk '{print $3}'"
 # 명령어를 실행하여 출력될 결과를 변수에 저장
-# serial_id = os.popen(serial_id_command).read()
-
-serial_id = '12341234'
+serial_id = os.popen(serial_id_command).read()
 
 # 연결한 카메라
 cap = cv2.VideoCapture(0)

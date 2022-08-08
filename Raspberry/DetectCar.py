@@ -1,7 +1,7 @@
 import cv2, mysql.connector, schedule
 import numpy as np
 
-from Common import serial_id, cap, End_Key
+from Common import cap, serial_id, End_Key
 from Colors import *
 from DrawingUtil import draw_contours
 
@@ -65,8 +65,6 @@ class CarMotionDetector:
             schedule.run_pending()
             
             ret, frame = self.camera.read()
-            if ret == False:
-                raise CaptureReadError("Error reading video capture on frame %s" % str(frame))
             
             blurred = cv2.GaussianBlur(frame, (5, 5), 3)
             grayed = cv2.cvtColor(blurred, cv2.COLOR_BGR2GRAY)

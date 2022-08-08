@@ -37,6 +37,5 @@ def shoot_pic():
         if Key == End_Key:
             break
     
-    cap.release()
     # 모든 윈도우창 닫기
     cv2.destroyAllWindows()
