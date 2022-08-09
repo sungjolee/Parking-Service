@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import useLocalStorage from "./useLocalStorage";
 
 const RedBox = styled.div`
   top: 30px;
@@ -27,40 +26,29 @@ const GrayBox = styled.div`
   background-color: #d9d9d9;
 `;
 
-export default function Box({ TestData, index }) {
+export default function Box({ TestData }) {
   const [zoneColor, setZoneColor] = useState(false);
   const [myPosition, setMyPosition] = useState(false);
-
-  console.log(index);
-  // function MyParkingZone() {
-  //   const [on, setOn] = useLocalStorage("on", false);
-  //   if (on) {
-  //     return setOn(true);
-  //   }
-  // }
+  let number = TestData.ID;
 
   function myZone() {
     setZoneColor(!zoneColor);
 
     if (myPosition) {
       setMyPosition(!myPosition);
-      window.localStorage.removeItem(index);
+      window.localStorage.removeItem(number);
     } else {
       setMyPosition(!myPosition);
-      window.localStorage.setItem(index, 1);
+      // number index에 number을 저장한다.
+      window.localStorage.setItem(number, number);
     }
-    // if (zoneColor) {
-    //   setZoneColor(false)
-    // } else {
-    //   setZoneColor(true)
-    // }
   }
 
   useEffect(() => {
-    if (zoneColor) {
-      window.localStorage.getItem(index);
+    if (window.localStorage.getItem(number)) {
+      myZone();
     }
-  }, [zoneColor]);
+  }, []);
 
   if (TestData.value === "OCCUPIED") {
     return (
@@ -84,27 +72,3 @@ export default function Box({ TestData, index }) {
     );
   }
 }
-
-// ////
-//   function Counter() {
-//     const [count, setCount] = useState(
-//       () => JSON.parse(window.localStorage.getItem("count")) || 0
-//     );
-
-//     useEffect(() => {
-//       window.localStorage.setItem("count", JSON.stringify(count));
-//     }, [count]);
-
-//     return <button onClick={() => setCount(count + 1)}>{count}</button>;
-//   }
-
-// myPosition ? setMyPosition(myPosition + 1) : setMyPosition(myPosition - 1));
-
-// function MyParkingZone() {
-//   const [myParkingZone, setMyParkingZone] = useLocalStorage("myParkingZone", false)
-//   if (myParkingZone) {
-//     setMyParkingZone(false)
-//   } else {
-//     setMyParkingZone(true)
-//   }
-// }

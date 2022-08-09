@@ -170,8 +170,18 @@ export default function SearchBar({ onAddKeyword, datas }) {
       // 검색 성공시
       if (clickedOption === parkingData.NAME) {
         flag = true;
+        // 검색 기록에 추가해줌
+        onAddKeyword(clickedOption);
         dispatch(getKeyword(parkingData));
         navigate(`/`);
+        // function move() {
+        //   return
+        // }
+
+        // (async function test1() {
+        //   console.log("succes?");
+        //   await move();
+        // })();
       }
     }
   };
