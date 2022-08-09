@@ -140,6 +140,8 @@ export default function SearchBar({ onAddKeyword, datas }) {
   const [options, setOptions] = useState(deselectedOptions); //option의 상태는 input값을 포함하는 autocomplete 추천 항목 리스트를 확인하기 위함
   const [selected, setSelected] = useState(-1); //키보드로 option 선택할때 필요한 selected상태
   const [hasText, setHasText] = useState(false);
+  const navigate = useNavigate();
+  let flag = false;
 
   const handleKeyword = (e) => {
     setKeyword(e.target.value);
@@ -159,8 +161,19 @@ export default function SearchBar({ onAddKeyword, datas }) {
   };
 
   const handleDropDownClick = (clickedOption) => {
-    //DropDown 컴포넌트의 li엘리먼트에서 onClick으로 이벤트 핸들러 함수에 option을 전달해주고 있다.
+    // DropDown 컴포넌트의 li엘리먼트에서 onClick으로 이벤트 핸들러 함수에 option을 전달해주고 있다.
     setKeyword(clickedOption); //전달받은 option으로 inputValue를 변경해준다.
+
+    // 클릭시 바로 지도로 이동
+    for (const parkingData of datas) {
+      console.log(clickedOption);
+      // 검색 성공시
+      if (clickedOption === parkingData.NAME) {
+        flag = true;
+        dispatch(getKeyword(parkingData));
+        navigate(`/`);
+      }
+    }
   };
 
   // eslint-disable-next-line
@@ -245,13 +258,14 @@ export default function SearchBar({ onAddKeyword, datas }) {
 
   // 검색 성공시 지도 화면으로 이동시켜준다.
   // 링크 이동을 위해 useNavigate 사용
-  const navigate = useNavigate();
+
   useEffect(() => {
+    console.log(flag);
     if (flag2) {
       navigate(`/`);
     }
     // eslint-disable-next-line
-  }, [flag2]);
+  }, [flag, flag2]);
 
   useEffect(() => {
     if (keyword === "") {

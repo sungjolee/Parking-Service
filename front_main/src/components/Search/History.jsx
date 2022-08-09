@@ -84,8 +84,8 @@ function History({ keywords, onRemoveKeyword, onClearKeywords, datas }) {
       <ListContainer>
         {keywords.map(({ id, text }) => {
           return (
-            <KeywordContainer key={id} onClick={() => handleClick(text)}>
-              <Keyword>{text}</Keyword>
+            <KeywordContainer key={id}>
+              <Keyword onClick={() => handleClick(text)}>{text}</Keyword>
               <RemoveButton
                 //눌렸을때 해야하는거라 arrow function을 사용하여 실행
                 //그냥 함수 쓰면은 그려지자마자 바로 실행됨
