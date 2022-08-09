@@ -33,7 +33,10 @@ const BoxList = ({ParkingData}) => {
   if (ParkingData) {return(
     <>
       <div>
-        <ParkingSatus> 빈 : {ParkingData?.ENABLE} / 총 : {ParkingData?.TOTAL}</ParkingSatus>
+        <ParkingSatus>
+          GreenLoad <br />
+          빈 : {ParkingData?.ENABLE} / 총 : {ParkingData?.TOTAL}
+          </ParkingSatus>
           <BackParking>
             <div>
               {

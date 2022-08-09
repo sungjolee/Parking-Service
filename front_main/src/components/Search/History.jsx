@@ -75,21 +75,20 @@ function History({ keywords, onRemoveKeyword, onClearKeywords, datas }) {
 
     for (const parkingData of datas) {
       if (text === parkingData.NAME) {
-        console.log('어라 맞는데?')
-        // console.log(text)
-        console.log(datas)
+        // console.log('어라 맞는데?')
+        // console.log(datas)
         dispatch(getKeyword(parkingData));
-        setFlag2(flag2 => !flag2)
+        setFlag2((flag2) => !flag2)
       } 
       console.log(flag2);
 
     }
     if (flag2 === false) {
       // 검색 실패시
-      console.log('여기가 문제냐?');
+      // console.log('여기가 문제냐?');
       console.log(flag2);
       alert("등록되지 않은 주차장입니다.")
-    }
+
 
     //   if (text === parkingData.NAME) {
     //     // 검색 성공시
@@ -100,7 +99,7 @@ function History({ keywords, onRemoveKeyword, onClearKeywords, datas }) {
     //   // 검색 실패시
     //   alert("등록되지 않은 주차장입니다.")
     // }
-  }
+    }}
 
 
 

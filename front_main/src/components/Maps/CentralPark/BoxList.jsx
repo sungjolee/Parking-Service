@@ -27,6 +27,15 @@ const BrTask = styled.div`
   margin-top : 300px;
   margin-bottom: 300px;
   `
+const RotateBox = styled.div`
+  transform: rotate(90deg);
+  margin-top : 200px;
+`
+const RightBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto;
+`
 
 const BoxList = ({ParkingData}) => {
   
@@ -34,25 +43,28 @@ const BoxList = ({ParkingData}) => {
   if (ParkingData) {return(
     <>
       <div>
-        <ParkingSatus> 빈 : {ParkingData?.ENABLE} / 총 : {ParkingData?.TOTAL}</ParkingSatus>
+        <ParkingSatus>
+           CentralPark <br />
+           빈 : {ParkingData?.ENABLE} / 총 : {ParkingData?.TOTAL}
+           </ParkingSatus>
           <BackParking>
-            <div>
+            <RotateBox>
               {
-                TestData.filter(TestData => TestData.ID <= 7).map(TestData => (
+                TestData.filter(TestData => TestData.ID <= 2).map(TestData => (
                   <Box key={ TestData.ID } TestData={ TestData } />
                 ))
               }
-            </div>
+            </RotateBox>
           </BackParking>
           <BrTask></BrTask>
           <BackParking>
-            <div>
+            <RightBox>
               {
-                TestData.filter(TestData => TestData.ID >= 8).map(TestData => (
+                TestData.filter(TestData => TestData.ID >= 3).map(TestData => (
                   <Box key={ TestData.ID } TestData={ TestData } />
                 ))
               }
-            </div>
+            </RightBox>
           </BackParking>
       </div>
     </>
