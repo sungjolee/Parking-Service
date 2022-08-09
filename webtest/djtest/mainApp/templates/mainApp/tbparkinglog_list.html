@@ -1,0 +1,82 @@
+<table>
+    <thead>
+        <tr>
+            <th>로그테이블</th>
+            <th>id</th>
+            <th>time</th>
+            <th>totalcount</th>
+            <th>equiped</th>
+            <th>equipedlist</th>
+            <th>emptylist</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in logs %}    
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.time}}</td>
+            <td>{{i.serial_id}}</td>
+            <td>{{i.enable}}</td>
+            <td>{{i.ocupiedlist}}</td>
+            <td>{{i.total}}</td>
+            <td>{{i.enablelist}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>주차장리스트</th>
+            <th>id</th>
+            <th>이름</th>
+            <th>위도</th>
+            <th>경도</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in mains %}    
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.id}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.latitude}}</td>
+            <td>{{i.longitude}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>detail</th>
+            <th>serial</th>
+            <th>일반슬롯</th>
+            <th>특별슬롯</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in details %}    
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.serial_id}}</td>
+            <td>{{i.id}}</td>
+            <td>{{i.totalspots}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<form action="{% url 'create' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="name">
+    <input type="text" name="latitude">
+    <input type="text" name="longitude">
+    <button type="submit">제출하기</button>
+</form>
