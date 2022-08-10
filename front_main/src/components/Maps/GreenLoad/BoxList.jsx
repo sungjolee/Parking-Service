@@ -34,7 +34,7 @@ const BoxList = ({ParkingData}) => {
     <>
       <div>
         <ParkingSatus>
-        {ParkingData.NAME} <br />
+          {ParkingData.NAME} <br />
           빈 : {ParkingData?.ENABLE} / 총 : {ParkingData?.TOTAL}
           </ParkingSatus>
           <BackParking>

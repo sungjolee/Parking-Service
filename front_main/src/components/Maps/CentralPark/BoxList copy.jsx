@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import Box from '../Box'; // props를 위한 Box import
 
-const ParkingSatus = styled.h4`
-  position: flexd;
-  /* top : 0;
+
+
+const ParkingSatus = styled.div`
+  /* position: fixed;
+  top : 0;
   left : 0;
   right : 0;
   align-items: center;
@@ -13,21 +15,14 @@ const ParkingSatus = styled.h4`
   text-shadow: 2px 2px 3px rgba(255,255,255,0.2); */
 `
 const ParkingTitle = styled.div`
-  /* position: flexd; */
-  margin-left:auto; 
-  margin-right:auto;
   display: flex;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-  width: 300px;
+  width: 300;
+  left: 50%;
+  transform: translate(-50%, 0);
+  position: fixed;
   background-color: red;
-  border-radius: 30;
-  /* left: 50%; */
-  /* transform: translate(-50%, 0); */
-
+  border-radius: 10;
 `
-
 
 
 const BackParking = styled.div`
@@ -59,30 +54,31 @@ const BoxList = ({ParkingData}) => {
   if (ParkingData) {return(
     <>
       <div>
-      <ParkingSatus>
+        <ParkingSatus>
           <ParkingTitle>
           {ParkingData.NAME}
           </ParkingTitle>
+            
            빈 : {ParkingData?.ENABLE} / 총 : {ParkingData?.TOTAL}
-      </ParkingSatus>
-        <BackParking>
-          <RotateBox>
-            {
-              TestData.filter(TestData => TestData.ID <= 2).map(TestData => (
-                <Box key={ TestData.ID } TestData={ TestData } />
-              ))
-            }
-          </RotateBox>
-        </BackParking>
-        <BackParking>
-          <RightBox>
-            {
-              TestData.filter(TestData => TestData.ID >= 3).map(TestData => (
-                <Box key={ TestData.ID } TestData={ TestData } />
-              ))
-            }
-          </RightBox>
-        </BackParking>
+           </ParkingSatus>
+          <BackParking>
+            <RotateBox>
+              {
+                TestData.filter(TestData => TestData.ID <= 2).map(TestData => (
+                  <Box key={ TestData.ID } TestData={ TestData } />
+                ))
+              }
+            </RotateBox>
+          </BackParking>
+          <BackParking>
+            <RightBox>
+              {
+                TestData.filter(TestData => TestData.ID >= 3).map(TestData => (
+                  <Box key={ TestData.ID } TestData={ TestData } />
+                ))
+              }
+            </RightBox>
+          </BackParking>
       </div>
     </>
   )}

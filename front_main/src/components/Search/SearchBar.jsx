@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getKeyword } from "../Redux/getSearchName";
+
 
 const horizontalCenter = css`
   position: absolute;
@@ -13,7 +14,7 @@ const horizontalCenter = css`
 const Container = styled.div`
   position: relative;
   width: 100%;
-  background-color: #c5a5f9;
+  background-color: #A6B0F7;
   padding: 20px 60px;
   box-sizing: border-box;
 `;
@@ -71,6 +72,9 @@ const Input = styled.input`
   font-weight: 500;
   font-size: 15px;
   box-sizing: border-box;
+  border: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px gray;
 
   ${({ active }) =>
     active &&
@@ -133,6 +137,7 @@ export default function SearchBar({ onAddKeyword, datas }) {
     "중고B급",
     "골동품",
   ];
+
 
   //form을 관련 요소를 다룰때는 2-way 데이터 바인딩을 해줍니다! (input 의 value에 state를 넣는 것)
 
@@ -233,6 +238,8 @@ export default function SearchBar({ onAddKeyword, datas }) {
   const [flag2, setFlag2] = useState(false);
 
   const handleEnter = (e) => {
+    console.log('잘 들어오나?');
+    console.log(e);
     if (keyword && e.keyCode === 13) {
       //엔터일때 부모의 addkeyword에 전달
       onAddKeyword(keyword);
