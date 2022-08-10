@@ -29,7 +29,7 @@ class CarMotionDetector:
         disable_list = [index + 1 for index, value in enumerate(statuses_list) if value == False]
         disable = ','.join(list(map(str, disable_list)))
         
-        sendcommand = "INSERT INTO TB_PARKING_LOG (SERIAL_ID, TOTAL, ENABLE, ENABLELIST, OCUPIEDLIST) VALUES (%s, %s, %s, %s, %s)"
+        sendcommand = "CALL PD_LOG_INSERT(%s, %s, %s, %s, %s)"
         val = (self.serial_id, len(statuses_list), len(enable_list) , enable, disable)
         self.cur.execute(sendcommand, val)
         self.db.commit()
