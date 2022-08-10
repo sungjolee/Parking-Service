@@ -3,7 +3,7 @@ import axios from 'axios'
 import BoxList from './BoxList' // props를 위한 BoxList import
 
 
-const baseURL = 'http://i7c103.p.ssafy.io:8000/parking/' // 기본 url
+const BASE_URL = 'http://i7c103.p.ssafy.io:8000/parking/' // 기본 url
 
 
 const ParkingData = () => {
@@ -11,11 +11,13 @@ const ParkingData = () => {
 
   // useEffect 안 함수 작동
   useEffect(() => {
-    axios.get(baseURL).then((response) => {
+    axios.get(BASE_URL, {
+      params: {ID : 'centralpark'}
+    }).then((response) => {
       setParkingData(response.data);
-      
+      console.log(response)
     });
-  }, [])
+  }, []);
 
   return (
     <>

@@ -34,7 +34,7 @@ const BoxList = ({ParkingData}) => {
     <>
       <div>
         <ParkingSatus>
-          GreenLoad <br />
+        {ParkingData.NAME} <br />
           빈 : {ParkingData?.ENABLE} / 총 : {ParkingData?.TOTAL}
           </ParkingSatus>
           <BackParking>
