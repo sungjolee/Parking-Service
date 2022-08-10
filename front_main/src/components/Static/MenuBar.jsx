@@ -90,11 +90,9 @@ const Parking = styled.button`
 
 export default function MenuBar() {
     const keyword = useSelector((state) => state.keyword.value);
-    console.log('여긴 파킹 키워드');
-    console.log(keyword)
     function warning() {
-        if (keyword == []) {
-        alert('선택된 주차장이 없습니다.')
+        if (keyword === []) {
+            alert('선택된 주차장이 없습니다.')
         }
     }
 
