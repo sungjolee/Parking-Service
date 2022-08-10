@@ -23,39 +23,56 @@ const Menubar = styled.div`
   border-radius: 50px;
   background-color: lightgray;
   position: fixed;
-`;
+`
 
 export default function MenuBar() {
-  const [value, setValue] = React.useState(1);
-  const keyword = useSelector((state) => state.keyword.value);
+  let path = window.location.pathname
+  let start = 0
+  if (path === '/') {
+    start = 1
+  } else if (path === '/SearchPage') {
+    start = 0
+  } else if (path === '/parking...') {
+    start = 2
+  }
 
+
+  const [value, setValue] = React.useState(start);
+  const keyword = useSelector((state) => state.keyword.value);
   function warning() {
     // 선택된 주차장이 없다면 search page로 이동
     if (keyword === '') {
-      setValue(0)   // 메뉴바 searchpage 활성화
       alert('선택된 주차장이 없습니다.')
     }
   }
-  console.log(window.location.pathname);
+  // console.log(window.location.pathname);
   useEffect(() => {
-  }, [])
+    if (path === '/') {
+      setValue(1)
+    } else if (path === '/SearchPage') {
+      setValue(0)
+    } else if (path === '/parking...') {
+      setValue(2)
+    }
+  }, [path])
 
   return (
     <Menubar>
-    <Box sx={{ width: 500 }}>
-      <BottomNavigation
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      >
-        <BottomNavigationAction label="Search" icon={<SearchIcon />} component={Link} to={`/SearchPage`} />
-        <BottomNavigationAction label="Home" icon={<HomeIcon />} component={Link} to={`/`}/>
-        <BottomNavigationAction onClick={warning} label="Parking" icon={<LocalParkingIcon />}  
-        component={Link} to={keyword ? `/${keyword.PARKING}` : `/SearchPage`}/>
-      </BottomNavigation>
-    </Box>
+      <Box sx={{ width: 500 }}>
+        <BottomNavigation
+          sx={{ backgroundColor: 'lightgray', borderRadius: '15px' }}
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        >
+          <BottomNavigationAction label="Search" icon={<SearchIcon />} component={Link} to={`/SearchPage`} />
+          <BottomNavigationAction label="Home" icon={<HomeIcon />} component={Link} to={`/`}/>
+          <BottomNavigationAction onClick={warning} label="Parking" icon={<LocalParkingIcon />}  
+          component={Link} to={keyword ? `/${keyword.PARKING}` : `/SearchPage`}/>
+        </BottomNavigation>
+      </Box>
     </Menubar>
   );
 }

@@ -11,8 +11,11 @@ const RedBox = styled.div`
   color: black;
   float: left;
   text-align: center;
-  background-color: #c5a5f9;
-`;
+  background-color: #f56060;
+  border-radius : 10px;
+`
+// #c5a5f9
+// #d9d9d9
 const GrayBox = styled.div`
   top: 30px;
   bottom: 100px;
@@ -23,7 +26,8 @@ const GrayBox = styled.div`
   color: black;
   float: left;
   justify-content: center;
-  background-color: #d9d9d9;
+  background-color: #D9D9D9;
+  border-radius : 10px;
 `;
 
 export default function Box({ TestData }) {
@@ -36,6 +40,7 @@ export default function Box({ TestData }) {
 
     if (myPosition) {
       setMyPosition(!myPosition);
+      // number을 삭제시킨다.
       window.localStorage.removeItem(number);
     } else {
       setMyPosition(!myPosition);
@@ -56,7 +61,7 @@ export default function Box({ TestData }) {
         onClick={() => {
           myZone();
         }}
-        style={{ backgroundColor: zoneColor ? "#f34c4c" : "#C5A5F9" }}
+        style={{ backgroundColor: zoneColor ? "#c5a5f9" : "#f56060" }}
       >
         {TestData.ID}
       </RedBox>
@@ -65,7 +70,7 @@ export default function Box({ TestData }) {
     return (
       <GrayBox
         onClick={myZone}
-        style={{ backgroundColor: zoneColor ? "#f34c4c" : "#D9D9D9" }}
+        style={{ backgroundColor: zoneColor ? "#c5a5f9" : "#D9D9D9" }}
       >
         {TestData.ID}
       </GrayBox>
