@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'parkingAdmin',
     'bootstrap4',
+    'sslserver'
 ]
 
 MIDDLEWARE = [

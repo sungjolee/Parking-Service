@@ -21,9 +21,10 @@ urlpatterns = [
     # path('home/',insertDB,name='list'),
     # path('create/',create,name='create'),
     # path('main/',DBCreateView.as_view(),name='main'),
-    path('review/',ReviewList.as_view()),
+    path('parking/',ReviewList.as_view()),
     # path('review/<int:pk>',ReviewDetail.as_view()),
     path('totaldata/',TotalData.as_view())
+    
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

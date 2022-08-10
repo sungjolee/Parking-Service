@@ -16,7 +16,7 @@ Including another URLconf
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from .views import parkingOwner
+from .views import index, layout, login
 # from .views import ReviewList, TotalData
 
 urlpatterns = [
@@ -26,7 +26,10 @@ urlpatterns = [
     # path('review/',ReviewList.as_view()),
     # # path('review/<int:pk>',ReviewDetail.as_view()),
     # path('totaldata/',TotalData.as_view())
-    path('parkingAdmin/', parkingOwner, name='ownerPage'),
+    # path('parkingAdmin/', parkingOwner, name='ownerPage'),
+    path('index',index),
+    path('layout-static',layout),
+    path('login',login),
     
     
 ]

@@ -23,43 +23,21 @@ from django.db import connection
 #
 #
 class TotalData(APIView):
-    
-    # def post(self, request):
-    #     serializer = ReviewSerializer(data = request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data,status=status.HTTP_201_CREATED)
-    #     return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)
+
     
     def get(self, request):
         reviews = TbParkingLog.objects.all()
         cursor = connection.cursor()
-        strSQL = "select * from TB_PARKING_MAIN"
+        strSQL = "select * from VW_MAPVIEW"
         result = cursor.execute(strSQL)
         reviews = cursor.fetchall()
         
         connection.commit()
         connection.close()
-        # reviews=list(reviews)
-        # reviews[0]=list(reviews[0])
-        
-        # reviews[0][3]=reviews[0][3][1:-1]
-        # print(reviews[0][3])
-        # reviews[0][5]=reviews[0][5][1:-1]
-        # print(reviews[0][5])
-        # reviews[0][3]=reviews[0][3].split(',')
-        # reviews[0][5]=reviews[0][5].split(',')
-        
-        
-        
-        # for i in range(len(reviews[0][3])):
-        #     reviews[0][3][i]="s"+str(reviews[0][3][i])
-        #     reviews[0][5][i]="s"+str(reviews[0][5][i])
-        
 
         
         cursor = connection.cursor()
-        columnSQL = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='TB_PARKING_MAIN' ORDER BY ORDINAL_POSITION;" 
+        columnSQL = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='VW_MAPVIEW' ORDER BY ORDINAL_POSITION;" 
         columresult = cursor.execute(columnSQL)
         columnnames=cursor.fetchall()
         
@@ -75,53 +53,12 @@ class TotalData(APIView):
         reviews=list(reviews)
         for i in range(result):
             reviews[i]=list(reviews[i])
-            # reviews[i][7]=reviews[i][7][1:-1]
-            # reviews[i][9]=reviews[i][9][1:-1]
-            # reviews[i][7]=reviews[i][7].split(',')
-            # reviews[i][9]=reviews[i][9].split(',')
-
-
-
-            # for j in range(len(reviews[i][7])):
-            #     reviews[i][7][j]="s"+str(reviews[i][7][j])
-                
-            
-            # for j in range(len(reviews[i][9])):
-            #     reviews[i][9][j]="s"+str(reviews[i][9][j])
 
             Dict = toDict(reviews[i],keys)
             resultarray.append(Dict)
         
         return Response(resultarray)
 
-# def insertDB(request):
-#     model1 = TbParkingLog.objects.all()
-#     model2 = TbParkingMain.objects.all()
-#     model3 = TbParkingDetail.objects.all()
-#     context = {'logs' : model1,
-#                'mains': model2,
-#                'details':model3,} #context에 모든 후보에 대한 정보를 저장
-#     return render(request, 'mainApp/tbparkinglog_list.html', context)
-
-# def create(request):
-#     new_main = TbParkingMain() # 데이터 저장을 위한 객체 생성
-#     new_main.name = request.POST['name']
-#     new_main.latitude = request.POST['latitude']
-#     new_main.longitude = request.POST['longitude']
-
-#     cursor = connection.cursor()
-#     strSQL = f"insert into TB_PARKING_MAIN (Name,latitude,longitude) values({new_main.name},{new_main.latitude},{new_main.longitude})"
-#     result = cursor.execute(strSQL)
-#     reviews = cursor.fetchall()
-        
-#     connection.commit()
-#     connection.close()
-#     print('commit 하냐')
-#     return redirect('list')
-
-# class DBCreateView(ListView):
-#     model = TbParkingMain
-    
 def toDict(queryResult,columnResult):
     if queryResult ==None or columnResult==None:
         return None
@@ -134,62 +71,80 @@ class ReviewList(APIView):
     def get(self, request):
         reviews = TbParkingLog.objects.all()
         cursor = connection.cursor()
-        strSQL = "select * from TB_PARKING_LOG ORDER BY TIME LIMIT 1"
+        st = request.GET.get("ID")
+        strSQL = f"\
+                SELECT A.NAME, C.* \
+                FROM\
+	                TB_PARKING_MAIN A,\
+                    TB_PARKING_DETAIL B,\
+                    TB_PARKING_LOG C\
+                WHERE A.ID=B.ID\
+                AND B.SERIAL_ID=C.SERIAL_ID\
+                AND A.ID='{st}'\
+                ORDER BY TIME DESC\
+                LIMIT 1"
         result = cursor.execute(strSQL)
         reviews = cursor.fetchall()
         
+
         connection.commit()
         connection.close()
         reviews=list(reviews)
-        # reviews[0]=list(reviews[0])
-        
-        # reviews[0][3]=reviews[0][3][1:-1]
-        # print(reviews[0][3])
-        # reviews[0][5]=reviews[0][5][1:-1]
-        # print(reviews[0][5])
-        # reviews[0][3]=reviews[0][3].split(',')
-        # reviews[0][5]=reviews[0][5].split(',')
-        
-        
-        
-        # for i in range(len(reviews[0][3])):
-        #     reviews[0][3][i]="s"+str(reviews[0][3][i])
-        #     reviews[0][5][i]="s"+str(reviews[0][5][i])
-        
-        cursor = connection.cursor()
-        columnSQL = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='TB_PARKING_LOG' ORDER BY ORDINAL_POSITION;" 
-        columresult = cursor.execute(columnSQL)
-        columnnames=cursor.fetchall()
-        
-        connection.commit()
-        connection.close()
-                
-        keys=[]
-        for columnname in columnnames:
-            keys.append(columnname[0])        
+
+
+        keys=["NAME","TIME","SERIAL_ID"]
+   
                 
         resultarray=[]
         
         reviews=list(reviews)
         for i in range(result):
             reviews[i]=list(reviews[i])
-            reviews[i][3]=reviews[i][3][1:-1]
-            reviews[i][5]=reviews[i][5][1:-1]
-            
-            reviews[i][3]=reviews[i][3].split(',')
+
+            reviews[i][6]=reviews[i][6].split(',')
             reviews[i][5]=reviews[i][5].split(',')
 
 
 
-            for j in range(len(reviews[i][3])):
-                reviews[i][3][j]="s"+str(reviews[i][3][j])
+            for j in range(len(reviews[i][6])):
+                reviews[i][6][j]="s"+str(reviews[i][6][j])
                 
             
             for j in range(len(reviews[i][5])):
                 reviews[i][5][j]="s"+str(reviews[i][5][j])
+                
+            parkingZoneDictArray =[]
+            for j in reviews[i][5]:
+                tmpdic = {
+                    "ID":int(j[1:]),
+                    "value":"OCCUPIED"
+                }
+                parkingZoneDictArray.append(tmpdic)
+            for j in reviews[i][6]:
+                tmpdic = {
+                    "ID":int(j[1:]),
+                    "value":"ENABLE"
+                }
+                parkingZoneDictArray.append(tmpdic)
 
             Dict = toDict(reviews[i],keys)
-            resultarray.append(Dict)
+        
+        
+        for i in range(len(parkingZoneDictArray)):
+            for j in range(i+1,len(parkingZoneDictArray)):
+                if(parkingZoneDictArray[i]["ID"]>parkingZoneDictArray[j]["ID"]):
+                    tmp=parkingZoneDictArray[i]
+                    parkingZoneDictArray[i]=parkingZoneDictArray[j]
+                    parkingZoneDictArray[j]=tmp
+        
+        Dict["ENABLE"]=len(reviews[0][5])
+        Dict["TOTAL"]=len(parkingZoneDictArray)
+        Dict["LIST"]=parkingZoneDictArray
+            # resultarray.append(Dict)
+        
+        
+        
+        
         
         return Response(Dict)
     

@@ -6,14 +6,14 @@ from parkingAdmin.models import TbParkingLog, TbParkingMain, TbParkingDetail
 
 # Create your views here.
 
-def parkingOwner(request):
-    model1 = TbParkingLog.objects.all()
-    model2 = TbParkingMain.objects.all()
-    model3 = TbParkingDetail.objects.all()
-    context = {'logs' : model1,
-               'mains': model2,
-               'details':model3,} #context에 모든 후보에 대한 정보를 저장
-    return render(request, 'parkingAdmin/layout.html', context)
+# def parkingOwner(request):
+#     model1 = TbParkingLog.objects.all()
+#     model2 = TbParkingMain.objects.all()
+#     model3 = TbParkingDetail.objects.all()
+#     context = {'logs' : model1,
+#                'mains': model2,
+#                'details':model3,} #context에 모든 후보에 대한 정보를 저장
+#     return render(request, 'parkingAdmin/layout.html', context)
 
 
 
@@ -36,3 +36,17 @@ def signup(request):
     return render(request, 'accounts/signup_form.html', {
         'form': form,
     })
+    
+    
+def index(request):
+  #코드 구현
+  table = TbParkingLog.objects.all()
+  
+  
+  return render(request, "parkingAdmin/index.html",{'value':table})
+
+def layout(request):
+    return render(request,"parkingAdmin/layout-static.html")
+
+def login(request):
+    return render(request,"parkingAdmin/login.html")
