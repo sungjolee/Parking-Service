@@ -18,23 +18,22 @@ const BackParking = styled.div`
   height: 100%;
   margin-left : auto;
   margin-right : auto;
-  margin-top : 150px;
-  margin-bottom : 150px;
+  margin-top : 0px;
+  margin-bottom : 0px;
   display: flex;
 `
 
-const BrTask = styled.div`
-  margin-top : 300px;
-  margin-bottom: 300px;
-  `
 const RotateBox = styled.div`
   transform: rotate(90deg);
-  margin-top : 200px;
+  margin-top : 250px;
 `
 const RightBox = styled.div`
   display: flex;
   justify-content: space-between;
+  top : 0px;
+  margin-top : 50px;
   margin-left: auto;
+  margin-bottom : 150px;
 `
 
 const BoxList = ({ParkingData}) => {
@@ -56,7 +55,6 @@ const BoxList = ({ParkingData}) => {
               }
             </RotateBox>
           </BackParking>
-          <BrTask></BrTask>
           <BackParking>
             <RightBox>
               {
