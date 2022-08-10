@@ -28,7 +28,8 @@ const Menubar = styled.div`
 export default function MenuBar() {
   const [value, setValue] = React.useState(1);
   const keyword = useSelector((state) => state.keyword.value);
-
+  let path = window.location.pathname
+  
   function warning() {
     // 선택된 주차장이 없다면 search page로 이동
     if (keyword === '') {
@@ -36,9 +37,16 @@ export default function MenuBar() {
       alert('선택된 주차장이 없습니다.')
     }
   }
-  console.log(window.location.pathname);
+  
   useEffect(() => {
-  }, [])
+    if (path === '/') {
+      setValue(1)
+    } else if (path === '/SearchPage') {
+      setValue(0)
+    } else if (path === '/parking...') {
+      setValue(2)
+    }
+  }, [path])
 
   return (
     <Menubar>
@@ -52,10 +60,10 @@ export default function MenuBar() {
       >
         <BottomNavigationAction label="Search" icon={<SearchIcon />} component={Link} to={`/SearchPage`} />
         <BottomNavigationAction label="Home" icon={<HomeIcon />} component={Link} to={`/`}/>
-        <BottomNavigationAction onClick={warning} label="Parking" icon={<LocalParkingIcon />}  
+        <BottomNavigationAction onClick={warning} label="Parking" icon={<LocalParkingIcon />} color="primary"
         component={Link} to={keyword ? `/${keyword.PARKING}` : `/SearchPage`}/>
       </BottomNavigation>
     </Box>
-    </Menubar>
+    </Menubar>  
   );
 }
