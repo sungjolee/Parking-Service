@@ -12,13 +12,17 @@ const ParkingSatus = styled.h2`
   color: #222222;
   text-shadow: 2px 2px 3px rgba(255,255,255,0.2);
 `
+const AllParking = styled.div`
+  flex-wrap : nowrap;
+`
 
 const BackParking = styled.div`
-  width : 80vw;
+  width : 100%;
   height: 100%;
-  margin-left : auto;
-  margin-right : auto;
   margin-top : 200px;
+  margin-left : 200px;
+  margin-right : auto;
+  margin-bottom : 100px;
   display: flex;
 `
 
@@ -37,25 +41,27 @@ const BoxList = ({ParkingData}) => {
           {ParkingData.NAME} <br />
           빈 : {ParkingData?.ENABLE} / 총 : {ParkingData?.TOTAL}
           </ParkingSatus>
-          <BackParking>
-            <div>
-              {
-                TestData.filter(TestData => TestData.ID <= 7).map(TestData => (
-                  <Box key={ TestData.ID } TestData={ TestData } />
-                ))
-              }
-            </div>
-          </BackParking>
-          <BrTask></BrTask>
-          <BackParking>
-            <div>
-              {
-                TestData.filter(TestData => TestData.ID >= 8).map(TestData => (
-                  <Box key={ TestData.ID } TestData={ TestData } />
-                ))
-              }
-            </div>
-          </BackParking>
+          <AllParking>
+            <BackParking>
+              <div>
+                {
+                  TestData.filter(TestData => TestData.ID <= 7).map(TestData => (
+                    <Box key={ TestData.ID } TestData={ TestData } />
+                  ))
+                }
+              </div>
+            </BackParking>
+            <BrTask></BrTask>
+            <BackParking>
+              <div>
+                {
+                  TestData.filter(TestData => TestData.ID >= 8).map(TestData => (
+                    <Box key={ TestData.ID } TestData={ TestData } />
+                  ))
+                }
+              </div>
+            </BackParking>
+          </AllParking>
       </div>
     </>
   )}
