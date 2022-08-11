@@ -16,7 +16,7 @@ def shoot_pic():
     # 영상 불러오기 성공한 경우
     if ret:
         # 카메라 연결 대기
-        sleep(3)
+        # sleep(3)
         # 카메라 영상에서 1 Frame을 사진으로 저장
         cv2.imwrite(img_path, frame)
     # 영상 불러오기 실패한 경우

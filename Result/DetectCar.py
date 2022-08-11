@@ -11,7 +11,7 @@ class CarMotionDetector:
     
     def __init__(self, coordinates, start_frame):
         # 주차장 정보를 보낼 DB 서버
-        self.db = mysql.connector.connect(host='your_DB_address', port='your_DB_port', user='your_user', password='your_DB_password!', database='your_DB_name', auth_plugin='mysql_native_password')
+        self.db = mysql.connector.connect(host='i7c103.p.ssafy.io', port='3306', user='root', password='parkingC103!', database='parking', auth_plugin='mysql_native_password')
         self.cur = self.db.cursor()
         self.serial_id = serial_id
         
@@ -29,7 +29,8 @@ class CarMotionDetector:
         disable_list = [index + 1 for index, value in enumerate(statuses_list) if value == False]
         disable = ','.join(list(map(str, disable_list)))
         
-        sendcommand = "INSERT INTO TB_PARKING_LOG (SERIAL_ID, TOTAL, ENABLE, ENABLELIST, OCUPIEDLIST) VALUES (%s, %s, %s, %s, %s)"
+        # sendcommand = "INSERT INTO TB_PARKING_LOG (SERIAL_ID, TOTAL, ENABLE, ENABLELIST, OCUPIEDLIST) VALUES (%s, %s, %s, %s, %s)"
+        sendcommand = "CALL PD_LOG_INSERT(%s, %s, %s, %s, %s)"
         val = (self.serial_id, len(statuses_list), len(enable_list) , enable, disable)
         self.cur.execute(sendcommand, val)
         self.db.commit()

@@ -10,7 +10,7 @@ class CreateCoordinateData:
     ### 초기 설정
     def __init__(self, image):
         # 주차장 정보를 보낼 DB 서버
-        self.db = mysql.connector.connect(host='your_DB_address', port='your_DB_port', user='your_user', password='your_DB_password!', database='your_DB_name', auth_plugin='mysql_native_password')
+        self.db = mysql.connector.connect(host='i7c103.p.ssafy.io', port='3306', user='root', password='parkingC103!', database='parking', auth_plugin='mysql_native_password')
         self.cur = self.db.cursor()
         
         self.serial_id = serial_id
