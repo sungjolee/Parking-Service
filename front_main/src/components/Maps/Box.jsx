@@ -5,29 +5,29 @@ const RedBox = styled.div`
   top: 30px;
   bottom: 100px;
   border: 2px solid white;
-  width: 100px;
-  height: 150px;
+  width: 80px;
+  height: 120px;
   font-weight: bold;
   color: black;
   float: left;
   text-align: center;
   background-color: #f56060;
-  border-radius : 10px;
-`
+  border-radius: 10px;
+`;
 // #c5a5f9
 // #d9d9d9
 const GrayBox = styled.div`
   top: 30px;
   bottom: 100px;
   border: 2px solid white;
-  width: 100px;
-  height: 150px;
+  width: 80px;
+  height: 120px;
   font-weight: bold;
   color: black;
   float: left;
   justify-content: center;
-  background-color: #D9D9D9;
-  border-radius : 10px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
 `;
 
 export default function Box({ TestData }) {
@@ -55,13 +55,13 @@ export default function Box({ TestData }) {
     }
   }, []);
 
-  if (TestData.value === "OCCUPIED") {
+  if (TestData.value === "OCUPIED") {
     return (
       <RedBox
         onClick={() => {
           myZone();
         }}
-        style={{ backgroundColor: zoneColor ? "#5380E0": "#f56060" }}
+        style={{ backgroundColor: zoneColor ? "#5380E0" : "#f56060" }}
       >
         {TestData.ID}
       </RedBox>
