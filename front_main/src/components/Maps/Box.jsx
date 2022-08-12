@@ -55,7 +55,7 @@ export default function Box({ TestData }) {
     }
   }, []);
 
-  if (TestData.value === "OCCUPIED") {
+  if (TestData.value === "OCUPIED") {
     return (
       <RedBox
         onClick={() => {
