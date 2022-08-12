@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'mainApp',
     'rest_framework',
     'corsheaders',
+    'parkingAdmin',
+    'bootstrap4',
+    'sslserver'
 ]
 
 MIDDLEWARE = [
@@ -154,3 +157,5 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'x-requested-with',
 )
+
+AUTH_USER_MODEL = 'parkingAdmin.User'

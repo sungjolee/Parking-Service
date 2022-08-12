@@ -15,15 +15,24 @@ Including another URLconf
 """
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import ReviewList, TotalData
+
+from .views import charts, index, layout, login, notFound
+# from .views import ReviewList, TotalData
 
 urlpatterns = [
-    # path('home/',insertDB,name='list'),
-    # path('create/',create,name='create'),
-    # path('main/',DBCreateView.as_view(),name='main'),
-    path('parking/',ReviewList.as_view()),
-    # path('review/<int:pk>',ReviewDetail.as_view()),
-    path('totaldata/',TotalData.as_view())
+    # # path('home/',insertDB,name='list'),
+    # # path('create/',create,name='create'),
+    # # path('main/',DBCreateView.as_view(),name='main'),
+    # path('review/',ReviewList.as_view()),
+    # # path('review/<int:pk>',ReviewDetail.as_view()),
+    # path('totaldata/',TotalData.as_view())
+    # path('parkingAdmin/', parkingOwner, name='ownerPage'),
+    path('index',index),
+    path('layout-static',layout),
+    path('login',login),
+    path('404',notFound),
+    path('charts',charts)
+    
     
 ]
 

@@ -13,34 +13,52 @@ from .models import TbParkingDetail,TbParkingLog,TbParkingMain
 from django.db import connection
 # Create your views here.
 
-def insertDB(request):
-    model1 = TbParkingLog.objects.all()
-    model2 = TbParkingMain.objects.all()
-    model3 = TbParkingDetail.objects.all()
-    context = {'logs' : model1,
-               'mains': model2,
-               'details':model3,} #context에 모든 후보에 대한 정보를 저장
-    return render(request, 'mainApp/tbparkinglog_list.html', context)
 
-def create(request):
-    new_main = TbParkingMain() # 데이터 저장을 위한 객체 생성
-    new_main.name = request.POST['name']
-    new_main.latitude = request.POST['latitude']
-    new_main.longitude = request.POST['longitude']
 
-    cursor = connection.cursor()
-    strSQL = f"insert into TB_PARKING_MAIN (Name,latitude,longitude) values({new_main.name},{new_main.latitude},{new_main.longitude})"
-    result = cursor.execute(strSQL)
-    reviews = cursor.fetchall()
-        
-    connection.commit()
-    connection.close()
-    print('commit 하냐')
-    return redirect('list')
+####################################
+# 맵페이지용 토탈 데이터
+########################
+#
+#
+#
+#
+class TotalData(APIView):
 
-class DBCreateView(ListView):
-    model = TbParkingMain
     
+    def get(self, request):
+        reviews = TbParkingLog.objects.all()
+        cursor = connection.cursor()
+        strSQL = "select * from VW_MAPVIEW"
+        result = cursor.execute(strSQL)
+        reviews = cursor.fetchall()
+        
+        connection.commit()
+        connection.close()
+
+        
+        cursor = connection.cursor()
+        columnSQL = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='VW_MAPVIEW' ORDER BY ORDINAL_POSITION;" 
+        columresult = cursor.execute(columnSQL)
+        columnnames=cursor.fetchall()
+        
+        connection.commit()
+        connection.close()
+                
+        keys=[]
+        for columnname in columnnames:
+            keys.append(columnname[0])        
+                
+        resultarray=[]
+        
+        reviews=list(reviews)
+        for i in range(result):
+            reviews[i]=list(reviews[i])
+
+            Dict = toDict(reviews[i],keys)
+            resultarray.append(Dict)
+        
+        return Response(resultarray)
+
 def toDict(queryResult,columnResult):
     if queryResult ==None or columnResult==None:
         return None
@@ -53,80 +71,118 @@ class ReviewList(APIView):
     def get(self, request):
         reviews = TbParkingLog.objects.all()
         cursor = connection.cursor()
-        strSQL = "select * from TB_PARKING_LOG"
+        st = request.GET.get("ID")
+        strSQL = f"\
+                SELECT A.NAME, C.* \
+                FROM\
+	                TB_PARKING_MAIN A,\
+                    TB_PARKING_DETAIL B,\
+                    TB_PARKING_LOG C\
+                WHERE A.ID=B.ID\
+                AND B.SERIAL_ID=C.SERIAL_ID\
+                AND A.ID='{st}'\
+                ORDER BY TIME DESC\
+                LIMIT 1"
         result = cursor.execute(strSQL)
         reviews = cursor.fetchall()
         
+
         connection.commit()
         connection.close()
-        
-        
-        # cursor = connection.cursor()
-        # columnSQL = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='TB_PARKING_LOG' ORDER BY ORDINAL_POSITION;" 
-        # columresult = cursor.execute(columnSQL)
-        # columnnames=cursor.fetchall()
-        
-        # connection.commit()
-        # connection.close()
-        
-        # print(result)
-        # keys=[]
-        # for columnname in columnnames:
-        #     keys.append(columnname[0])
-        
-        # print(keys)
-        # print(reviews)            
-        # Dict = toDict(reviews[0],keys)
-        
-        # emptySpots=0
-        # totalSpots=0
-        # emptySpotList=[]
-        # parkedSpotList=[]
-        # tmpDict={}
-        # for key, value in (Dict.items()):
-        #     if key[0]=='s':
-        #         if value==0:
-        #             emptySpots+=1
-        #             emptySpotList.append(key)    
-        #         totalSpots+=1
-        #     else:
-        #         tmpDict[key]=value
-            
+        reviews=list(reviews)
+
+
+        keys=["NAME","TIME","SERIAL_ID"]
+   
                 
-        # tmpDict['emptySpotNow'] = emptySpots
-        # tmpDict['totalSpot'] = totalSpots
-        # tmpDict['emptySpotList'] = emptySpotList
-        return Response(1)
-    
-    def post(self, request):
-        serializer = ReviewSerializer(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
-        return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)
-    
-class ReviewDetail(APIView):
-    def get_object(self,pk):
-        try:
-            return TbParkingDetailBlue.objects.get(pk=pk)
-        except TbParkingDetailBlue.DoesNotExist:
-            raise Http404
+        resultarray=[]
         
-    def get(self, request,pk, format=None):
-        review = self.get_object(pk)
-        serializer=ReviewSerializer(review)
-        return Response(serializer.data)
+        reviews=list(reviews)
+        for i in range(result):
+            reviews[i]=list(reviews[i])
+
+            reviews[i][6]=reviews[i][6].split(',')
+            reviews[i][5]=reviews[i][5].split(',')
+
+
+
+            # for j in range(len(reviews[i][6])):
+            #     reviews[i][6][j]="s"+str(reviews[i][6][j])
+                
+            
+            # for j in range(len(reviews[i][5])):
+            #     reviews[i][5][j]="s"+str(reviews[i][5][j])
+                
+            parkingZoneDictArray =[]
+            for j in reviews[i][5]:
+                tmpdic = {
+                    "ID":int(j),
+                    "value":"ENABLE"
+                }
+                parkingZoneDictArray.append(tmpdic)
+            for j in reviews[i][6]:
+                if j=='':
+                    break
+                print("---------------")
+                print(reviews[i][6])
+                print(j)
+                print("---------------")
+                tmpdic = {
+                    "ID":int(j),
+                    "value":"OCUPIED"
+                }
+                parkingZoneDictArray.append(tmpdic)
+
+            Dict = toDict(reviews[i],keys)
+        
+        
+        for i in range(len(parkingZoneDictArray)):
+            for j in range(i+1,len(parkingZoneDictArray)):
+                if(parkingZoneDictArray[i]["ID"]>parkingZoneDictArray[j]["ID"]):
+                    tmp=parkingZoneDictArray[i]
+                    parkingZoneDictArray[i]=parkingZoneDictArray[j]
+                    parkingZoneDictArray[j]=tmp
+        
+        Dict["ENABLE"]=len(reviews[0][5])
+        Dict["TOTAL"]=len(parkingZoneDictArray)
+        Dict["LIST"]=parkingZoneDictArray
+            # resultarray.append(Dict)
+        
+        
+        
+        
+        
+        return Response(Dict)
     
-    def put(self, request, pk, format=None):
-        review = self.get_object(pk)
-        serializer=ReviewSerializer(review, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    # def post(self, request):
+    #     serializer = ReviewSerializer(data = request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data,status=status.HTTP_201_CREATED)
+    #     return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request, pk, format=None):
-        review = self.get_object(pk)
-        review.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+# class ReviewDetail(APIView):
+#     def get_object(self,pk):
+#         try:
+#             return TbParkingDetailBlue.objects.get(pk=pk)
+#         except TbParkingDetailBlue.DoesNotExist:
+#             raise Http404
+        
+#     def get(self, request,pk, format=None):
+#         review = self.get_object(pk)
+#         serializer=ReviewSerializer(review)
+#         return Response(serializer.data)
+    
+#     def put(self, request, pk, format=None):
+#         review = self.get_object(pk)
+#         serializer=ReviewSerializer(review, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    
+#     def delete(self, request, pk, format=None):
+#         review = self.get_object(pk)
+#         review.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
         
