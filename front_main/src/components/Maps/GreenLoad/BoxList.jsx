@@ -1,17 +1,35 @@
 import styled from 'styled-components';
 import Box from '../Box'; // props를 위한 Box import
 
-const ParkingSatus = styled.h2`
+const ParkingSatus = styled.div`
   position: fixed;
-  top : 0;
-  left : 0;
-  right : 0;
+  top: 0;
+  left: 0;
+  right: 0;
   align-items: center;
-  font-size : 40px;
-  background-color: #f7ccf7;
-  color: #222222;
-  text-shadow: 2px 2px 3px rgba(255,255,255,0.2);
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.2);
+`
 
+const Title = styled.div`
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 50px;
+
+  color: white;
+  font-size: 35px;
+  font-weight: 500;
+  background-color: #a6b0f7;
+  border-radius: 50px;
+`
+const Info = styled.div`
+  margin-top: 5px;
+  font-size: 15px;
+  font-weight: 500;
 `
 const AllParking = styled.div`
   flex-wrap : nowrap;
@@ -19,7 +37,6 @@ const AllParking = styled.div`
         background-color: black;
     }
 `
-
 const BackParking = styled.div`
   width : 100%;
   height: 100%;
@@ -37,15 +54,30 @@ const BrTask = styled.div`
   margin-bottom: 300rem;
   `
 
+// const CheckEnable = () => {
+//   const CheckZone = EnableZone 
+//   if (CheckZone === 0) {return '주차할 공간이 없습니다.'}
+//    else {return '주차할 공간이 없습니다.'}
+// }
+
 const BoxList = ({ParkingData}) => {
-  console.log(ParkingData)
+  const EnableZone = ParkingData?.ENABLE
+  
+  const CheckEnable = (EnableZone) => {
+    if (EnableZone === 0) {return '현재 주차할 공간이 없습니다.'}
+     else {return '현재 주차할 공간이 없습니다.'}
+  }
+
   const TestData = ParkingData?.LIST
   if (ParkingData) {return(
     <>
       <div>
         <ParkingSatus>
-          {ParkingData.NAME} <br />
-          빈 : {ParkingData?.ENABLE} / 총 : {ParkingData?.TOTAL}
+          <Title>{ParkingData.NAME}</Title>
+          <Info>
+          {CheckEnable(EnableZone)} <br />
+          주차 현황 : {ParkingData?.ENABLE} / {ParkingData?.TOTAL}
+          </Info>
           </ParkingSatus>
           <AllParking>
             <BackParking>
