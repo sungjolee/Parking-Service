@@ -28,7 +28,6 @@ const Menubar = styled.div`
 export default function MenuBar() {
   let path = window.location.pathname;
   let start = 0;
-  console.log(path);
   if (path === "/") {
     start = 1;
   } else if (path === "/SearchPage") {
