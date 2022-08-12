@@ -1,0 +1,26 @@
+[
+  {
+    "ID": "IDSAMPLE1",
+    "NAME": "치킨",
+    "LATITUDE": "35.1897759",
+    "LONGITUDE": "35.1897759",
+    "ADMIN": null,
+    "OWNER": null
+  },
+  {
+    "ID": "IDSAMPLE2",
+    "NAME": "피자",
+    "LATITUDE": "35.1891798",
+    "LONGITUDE": "35.1896542",
+    "ADMIN": null,
+    "OWNER": null
+  },
+  {
+    "ID": "serialsample",
+    "NAME": "namesample",
+    "LATITUDE": "36.1252162",
+    "LONGITUDE": "127.21125215",
+    "ADMIN": null,
+    "OWNER": null
+  }
+]
