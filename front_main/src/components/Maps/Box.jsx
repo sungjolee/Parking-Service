@@ -53,7 +53,7 @@ export default function Box({ TestData }) {
     if (window.localStorage.getItem(number)) {
       myZone();
     }
-  }, []);
+  }, );
 
   if (TestData.value === "OCUPIED") {
     return (
