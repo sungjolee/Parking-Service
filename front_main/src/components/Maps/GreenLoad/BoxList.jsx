@@ -33,19 +33,23 @@ const Info = styled.div`
 `
 const AllParking = styled.div`
   flex-wrap : nowrap;
-  @media screen and (max-width: 700px) {
+  right: 0px;
+  flex: 1;
+  /* @media screen and (max-width: 700px) {
         background-color: black;
-    }
+    } */
 `
 const BackParking = styled.div`
   width : 100%;
   height: 100%;
   margin-top : 200px;
-  margin-left : 200px;
-  margin-right : auto;
   margin-bottom : 100px;
-  left : 200px;
+  justify-content: center;
+  align-items: center;
   display: flex;
+  @media screen and (max-width: 700px) {
+    margin-left:auto;
+  }
   
 `
 
@@ -54,29 +58,23 @@ const BrTask = styled.div`
   margin-bottom: 300rem;
   `
 
-// const CheckEnable = () => {
-//   const CheckZone = EnableZone 
-//   if (CheckZone === 0) {return '주차할 공간이 없습니다.'}
-//    else {return '주차할 공간이 없습니다.'}
-// }
-
 const BoxList = ({ParkingData}) => {
   const EnableZone = ParkingData?.ENABLE
   
   const CheckEnable = (EnableZone) => {
     if (EnableZone === 0) {return '현재 주차할 공간이 없습니다.'}
-     else {return '현재 주차할 공간이 없습니다.'}
   }
 
   const TestData = ParkingData?.LIST
-  if (ParkingData) {return(
+  if (ParkingData) {
+    return(
     <>
       <div>
         <ParkingSatus>
           <Title>{ParkingData.NAME}</Title>
           <Info>
-          {CheckEnable(EnableZone)} <br />
-          주차 현황 : {ParkingData?.ENABLE} / {ParkingData?.TOTAL}
+            {CheckEnable(EnableZone)} <br />
+            주차 현황 : {ParkingData?.ENABLE} / {ParkingData?.TOTAL}
           </Info>
           </ParkingSatus>
           <AllParking>

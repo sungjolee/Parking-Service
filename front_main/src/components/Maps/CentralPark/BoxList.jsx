@@ -42,29 +42,29 @@ const AllParking = styled.div`
 const BackParking = styled.div`
   width: 100%;
   height: 100%;
-  left: 0px;
-  right: 0px;
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-bottom: 0px;
+
   display: flex;
 `;
 
 const RotateBox = styled.div`
   display: flex;
   transform: rotate(90deg);
-  left: 0px;
   justify-content: space-between;
-  margin-top: 350px;
-  margin-left: 0px;
+  margin-top: 300px;
+  margin-left: 10%;
   margin-right: auto;
+  @media screen and (max-width:700px) {
+    margin-left: -20%;
+    
+  }
 `;
 const RightBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   margin-top: 150px;
-  margin-left: auto;
+  margin-left: 50%;
+  transform: translate(-50%, 0);
   margin-right: 0px;
   margin-bottom: 150px;
 `;
