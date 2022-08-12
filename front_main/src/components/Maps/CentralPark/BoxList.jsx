@@ -38,10 +38,22 @@ const Info = styled.div`
 `;
 
 const AllParking = styled.div`
+<<<<<<< HEAD
   /* flex-wrap: wrap; */
   /* align-content: space-between; */
   height: 100vh;
   width: 100vw;
+=======
+  flex-wrap: nowrap;
+  right: 0px;
+  flex: 1;
+`;
+
+const BackParking = styled.div`
+  width: 100%;
+  height: 100%;
+
+>>>>>>> 2a6ff0ea445758247d0222a554601b73fffe6480
   display: flex;
   margin-left: 0;
   margin-right: 0;
@@ -56,6 +68,7 @@ const AllParking = styled.div`
 const RotateBox = styled.div`
   display: flex;
   transform: rotate(90deg);
+<<<<<<< HEAD
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
@@ -81,8 +94,24 @@ const RightBox = styled.div`
   justify-content: center;
   align-items: center;
   /* justify-content: space-between;
+=======
+  justify-content: space-between;
+  margin-top: 300px;
+  margin-left: 10%;
+  margin-right: auto;
+  @media screen and (max-width:700px) {
+    margin-left: -20%;
+    
+  }
+`;
+const RightBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+>>>>>>> 2a6ff0ea445758247d0222a554601b73fffe6480
   margin-top: 150px;
-  margin-left: auto;
+  margin-left: 50%;
+  transform: translate(-50%, 0);
   margin-right: 0px;
   margin-bottom: 15px; */
 `;
