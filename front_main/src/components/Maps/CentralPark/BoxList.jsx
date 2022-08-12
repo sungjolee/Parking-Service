@@ -54,7 +54,7 @@ const RotateBox = styled.div`
   margin-left: 10%;
   margin-right: auto;
   @media screen and (max-width:700px) {
-    margin-left: -20%;
+    margin-left: -10%;
     
   }
 `;
@@ -70,7 +70,14 @@ const RightBox = styled.div`
 `;
 
 const BoxList = ({ ParkingData }) => {
+  const EnableZone = ParkingData?.ENABLE
+  
+  const CheckEnable = (EnableZone) => {
+    if (EnableZone === 0) {return '현재 주차할 공간이 없습니다.'}
+  }
+  
   const TestData = ParkingData?.LIST;
+
   if (ParkingData) {
     return (
       <>
@@ -78,6 +85,7 @@ const BoxList = ({ ParkingData }) => {
           <ParkingSatus>
             <Title>{ParkingData.NAME}</Title>
             <Info>
+              {CheckEnable(EnableZone)} <br />
               주차 현황 : {ParkingData?.ENABLE} / {ParkingData?.TOTAL}
             </Info>
           </ParkingSatus>
