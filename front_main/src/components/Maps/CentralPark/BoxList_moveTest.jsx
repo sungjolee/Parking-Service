@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Box from "../Box"; // props를 위한 Box import
-// import {
-//   TransformComponent,
-//   TransformWrapper,
-// } from "@pronestor/react-zoom-pan-pinch";
+import {
+  TransformComponent,
+  TransformWrapper,
+} from "@pronestor/react-zoom-pan-pinch";
 
 const ParkingSatus = styled.div`
   position: fixed;
@@ -43,8 +43,8 @@ const AllParking = styled.div`
   height: 100vh;
   width: 100vw;
   display: flex;
-  margin-left: 0;
-  margin-right: 0;
+  margin-left: auto;
+  margin-right: auto;
   /* height: 100vh;
   width: 100vw;
   display: flex;
@@ -56,14 +56,6 @@ const AllParking = styled.div`
 const RotateBox = styled.div`
   display: flex;
   transform: rotate(90deg);
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* width: 300px;
-  height: 50px; */
   /* left: 0px;
   justify-content: space-between;
   margin-top: 350px;
@@ -73,13 +65,8 @@ const RotateBox = styled.div`
 const RightBox = styled.div`
   display: flex;
   align-items: flex-end;
-  /* margin-bottom: 150px; */
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-bottom: 150px;
+  margin-right: 0;
   /* justify-content: space-between;
   margin-top: 150px;
   margin-left: auto;
@@ -100,18 +87,38 @@ const BoxList = ({ ParkingData }) => {
             </Info>
           </ParkingSatus>
         </div>
-        <AllParking>
-          <RotateBox>
-            {TestData.filter((TestData) => TestData.ID <= 4).map((TestData) => (
-              <Box key={TestData.ID} TestData={TestData} />
-            ))}
-          </RotateBox>
-          <RightBox>
-            {TestData.filter((TestData) => TestData.ID >= 5).map((TestData) => (
-              <Box key={TestData.ID} TestData={TestData} />
-            ))}
-          </RightBox>
-        </AllParking>
+        <TransformWrapper
+          initialPositionX={0}
+          initialPositionY={0}
+          initialScale={1}
+        >
+          {({ zoomIn, zoomOut, ...rest }) => (
+            <>
+              <div className="tools">
+                <button onClick={() => zoomIn()}>+</button>
+                <button onClick={() => zoomOut()}>-</button>
+              </div>
+              <TransformComponent>
+                <AllParking>
+                  <RotateBox>
+                    {TestData.filter((TestData) => TestData.ID <= 4).map(
+                      (TestData) => (
+                        <Box key={TestData.ID} TestData={TestData} />
+                      )
+                    )}
+                  </RotateBox>
+                  <RightBox>
+                    {TestData.filter((TestData) => TestData.ID >= 5).map(
+                      (TestData) => (
+                        <Box key={TestData.ID} TestData={TestData} />
+                      )
+                    )}
+                  </RightBox>
+                </AllParking>
+              </TransformComponent>
+            </>
+          )}
+        </TransformWrapper>
       </>
     );
   }

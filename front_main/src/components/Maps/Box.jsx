@@ -2,11 +2,11 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 
 const RedBox = styled.div`
-  top: 30px;
-  bottom: 100px;
+  /* top: 30px;
+  bottom: 100px; */
   border: 2px solid white;
-  width: 80px;
-  height: 120px;
+  width: 60px;
+  height: 100px;
   font-weight: bold;
   color: black;
   float: left;
@@ -17,11 +17,11 @@ const RedBox = styled.div`
 // #c5a5f9
 // #d9d9d9
 const GrayBox = styled.div`
-  top: 30px;
-  bottom: 100px;
+  /* top: 30px;
+  bottom: 100px; */
   border: 2px solid white;
-  width: 80px;
-  height: 120px;
+  width: 60px;
+  height: 100px;
   font-weight: bold;
   color: black;
   float: left;
@@ -53,6 +53,7 @@ export default function Box({ TestData }) {
     if (window.localStorage.getItem(number)) {
       myZone();
     }
+    // eslint-disable-next-line
   }, []);
 
   if (TestData.value === "OCUPIED") {

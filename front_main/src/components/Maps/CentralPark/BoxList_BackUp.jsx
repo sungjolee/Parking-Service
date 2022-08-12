@@ -1,9 +1,5 @@
 import styled from "styled-components";
 import Box from "../Box"; // props를 위한 Box import
-// import {
-//   TransformComponent,
-//   TransformWrapper,
-// } from "@pronestor/react-zoom-pan-pinch";
 
 const ParkingSatus = styled.div`
   position: fixed;
@@ -38,53 +34,38 @@ const Info = styled.div`
 `;
 
 const AllParking = styled.div`
-  /* flex-wrap: wrap; */
-  /* align-content: space-between; */
-  height: 100vh;
-  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr;
+`;
+
+const BackParking = styled.div`
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  right: 0px;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
   display: flex;
-  margin-left: 0;
-  margin-right: 0;
-  /* height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: flex-start; */
 `;
 
 const RotateBox = styled.div`
   display: flex;
   transform: rotate(90deg);
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* width: 300px;
-  height: 50px; */
-  /* left: 0px;
+  left: 0px;
   justify-content: space-between;
   margin-top: 350px;
   margin-left: 0px;
-  margin-right: auto; */
+  margin-right: auto;
 `;
 const RightBox = styled.div`
   display: flex;
-  align-items: flex-end;
-  /* margin-bottom: 150px; */
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* justify-content: space-between;
+  justify-content: space-between;
   margin-top: 150px;
   margin-left: auto;
   margin-right: 0px;
-  margin-bottom: 15px; */
+  margin-bottom: 150px;
 `;
 
 const BoxList = ({ ParkingData }) => {
@@ -99,19 +80,27 @@ const BoxList = ({ ParkingData }) => {
               주차 현황 : {ParkingData?.ENABLE} / {ParkingData?.TOTAL}
             </Info>
           </ParkingSatus>
+          <AllParking>
+            <BackParking>
+              <RotateBox>
+                {TestData.filter((TestData) => TestData.ID <= 4).map(
+                  (TestData) => (
+                    <Box key={TestData.ID} TestData={TestData} />
+                  )
+                )}
+              </RotateBox>
+            </BackParking>
+            <BackParking>
+              <RightBox>
+                {TestData.filter((TestData) => TestData.ID >= 5).map(
+                  (TestData) => (
+                    <Box key={TestData.ID} TestData={TestData} />
+                  )
+                )}
+              </RightBox>
+            </BackParking>
+          </AllParking>
         </div>
-        <AllParking>
-          <RotateBox>
-            {TestData.filter((TestData) => TestData.ID <= 4).map((TestData) => (
-              <Box key={TestData.ID} TestData={TestData} />
-            ))}
-          </RotateBox>
-          <RightBox>
-            {TestData.filter((TestData) => TestData.ID >= 5).map((TestData) => (
-              <Box key={TestData.ID} TestData={TestData} />
-            ))}
-          </RightBox>
-        </AllParking>
       </>
     );
   }
