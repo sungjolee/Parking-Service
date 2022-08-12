@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 
-from parkingAdmin.models import TbParkingLog, TbParkingMain, TbParkingDetail
+from parkingAdmin.models import TbParkingLog, TbParkingLogCount, TbParkingMain, TbParkingDetail
 
 
 # Create your views here.
@@ -33,20 +33,25 @@ def signup(request):
             return redirect(next_url)
     else:
         form = SignupForm()
-    return render(request, 'accounts/signup_form.html', {
+    return render(request, 'parkingAdmin/register.html', {
         'form': form,
     })
-    
-    
+
 def index(request):
-  #코드 구현
-  table = TbParkingLog.objects.all()
-  
-  
-  return render(request, "parkingAdmin/index.html",{'value':table})
+    #코드 구현
+    table = TbParkingLogCount.objects.all()
+    
+    
+    return render(request, "parkingAdmin/index.html",{'value':table})
 
 def layout(request):
     return render(request,"parkingAdmin/layout-static.html")
 
 def login(request):
     return render(request,"parkingAdmin/login.html")
+
+def notFound(request):
+    return render(request,"parkingAdmin/404.html")
+
+def charts(request):
+    return render(request,"parkingAdmin/charts.html")

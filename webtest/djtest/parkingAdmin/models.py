@@ -43,6 +43,18 @@ class TbParkingMain(models.Model):
         
         # askcompany/accounts/models.py
 
+class TbParkingLogCount(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    serial_id = models.CharField(db_column='SERIAL_ID', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    zonenum = models.CharField(db_column='ZONENUM', max_length=45, blank=True, null=True)  # Field name made lowercase.
+    in_time = models.DateTimeField(db_column='IN_TIME', blank=True, null=True)  # Field name made lowercase.
+    out_time = models.DateTimeField(db_column='OUT_TIME', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TB_PARKING_LOG_COUNT'
+
+
 
 class User(AbstractUser):
     website_url = models.URLField(blank=True)

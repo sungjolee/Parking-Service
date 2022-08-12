@@ -89,14 +89,14 @@
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
+                                            <a class="nav-link" href="404">404 Page</a>
                                             <a class="nav-link" href="500.html">500 Page</a>
                                         </nav>
                                     </div>
                                 </nav>
                             </div>
                             <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="charts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Charts
                             </a>
@@ -115,11 +115,11 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Dashboard</h1>
+                        <h1 class="mt-4">대시보드</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">주차장 현황</li>
                         </ol>
-                        <div class="row">
+                        {% comment %} <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">Primary Card</div>
@@ -156,16 +156,24 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+                        </div> {% endcomment %}
+                        <div class="row" style="">
                             <div class="col-xl-6">
-                                <div class="card mb-4">
+                                 <div class="card mb-4" style="">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        Area Chart Example
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        Cam
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body" style="width:100%;">
+                                        
+                                        {% comment %} <canvas id="myAreaChart" width="100%" height="40"> {% endcomment %}
+                                            {% comment %} <canvas id="" style="height:35vh; width:100vh"> {% endcomment %}
+                                            <iframe style="width:100%; height:63vh;" src="http://192.168.43.115:5000/"></iframe>
+                                        {% comment %} </canvas>  {% endcomment %}
+
                                 </div>
+
+                                </div> 
                             </div>
                             <div class="col-xl-6">
                                 <div class="card mb-4">
@@ -173,7 +181,7 @@
                                         <i class="fas fa-chart-bar me-1"></i>
                                         Bar Chart Example
                                     </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="45vh"></canvas></div>
                                 </div>
                             </div>
                         </div>
@@ -215,7 +223,11 @@
                                         </tr>
                                         {% for i in value %}
                                             <tr>
-                                                <td>{{i.time}}</td>
+                                                <td>{{i.zonenum}}</td>
+                                                <td>{{i.in_time}}</td>
+                                                <td>{{i.out_time}}</td>
+                                                {% comment %} <td>{{}}</td> {% endcomment %}
+                                                <td>{{i.in_time}}</td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>
@@ -227,12 +239,12 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
-                            <div>
+                            <div class="text-muted">Copyright &copy; HOW ABOUT THERE? 2022</div>
+                            {% comment %} <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
                                 <a href="#">Terms &amp; Conditions</a>
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                     </div>
                 </footer>
@@ -242,7 +254,63 @@
         <script src="{% static 'js/scripts.js' %}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="{% static 'assets/demo/chart-area-demo.js'%}"></script>
-        <script src="{% static 'assets/demo/chart-bar-demo.js'%}"></script>
+        {% comment %} <script src="{% static 'assets/demo/chart-bar-demo.js'%}"></script> {% endcomment %}
+        <script>
+            // Set new default font family and font color to mimic Bootstrap's default styling
+Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = '#292b2c';
+
+// Bar Chart Example
+var ctx = document.getElementById("myBarChart");
+var myLineChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ["January", "February",  "April", "May", "June"],
+    datasets: [{
+      label: "Revenue",
+      backgroundColor: "rgba(2,117,216,1)",
+      borderColor: "rgba(2,117,216,1)",
+      data: [4215, 5312, 6251,  9821, 14984],
+    }],
+  },
+  options: {
+    scales: {
+      xAxes: [{
+        time: {
+          unit: 'month'
+        },
+        gridLines: {
+          display: false
+        },
+        ticks: {
+          maxTicksLimit: 5
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: 15000,
+          maxTicksLimit: 5
+        },
+        gridLines: {
+          display: true
+        }
+      }],
+    },
+    legend: {
+      display: false
+    }
+  }
+});
+
+
+
+
+
+
+
+
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="{% static 'js/datatables-simple-demo.js' %}"></script>
     </body>

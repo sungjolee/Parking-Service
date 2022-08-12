@@ -16,7 +16,7 @@ Including another URLconf
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from .views import index, layout, login
+from .views import charts, index, layout, login, notFound
 # from .views import ReviewList, TotalData
 
 urlpatterns = [
@@ -30,6 +30,8 @@ urlpatterns = [
     path('index',index),
     path('layout-static',layout),
     path('login',login),
+    path('404',notFound),
+    path('charts',charts)
     
     
 ]

@@ -106,24 +106,30 @@ class ReviewList(APIView):
 
 
 
-            for j in range(len(reviews[i][6])):
-                reviews[i][6][j]="s"+str(reviews[i][6][j])
+            # for j in range(len(reviews[i][6])):
+            #     reviews[i][6][j]="s"+str(reviews[i][6][j])
                 
             
-            for j in range(len(reviews[i][5])):
-                reviews[i][5][j]="s"+str(reviews[i][5][j])
+            # for j in range(len(reviews[i][5])):
+            #     reviews[i][5][j]="s"+str(reviews[i][5][j])
                 
             parkingZoneDictArray =[]
             for j in reviews[i][5]:
                 tmpdic = {
-                    "ID":int(j[1:]),
-                    "value":"OCCUPIED"
+                    "ID":int(j),
+                    "value":"ENABLE"
                 }
                 parkingZoneDictArray.append(tmpdic)
             for j in reviews[i][6]:
+                if j=='':
+                    break
+                print("---------------")
+                print(reviews[i][6])
+                print(j)
+                print("---------------")
                 tmpdic = {
-                    "ID":int(j[1:]),
-                    "value":"ENABLE"
+                    "ID":int(j),
+                    "value":"OCUPIED"
                 }
                 parkingZoneDictArray.append(tmpdic)
 
