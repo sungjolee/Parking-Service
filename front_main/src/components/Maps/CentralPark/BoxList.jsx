@@ -42,7 +42,6 @@ const AllParking = styled.div`
 const BackParking = styled.div`
   width: 100%;
   height: 100%;
-
   display: flex;
 `;
 
@@ -55,9 +54,9 @@ const RotateBox = styled.div`
   margin-right: auto;
   @media screen and (max-width:700px) {
     margin-left: -10%;
-    
   }
 `;
+
 const RightBox = styled.div`
   display: flex;
   justify-content: center;
@@ -71,7 +70,7 @@ const RightBox = styled.div`
 
 const BoxList = ({ ParkingData }) => {
   const EnableZone = ParkingData?.ENABLE
-  
+
   const CheckEnable = (EnableZone) => {
     if (EnableZone === 0) {return '현재 주차할 공간이 없습니다.'}
   }
