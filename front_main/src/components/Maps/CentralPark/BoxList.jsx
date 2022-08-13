@@ -54,7 +54,7 @@ const RotateBox = styled.div`
   margin-left: 10%;
   margin-right: auto;
   @media screen and (max-width: 700px) {
-    margin-left: -20%;
+    margin-left: -10%;
   }
 `;
 const RightBox = styled.div`

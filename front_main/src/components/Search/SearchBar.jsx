@@ -100,7 +100,7 @@ export default function SearchBar({ onAddKeyword, datas }) {
   const handleClick = (e) => {
     console.log("Click 잘 들어오나?");
     console.log(keyword);
-    onAddKeyword(keyword);
+
     console.log("불러온 데이터베이스 ↓");
     console.log(datas);
 
@@ -117,8 +117,13 @@ export default function SearchBar({ onAddKeyword, datas }) {
       // 검색 실패시
       alert("등록되지 않은 주차장입니다.");
       flag = 0;
+      if (keyword && true) {
+        onAddKeyword(keyword); // 최근검색에 등록
+        setKeyword("");
+      }
     } else {
       //검색 성공시
+      onAddKeyword(keyword); // 최근검색에 등록
       flag = 0;
       setFlag2(true);
     }

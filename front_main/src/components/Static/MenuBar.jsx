@@ -38,6 +38,8 @@ export default function MenuBar() {
 
   const [value, setValue] = React.useState(start);
   const keyword = useSelector((state) => state.keyword.value);
+
+  // 선택된 주차장이 없을 경우 경고창
   function warning() {
     // 선택된 주차장이 없다면 search page로 이동
     if (keyword === "") {
@@ -46,7 +48,7 @@ export default function MenuBar() {
     }
   }
   useEffect(() => {
-    // console.log(window.location.pathname);
+    console.log(window.location.pathname);
     if (path === "/") {
       setValue(1);
     } else if (path === "/SearchPage") {
