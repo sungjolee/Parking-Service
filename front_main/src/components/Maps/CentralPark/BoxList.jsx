@@ -42,7 +42,6 @@ const AllParking = styled.div`
 const BackParking = styled.div`
   width: 100%;
   height: 100%;
-
   display: flex;
 `;
 
@@ -50,13 +49,14 @@ const RotateBox = styled.div`
   display: flex;
   transform: rotate(90deg);
   justify-content: space-between;
-  margin-top: 300px;
+  margin-top: 200px;
   margin-left: 10%;
   margin-right: auto;
   @media screen and (max-width: 700px) {
     margin-left: -10%;
   }
 `;
+
 const RightBox = styled.div`
   display: flex;
   justify-content: center;
@@ -69,7 +69,16 @@ const RightBox = styled.div`
 `;
 
 const BoxList = ({ ParkingData }) => {
+  const EnableZone = ParkingData?.ENABLE;
+
+  const CheckEnable = (EnableZone) => {
+    if (EnableZone === 0) {
+      return "현재 주차할 공간이 없습니다.";
+    }
+  };
+
   const TestData = ParkingData?.LIST;
+
   if (ParkingData) {
     return (
       <>
@@ -78,6 +87,7 @@ const BoxList = ({ ParkingData }) => {
             <Title>{ParkingData.NAME}</Title>
             <Info>
               주차 현황 : {ParkingData?.ENABLE} / {ParkingData?.TOTAL}
+              {CheckEnable(EnableZone)} <br />
             </Info>
           </ParkingSatus>
           <AllParking>
