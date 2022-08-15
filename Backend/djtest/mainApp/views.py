@@ -26,7 +26,6 @@ class TotalData(APIView):
 
     
     def get(self, request):
-        reviews = TbParkingLog.objects.all()
         cursor = connection.cursor()
         strSQL = "select * from VW_MAPVIEW"
         result = cursor.execute(strSQL)
@@ -69,7 +68,7 @@ def toDict(queryResult,columnResult):
 class ReviewList(APIView):
 
     def get(self, request):
-        reviews = TbParkingLog.objects.all()
+        
         cursor = connection.cursor()
         st = request.GET.get("ID")
         strSQL = f"\

@@ -16,7 +16,7 @@ Including another URLconf
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from .views import charts, index, layout, login, notFound
+from .views import charts, index, login, logs, notFound
 # from .views import ReviewList, TotalData
 
 urlpatterns = [
@@ -28,7 +28,7 @@ urlpatterns = [
     # path('totaldata/',TotalData.as_view())
     # path('parkingAdmin/', parkingOwner, name='ownerPage'),
     path('index',index),
-    path('layout-static',layout),
+    path('logs',logs),
     path('login',login),
     path('404',notFound),
     path('charts',charts)
