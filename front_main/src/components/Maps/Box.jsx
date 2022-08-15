@@ -2,8 +2,6 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 
 const RedBox = styled.div`
-  /* top: 30px;
-  bottom: 100px; */
   border: 2px solid white;
   width: 60px;
   height: 100px;
@@ -14,11 +12,8 @@ const RedBox = styled.div`
   background-color: #f56060;
   border-radius: 10px;
 `;
-// #c5a5f9
-// #d9d9d9
+
 const GrayBox = styled.div`
-  /* top: 30px;
-  bottom: 100px; */
   border: 2px solid white;
   width: 60px;
   height: 100px;
@@ -37,7 +32,6 @@ export default function Box({ TestData }) {
 
   function myZone() {
     setZoneColor(!zoneColor);
-
     if (myPosition) {
       setMyPosition(!myPosition);
       // number을 삭제시킨다.

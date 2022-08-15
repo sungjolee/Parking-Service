@@ -60,6 +60,7 @@ const BoxList = ({ ParkingData }) => {
   const CheckEnable = (EnableZone) => {
     if (EnableZone === 0) {
       return (
+        // 주차장의 빈자리가 0이면 Alert 경고창 띄우기
         <Stack sx={{ width: "100%" }} spacing={2} alignItems="center">
           <Alert variant="outlined" severity="warning">
             현재 주차 공간이 없습니다.
