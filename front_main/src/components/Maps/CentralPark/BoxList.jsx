@@ -68,6 +68,10 @@ const RightBox = styled.div`
   transform: translate(-50%, 0);
   margin-right: 0px;
   margin-bottom: 150px;
+  @media screen and (max-width: 450px) {
+    width:100%;
+    height:100%;
+  }
 `;
 
 const BoxList = ({ ParkingData }) => {
