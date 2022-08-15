@@ -84,14 +84,14 @@ const BoxList = ({ ParkingData }) => {
           </ParkingSatus>
           <AllParking>
             <BackParking>
-              {TestData.filter((TestData) => TestData.ID <= 3).map(
+              {TestData.filter((TestData) => TestData.ID <= 7).map(
                 (TestData) => (
                   <Box key={TestData.ID} TestData={TestData} />
                 )
               )}
             </BackParking>
             <BackParking>
-              {TestData.filter((TestData) => TestData.ID >= 4).map(
+              {TestData.filter((TestData) => TestData.ID >= 8).map(
                 (TestData) => (
                   <Box key={TestData.ID} TestData={TestData} />
                 )

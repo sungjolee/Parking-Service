@@ -51,7 +51,7 @@ const RotateBox = styled.div`
   display: flex;
   transform: rotate(90deg);
   justify-content: space-between;
-  margin-top: 200px;
+  margin-top: 250px;
   margin-left: 10%;
   margin-right: auto;
   @media screen and (max-width: 700px) {
