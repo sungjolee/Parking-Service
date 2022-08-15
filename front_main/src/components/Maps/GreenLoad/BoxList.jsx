@@ -37,9 +37,6 @@ const AllParking = styled.div`
   flex-wrap: nowrap;
   right: 0px;
   flex: 1;
-  /* @media screen and (max-width: 700px) {
-        background-color: black;
-    } */
 `;
 const BackParking = styled.div`
   width: 100%;
@@ -57,16 +54,11 @@ const BackParking = styled.div`
   }
 `;
 
-// const BrTask = styled.div`
-//   margin-top : 300rem;
-//   margin-bottom: 300rem;
-//   `
-
 const BoxList = ({ ParkingData }) => {
   const EnableZone = ParkingData?.ENABLE;
 
   const CheckEnable = (EnableZone) => {
-    if (EnableZone === 4) {
+    if (EnableZone === 0) {
       return (
         <Stack sx={{ width: "100%" }} spacing={2} alignItems="center">
           <Alert variant="outlined" severity="warning">

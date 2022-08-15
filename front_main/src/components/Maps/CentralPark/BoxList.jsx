@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Box from "../Box"; // props를 위한 Box import
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 const ParkingSatus = styled.div`
   position: fixed;
@@ -73,9 +75,16 @@ const BoxList = ({ ParkingData }) => {
 
   const CheckEnable = (EnableZone) => {
     if (EnableZone === 0) {
-      return "현재 주차할 공간이 없습니다.";
+      return (
+        <Stack sx={{ width: "100%" }} spacing={2} alignItems="center">
+          <Alert variant="outlined" severity="warning">
+            현재 주차 공간이 없습니다.
+          </Alert>
+        </Stack>
+      );
     }
   };
+
 
   const TestData = ParkingData?.LIST;
 
