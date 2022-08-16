@@ -8,12 +8,9 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.10.0",
     "@mui/styled-engine-sc": "^5.10.0",
-<<<<<<< HEAD
     "@pronestor/react-zoom-pan-pinch": "^2.3.0",
     "@reduxjs/toolkit": "^1.8.3",
-=======
     "@reduxjs/toolkit": "^1.8.4",
->>>>>>> 58d2256889d35bec4611d234c2a94c18e22894eb
     "axios": "^0.27.2",
     "classname": "^0.0.0",
     "classnames": "^2.3.1",
