@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Box from "../Box"; // props를 위한 Box import
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 const ParkingSatus = styled.div`
   position: fixed;
@@ -42,35 +44,55 @@ const AllParking = styled.div`
 const BackParking = styled.div`
   width: 100%;
   height: 100%;
-  left: 0px;
-  right: 0px;
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-bottom: 0px;
   display: flex;
 `;
 
 const RotateBox = styled.div`
   display: flex;
   transform: rotate(90deg);
-  left: 0px;
   justify-content: space-between;
-  margin-top: 350px;
-  margin-left: 0px;
+  margin-top: 250px;
+  margin-left: 10%;
   margin-right: auto;
+  @media screen and (max-width: 700px) {
+    margin-left: -10%;
+  }
 `;
+
 const RightBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   margin-top: 150px;
-  margin-left: auto;
+  margin-left: 50%;
+  transform: translate(-50%, 0);
   margin-right: 0px;
   margin-bottom: 150px;
+  @media screen and (max-width: 450px) {
+    width:100%;
+    height:100%;
+  }
 `;
 
 const BoxList = ({ ParkingData }) => {
+  const EnableZone = ParkingData?.ENABLE;
+
+  const CheckEnable = (EnableZone) => {
+    if (EnableZone === 0) {
+      return (
+        // 주차장의 빈자리가 0이면 Alert 경고창 띄우기
+        <Stack sx={{ width: "100%" }} spacing={2} alignItems="center">
+          <Alert variant="outlined" severity="warning">
+            현재 주차 공간이 없습니다.
+          </Alert>
+        </Stack>
+      );
+    }
+  };
+
+
   const TestData = ParkingData?.LIST;
+
   if (ParkingData) {
     return (
       <>
@@ -79,6 +101,7 @@ const BoxList = ({ ParkingData }) => {
             <Title>{ParkingData.NAME}</Title>
             <Info>
               주차 현황 : {ParkingData?.ENABLE} / {ParkingData?.TOTAL}
+              {CheckEnable(EnableZone)} <br />
             </Info>
           </ParkingSatus>
           <AllParking>

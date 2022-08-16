@@ -13,7 +13,6 @@ const ParkingData = () => {
       params: {ID : 'greenload'}
     }).then((response) => {
       setParkingData(response.data);
-      console.log(response.params)
     });
   }, []);
 

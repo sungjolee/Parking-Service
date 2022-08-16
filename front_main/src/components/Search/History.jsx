@@ -71,7 +71,6 @@ function History({ keywords, onRemoveKeyword, onClearKeywords, datas }) {
     }
   }
 
-  console.log("keyword", keywords);
   if (keywords.length === 0) {
     return <HistoryContainer>최근 검색된 기록이 없습니다.</HistoryContainer>;
   }
