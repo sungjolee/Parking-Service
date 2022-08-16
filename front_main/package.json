@@ -9,7 +9,6 @@
     "@mui/material": "^5.10.0",
     "@mui/styled-engine-sc": "^5.10.0",
     "@pronestor/react-zoom-pan-pinch": "^2.3.0",
-    "@reduxjs/toolkit": "^1.8.3",
     "@reduxjs/toolkit": "^1.8.4",
     "axios": "^0.27.2",
     "classname": "^0.0.0",
