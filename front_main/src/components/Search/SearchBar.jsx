@@ -63,17 +63,10 @@ export default function SearchBar({ onAddKeyword, datas }) {
 
   // enter 입력시 데이터 조회
   const handleEnter = (e) => {
-    console.log("enter 잘 들어오나?");
-    console.log(e);
-    console.log(keyword);
-
     if (keyword && e.keyCode === 13) {
       //엔터일때 부모의 addkeyword에 전달
       onAddKeyword(keyword);
       setKeyword("");
-
-      console.log("불러온 데이터베이스 ↓");
-      console.log(datas);
 
       // 전체 데이터 확인
       let flag = 0;
@@ -98,12 +91,6 @@ export default function SearchBar({ onAddKeyword, datas }) {
 
   // 클릭시 데이터 조회
   const handleClick = (e) => {
-    console.log("Click 잘 들어오나?");
-    console.log(keyword);
-
-    console.log("불러온 데이터베이스 ↓");
-    console.log(datas);
-
     // 전체 데이터 확인
     let flag = 0;
     for (const parkingData of datas) {
@@ -132,7 +119,6 @@ export default function SearchBar({ onAddKeyword, datas }) {
   // 검색 성공시 지도 화면으로 이동시켜준다.
   // 링크 이동을 위해 useNavigate 사용
   useEffect(() => {
-    // console.log(flag);
     if (flag2) {
       navigate(`/`);
     }

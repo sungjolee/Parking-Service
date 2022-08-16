@@ -16,8 +16,6 @@ const SetMyLocation = styled.div`
 
 export default function Tmap() {
   const keyword = useSelector((state) => state.keyword.value);
-  console.log(keyword);
-
   let latitude;
   let longitude;
   let map;
@@ -29,8 +27,6 @@ export default function Tmap() {
       latitude = Number(keyword.LATITUDE);
       longitude = Number(keyword.LONGITUDE);
 
-      console.log(latitude);
-      console.log(typeof latitude);
     } else {
       latitude = pos.coords.latitude; // 위도
       longitude = pos.coords.longitude; // 경도
@@ -114,7 +110,6 @@ export default function Tmap() {
       map._status.center._lat = latitude;
       map._status.center._lng = longitude;
       map.setCenter(new Tmapv2.LatLng(latitude, longitude));
-      console.log("현재 위치");
 
       // 현재 위치 마커가 여러개 실행되는 것을 방지)
       if (flag === 0) {
@@ -124,7 +119,6 @@ export default function Tmap() {
           icon: "./images/location.png", //Marker의 아이콘.
           map: map, //Marker가 표시될 Map 설정.
         });
-        console.log(map);
       }
     });
   }

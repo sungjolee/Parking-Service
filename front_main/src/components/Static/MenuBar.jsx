@@ -48,7 +48,6 @@ export default function MenuBar() {
     }
   }
   useEffect(() => {
-    console.log(window.location.pathname);
     if (path === "/") {
       setValue(1);
     } else if (path === "/SearchPage") {

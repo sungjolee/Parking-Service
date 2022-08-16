@@ -15,7 +15,6 @@ const ParkingData = () => {
       params: {ID : 'centralpark'}
     }).then((response) => {
       setParkingData(response.data);
-      console.log(response)
     });
   }, []);
 

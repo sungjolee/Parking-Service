@@ -26,15 +26,12 @@ function SearchPage() {
   useEffect(() => {
     axios.get(BASE_URL).then((response) => {
       setDatas(response.data);
-      console.log('진짜 불러온 데이터');
-      // console.log(datas[0]);
     });
   }, []);
 
 
   //검색어 추가
   const handleAddKeyword = (text) => {
-    console.log('text', text)
     const newKeyword = {  
       id: Date.now(),
       text: text,
