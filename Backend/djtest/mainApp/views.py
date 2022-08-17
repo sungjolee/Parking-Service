@@ -95,7 +95,7 @@ class ReviewList(APIView):
    
                 
         resultarray=[]
-        
+        parkingZoneDictArray=[]
         reviews=list(reviews)
         for i in range(result):
             reviews[i]=list(reviews[i])
@@ -114,6 +114,9 @@ class ReviewList(APIView):
                 
             parkingZoneDictArray =[]
             for j in reviews[i][5]:
+                if j=='':
+                    j=[]
+                    break
                 tmpdic = {
                     "ID":int(j),
                     "value":"ENABLE"
@@ -121,11 +124,8 @@ class ReviewList(APIView):
                 parkingZoneDictArray.append(tmpdic)
             for j in reviews[i][6]:
                 if j=='':
+                    j=[]
                     break
-                print("---------------")
-                print(reviews[i][6])
-                print(j)
-                print("---------------")
                 tmpdic = {
                     "ID":int(j),
                     "value":"OCUPIED"
@@ -142,15 +142,14 @@ class ReviewList(APIView):
                     parkingZoneDictArray[i]=parkingZoneDictArray[j]
                     parkingZoneDictArray[j]=tmp
         
-        Dict["ENABLE"]=len(reviews[0][5])
+        # Dict["ENABLE"]=len(reviews[0][5])
+        Dict["ENABLE"]=reviews[0][4]
         Dict["TOTAL"]=len(parkingZoneDictArray)
         Dict["LIST"]=parkingZoneDictArray
             # resultarray.append(Dict)
         
-        
-        
-        
-        
+        print(Dict)
+        print(reviews[0])
         return Response(Dict)
     
     # def post(self, request):
