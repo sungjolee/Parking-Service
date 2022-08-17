@@ -24,7 +24,10 @@ function SearchPage() {
   const [datas, setDatas] = useState([]); // useState를 통한 값 저장
 
   useEffect(() => {
+    console.log(BASE_URL)
+    fetch(BASE_URL).then(res => console.log(res))
     axios.get(BASE_URL).then((response) => {
+      console.log(response)
       setDatas(response.data);
     });
   }, []);
