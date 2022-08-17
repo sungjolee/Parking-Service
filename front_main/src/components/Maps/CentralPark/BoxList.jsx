@@ -67,6 +67,8 @@ const RightBox = styled.div`
   margin-left: 50%;
   transform: translate(-50%, 0);
   margin-right: 0px;
+  margin-left: auto;
+  margin-right: 50px;
   margin-bottom: 150px;
   @media screen and (max-width: 450px) {
     width:100%;
