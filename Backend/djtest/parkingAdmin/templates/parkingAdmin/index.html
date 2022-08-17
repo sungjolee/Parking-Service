@@ -60,7 +60,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static">Static Navigation</a>
+                                    <a class="nav-link" href="logs">logs</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
                                 </nav>
                             </div>
@@ -119,17 +119,27 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">주차장 현황</li>
                         </ol>
-                        {% comment %} <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Primary Card</div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                
+                                    <h2>
+                                        SPOTS : {{dict.TOTAL}}
+                                   
+                                        OCUPIED : {{ocupied}}
+                                   
+                                        ENABLE : {{dict.ENABLE}}
+                                    </h2>
+                                    <h2>
+
+                                    </h2>
+                                    {% comment %} <div class="card-body">Primary Card</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="#">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
+                                    </div> {% endcomment %}
+
                             </div>
-                            <div class="col-xl-3 col-md-6">
+                            {% comment %} <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body">Warning Card</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
@@ -155,8 +165,8 @@
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
-                            </div>
-                        </div> {% endcomment %}
+                            </div> {% endcomment %}
+                        </div>
                         <div class="row" style="">
                             <div class="col-xl-6">
                                  <div class="card mb-4" style="">
@@ -194,40 +204,42 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
+                                            <th>Zone</th>
+                                            <th>in-time</th>
+                                            <th>out-time</th>
+                                            <th>fee-time</th>
                                             <th>Start date</th>
                                             <th>Salary</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
+                                            <th>Zone</th>
+                                            <th>in-time</th>
+                                            <th>out-time</th>
+                                            <th>fee-time</th>
                                             <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>fee</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
+                                        {% comment %} <tr>
                                             <td>Tiger Nixon</td>
                                             <td>System Architect</td>
                                             <td>Edinburgh</td>
                                             <td>61</td>
                                             <td>2011/04/25</td>
                                             <td>$320,800</td>
-                                        </tr>
+                                        </tr> {% endcomment %}
                                         {% for i in value %}
                                             <tr>
                                                 <td>{{i.zonenum}}</td>
                                                 <td>{{i.in_time}}</td>
                                                 <td>{{i.out_time}}</td>
                                                 {% comment %} <td>{{}}</td> {% endcomment %}
-                                                <td>{{i.in_time}}</td>
+                                                <td>{{i.FeeTime}}</td>
+                                                <td>jyp</td>
+                                                <td>\500</td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>

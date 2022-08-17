@@ -133,9 +133,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ORIGIN_WHITELIST = ('http://127.0.0.1:3000', 'http://localhost:3000')
+CORS_ORIGIN_WHITELIST = ('http://127.0.0.1:3000', 'http://localhost:3000','https://i7c103.p.ssafy.io')
 
 CORS_ALLOW_CREDENTIALS = True
+
 
 CORS_ALLOW_METHODS = (
     'DELETE',
@@ -159,3 +160,4 @@ CORS_ALLOW_HEADERS = (
 )
 
 AUTH_USER_MODEL = 'parkingAdmin.User'
+
