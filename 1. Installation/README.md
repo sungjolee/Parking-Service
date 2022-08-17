@@ -10,7 +10,7 @@
 ## OpenCV 준비
 <bt/>
 
-#### 1. 라즈베리 파이 4 Python 설치 (`python 3.x version` / `python 3.7` 사용)<br/>
+#### 1. 라즈베리 파이 4 Python 설치 ( `python 3.x version` / `python 3.7` 사용 )<br/>
 (Python Download : https://www.python.org/downloads/)
 <br/><br/>
 
@@ -36,7 +36,7 @@ pip install opencv-python
 * `opencv-python` : 실시간 컴퓨터 비전을 목적으로 만들어진 라이브러리입니다.
 <br/><br/>
 
-#### 3. OpenCV 설치 확인
+#### 3. OpenCV 설치 확인 ( `4.6.0` 사용 )
 ```py
 import cv2
 
@@ -44,7 +44,7 @@ import cv2
 # OpenCV 버젼이 화면에 출력되면 정상적으로 설치가 완료된 것입니다.
 print(cv2.__version__)
 ```
-<br/><br/>
+<br/>
 
 ## 예제 코드 테스트
 ```py
