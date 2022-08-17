@@ -41,7 +41,7 @@ def main():
             # 웹캠 연결 해제
             cap.release()
             
-            print("\n프로그램을 종료합니다. 이용해주셔서 감사합니다.\n")
+            print("\n프로그램을 종료합니다.\n")
             break
 
 if __name__ == '__main__':
