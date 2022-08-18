@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import History from './History'
-import SearchBar from './SearchBar'
+import React, { useState, useEffect } from "react";
+import History from "./History";
+import SearchBar from "./SearchBar";
 import axios from "axios";
-
-
-
 
 function SearchPage() {
   //string은 map을 사용 할 수 없기때문에 object 형태로 변환 시키기 위해 parsing을 해줘야함
@@ -29,28 +26,27 @@ function SearchPage() {
     });
   }, []);
 
-
   //검색어 추가
   const handleAddKeyword = (text) => {
-    const newKeyword = {  
+    const newKeyword = {
       id: Date.now(),
       text: text,
-    }
-    setKeywords([newKeyword, ...keywords])
-  }
+    };
+    setKeywords([newKeyword, ...keywords]);
+  };
 
   //검색어 삭제
   const handleRemoveKeyword = (id) => {
     const nextKeyword = keywords.filter((thisKeyword) => {
-      return thisKeyword.id !== id
-    })
-    setKeywords(nextKeyword)
-  }
+      return thisKeyword.id !== id;
+    });
+    setKeywords(nextKeyword);
+  };
 
   //검색어 전체 삭제
   const handleClearKeywords = () => {
-    setKeywords([])
-  }
+    setKeywords([]);
+  };
 
   //자식 컴포넌트에서 setState를 못하기때문에 그거를 바꿔주는 함수를 선언후 그 함수를 넘겨야함
   return (
@@ -63,7 +59,7 @@ function SearchPage() {
         onRemoveKeyword={handleRemoveKeyword}
       />
     </div>
-  )
+  );
 }
 
-export default SearchPage
+export default SearchPage;

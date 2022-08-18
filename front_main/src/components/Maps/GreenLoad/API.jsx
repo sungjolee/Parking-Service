@@ -8,13 +8,14 @@ const ParkingData = () => {
   const [ParkingData, setParkingData] = useState(); // useState를 통한 datas 값 저장
   // useEffect 안 함수 작동
   useEffect(() => {
-    axios.get(BASE_URL, {
-      params: {ID : 'greenload'}
-    }).then((response) => {
-      setParkingData(response.data);
-    });    
-  }, [])
-  ;
+    axios
+      .get(BASE_URL, {
+        params: { ID: "greenload" },
+      })
+      .then((response) => {
+        setParkingData(response.data);
+      });
+  }, []);
 
   return (
     <>
