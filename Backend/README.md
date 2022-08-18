@@ -1,5 +1,5 @@
 # 3팀 - 주차장 관리 플랫폼 Backend
-## 1. 장고(Django) 개발환경 설치
+## 1. 장고(Django) 개발환경 설정
 * ### [1.Installation](./1.%20Installation/)
 
 ## 2. 차량 감지 알고리즘
