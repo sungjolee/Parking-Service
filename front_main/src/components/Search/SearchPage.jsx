@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import History from './History'
-import SearchBar from './SearchBar'
+import React, { useState, useEffect } from "react";
+import History from "./History";
+import SearchBar from "./SearchBar";
 import axios from "axios";
-
-
-
 
 function SearchPage() {
   //string은 map을 사용 할 수 없기때문에 object 형태로 변환 시키기 위해 parsing을 해줘야함
   const [keywords, setKeywords] = useState(
-    JSON.parse(localStorage.getItem('keywords') || '[]'),
-    )
-    
-    //keyword에 변화가 일어날때만 랜더링
-    useEffect(() => {
-      //array 타입을 string형태로 바꾸기 위해 json.stringfy를 사용한다.
-      localStorage.setItem('keywords', JSON.stringify(keywords))
-    }, [keywords]);
-    
-    //state를 다루는 함수는 handle 보통 많이 붙인다.
-  
-  const BASE_URL = "https://i7c103.p.ssafy.io:8000/totaldata/"; // 기본 url
+    JSON.parse(localStorage.getItem("keywords") || "[]")
+  );
+
+  //keyword에 변화가 일어날때만 랜더링
+  useEffect(() => {
+    //array 타입을 string형태로 바꾸기 위해 json.stringfy를 사용한다.
+    localStorage.setItem("keywords", JSON.stringify(keywords));
+  }, [keywords]);
+
+  //state를 다루는 함수는 handle 보통 많이 붙인다.
+
+  const BASE_URL = "http://i7c103.p.ssafy.io:8000/totaldata/"; // 기본 url
 
   const [datas, setDatas] = useState([]); // useState를 통한 값 저장
 
@@ -30,28 +27,27 @@ function SearchPage() {
     });
   }, []);
 
-
   //검색어 추가
   const handleAddKeyword = (text) => {
-    const newKeyword = {  
+    const newKeyword = {
       id: Date.now(),
       text: text,
-    }
-    setKeywords([newKeyword, ...keywords])
-  }
+    };
+    setKeywords([newKeyword, ...keywords]);
+  };
 
   //검색어 삭제
   const handleRemoveKeyword = (id) => {
     const nextKeyword = keywords.filter((thisKeyword) => {
-      return thisKeyword.id !== id
-    })
-    setKeywords(nextKeyword)
-  }
+      return thisKeyword.id !== id;
+    });
+    setKeywords(nextKeyword);
+  };
 
   //검색어 전체 삭제
   const handleClearKeywords = () => {
-    setKeywords([])
-  }
+    setKeywords([]);
+  };
 
   //자식 컴포넌트에서 setState를 못하기때문에 그거를 바꿔주는 함수를 선언후 그 함수를 넘겨야함
   return (
@@ -64,7 +60,7 @@ function SearchPage() {
         onRemoveKeyword={handleRemoveKeyword}
       />
     </div>
-  )
+  );
 }
 
-export default SearchPage
+export default SearchPage;
