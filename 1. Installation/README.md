@@ -8,7 +8,7 @@
 <br/>
 
 ## OpenCV 준비
-<bt/>
+<br/>
 
 #### 1. 라즈베리 파이 4 Python 설치 ( `python 3.x version` / `python 3.7` 사용 )<br/>
 (Python Download : https://www.python.org/downloads/)

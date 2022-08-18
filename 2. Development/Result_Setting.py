@@ -1,6 +1,6 @@
 import os
 
-from Common import cap, img_path, data_path
+from Common import cap, img_path
 from TakePic import shoot_pic
 from CreateData import CreateCoordinateData
 

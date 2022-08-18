@@ -12,7 +12,7 @@ LAPLACIAN = 1.4
 DETECT_DELAY = 1
 
 # 접속할 DB 서버 설정
-db = mysql.connector.connect(host='i7c103.p.ssafy.io', port='3306', user='root', password='parkingC103!', database='parking', auth_plugin='mysql_native_password')
+db = mysql.connector.connect(host='your_DB_address', port='your_DB_port', user='your_user', password='your_DB_password!', database='your_DB_name', auth_plugin='mysql_native_password')
 cur = db.cursor()
 
 # 라즈베리 파이 4의 시리얼 번호를 알아내기 위한 명령어
