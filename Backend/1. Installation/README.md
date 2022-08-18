@@ -1,39 +1,33 @@
-# 라즈베리 파이 4 개발 환경 설정
+# 장고(Django) 개발환경 설정
 
-### 1. [OpenCV 준비](#opencv-준비)
+### 1. [python(파이썬) 설치](#python(파이썬)-설치)
 ### 2. [예제 코드 테스트](#예제-코드-테스트)
 <br/>
 
 ---
 <br/>
 
-## OpenCV 준비
+## python(파이썬) 설치
 <br/>
 
-#### 1. 라즈베리 파이 4 Python 설치 ( `python 3.x version` / `python 3.7` 사용 )<br/>
+#### 1. Python 설치 ( `python 3.x version` / `python 3.8.10` 사용 )<br/>
 (Python Download : https://www.python.org/downloads/)
 <br/><br/>
 
-#### 2. 라즈베리 파이 4 터미널을 열어 OpenCV에 필요한 Python 라이브러리 및 패키지 설치 명령어 입력
+#### 2. Django 개발환경 세팅을 위한 Python 라이브러리 및 패키지 설치 명령어 입력
 ```
-pip install numpy
-pip install matplotlib
-pip install pickle
-pip install schedule
+pip install Django
+pip install Django-cors-header
+pip install Django-sslserver
 pip install mysql.connector
-pip install opencv-python
 ```
-* `numpy` : 행렬이나 일반적으로 대규모 다차원 배열을 쉽게 처리할 수 있도록 지원합니다.
+* `Django` : 파이썬으로 작성된 오픈 소스 웹 프레임워크.
 
-* `matplotlib` : Tkinter , wxPython , Qt 또는 GTK 와 같은 범용 GUI 툴킷을 사용하여 애플리케이션에 플롯을 포함 하기 위한 객체 지향 API를 제공합니다.
+* `Django-cors-header` : 다른 도메인에서 장고의 리소스에 액세스할 수 있게 하는 라이브러리.
 
-* `pickle` : 텍스트 상태의 데이터가 아닌 파이썬 객체 자체를 파일로 저장해줍니다.
+* `Django-sslserver` : 명령어로 http, https를 지원하는 장고 패키지.
 
-* `schedule` : 정해진 시간에 Python Script를 자동 실행하는, 작업 예약용 기능을 제공해줍니다.
-
-* `mysql.connector` : Python에서 MySQL DB를 사용하기 위한 라이브러리입니다.
-
-* `opencv-python` : 실시간 컴퓨터 비전을 목적으로 만들어진 라이브러리입니다.
+* `mysql.connector` : Python에서 MySQL DB와 연결하기 위한를 사용하기 위한 라이브러리.
 <br/><br/>
 
 #### 3. OpenCV 설치 확인 ( `4.6.0` 사용 )
