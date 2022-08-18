@@ -167,7 +167,7 @@ def generate_frames():
 
 # DB 서버에 데이터를 전송하는 함수
 def send_log(statuses_list):
-    db = mysql.connector.connect(host='i7c103.p.ssafy.io', port='3306', user='root', password='parkingC103!', database='parking', auth_plugin='mysql_native_password')
+    db = mysql.connector.connect(host='your_DB_address', port='your_DB_port', user='your_user', password='your_DB_password!', database='your_DB_name', auth_plugin='mysql_native_password')
     cur = db.cursor()
     
     # 전역변수를 사용하기 위한 선언
