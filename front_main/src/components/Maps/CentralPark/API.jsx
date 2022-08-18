@@ -3,7 +3,7 @@ import axios from 'axios'
 import BoxList from './BoxList' // props를 위한 BoxList import
 
 
-const BASE_URL = 'http://i7c103.p.ssafy.io:8000/parking/' // 기본 url
+const BASE_URL = 'https://i7c103.p.ssafy.io:8000/parking/' // 기본 url
 
 
 const ParkingData = () => {
