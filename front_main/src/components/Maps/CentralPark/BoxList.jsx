@@ -65,7 +65,6 @@ const RightBox = styled.div`
   align-items: center;
   margin-top: 150px;
   margin-left: 50%;
-  transform: translate(-50%, 0);
   margin-right: 0px;
   margin-left: auto;
   margin-right: 50px;
