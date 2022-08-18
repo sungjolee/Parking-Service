@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-import pymysql  
-pymysql.install_as_MySQLdb()
+# import pymysql  
+# pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'parkingAdmin',
-    'bootstrap4',
+    # 'bootstrap4',
     'sslserver'
 ]
 
@@ -133,9 +133,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ORIGIN_WHITELIST = ('http://127.0.0.1:3000', 'http://localhost:3000')
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = ('http://127.0.0.1:3000', 'http://localhost:3000','https://i7c103.p.ssafy.io','http://i7c103.p.ssafy.io')
 
 CORS_ALLOW_CREDENTIALS = True
+
 
 CORS_ALLOW_METHODS = (
     'DELETE',
@@ -159,3 +162,4 @@ CORS_ALLOW_HEADERS = (
 )
 
 AUTH_USER_MODEL = 'parkingAdmin.User'
+
