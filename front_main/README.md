@@ -1,70 +1,143 @@
-# Getting Started with Create React App
+# README - Front-end
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center"><img src="./public/images/Untitled%200.png" width="400" height="400"></p>
 
-## Available Scripts
+## 소개
 
-In the project directory, you can run:
+---
 
-### `npm start`
+주차 안내 솔루션
+<br/><br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 주요기능
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+- 지도에서 주차장 확인
+- 주차장 검색
+- 주차현황 확인
+- 내 자리 표시
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br/><br/>
 
-### `npm run build`
+## 기술스택
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🖥️ Front-end
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- react : 18.2.0
+- react-dom : 18.2.0
+- react-router-dom : 6.3.0
+- redux : 4.2.0
+- react-redux : 8.0.2
+- styled-components : 5.3.5
+- MUI : 5.10.0
+- axios : 0.27.2
 
-### `npm run eject`
+## 👥 Team Collaboration Tool
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Notion
+- Jira
+- Webex
+- Mattermost
+- Figma
+- GitLab
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br/><br/>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## usage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+- NPM(Node Package Manager) install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- server start
 
-### Code Splitting
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<br/><br/>
 
-### Analyzing the Bundle Size
+## Install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+- create React App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npx create-react-app my-app
+cd my-app
+npm start
+```
 
-### Advanced Configuration
+- React-Router-Dom
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm i react-router-dom
+```
 
-### Deployment
+- styled-components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+npm install --save styled-components
+```
 
-### `npm run build` fails to minify
+- axios
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm install axios
+```
+
+- Redux
+
+```bash
+npm install @reduxjs/toolkit
+```
+
+이번 프로젝트는 redux를 추가로 설치했지만 처음부터 Redux가 통합된 App을 만들고 싶다면 아래 명령어로 App 생성이 가능하다.
+
+```bash
+npx create-react-app my-app --template redux
+```
+
+- MUI (Material UI)
+
+```bash
+npm install @mui/material @emotion/react @emotion/styled
+```
+
+styled-components를 함께 사용하고 싶다면
+
+```bash
+npm install @mui/material @mui/styled-engine-sc styled-components
+```
+
+<br/><br/>
+
+## Wireframe
+
+---
+
+![Untitled](./public/images/Untitled%201.png)
+
+<br/><br/>
+
+## Architecture
+
+---
+
+![Untitled](./public/images/Untitled%202.png)
+
+<br/><br/>
+
+## Team Member
+
+---
+
+![Untitled](./public/images/Untitled%203.png)
