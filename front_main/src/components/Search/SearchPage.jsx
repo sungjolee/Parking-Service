@@ -20,7 +20,8 @@ function SearchPage() {
     
     //state를 다루는 함수는 handle 보통 많이 붙인다.
   
-  const BASE_URL = "http://i7c103.p.ssafy.io:8000/totaldata/"; // 기본 url
+  const BASE_URL = "https://i7c103.p.ssafy.io:8000/totaldata/"; // 기본 url
+
   const [datas, setDatas] = useState([]); // useState를 통한 값 저장
 
   useEffect(() => {
