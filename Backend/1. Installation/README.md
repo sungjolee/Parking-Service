@@ -1,7 +1,9 @@
 # 장고(Django) 개발환경 설정
 
 ### 1. [python(파이썬) 설치](#python(파이썬)-설치)
-### 2. [예제 코드 테스트](#예제-코드-테스트)
+### 2. [Python 라이브러리 및 패키지 설치 명령어 입력](#Python-라이브러리-및-패키지-설치-명령어-입력)
+### 3. [MYSQL 설치](#MYSQL-설치)
+### 2. [MYSQL 스키마 및 계정 생성](#MYSQL-스키마-및-계정-생성)
 <br/>
 
 ---
@@ -14,7 +16,7 @@
 (Python Download : https://www.python.org/downloads/)
 <br/><br/>
 
-#### 2. Django 개발환경 세팅을 위한 Python 라이브러리 및 패키지 설치 명령어 입력
+#### 2. Python 라이브러리 및 패키지 설치 명령어 입력
 ```
 pip install Django
 pip install Django-cors-header
@@ -30,13 +32,9 @@ pip install mysql.connector
 * `mysql.connector` : Python에서 MySQL DB와 연결하기 위한를 사용하기 위한 라이브러리.
 <br/><br/>
 
-#### 3. OpenCV 설치 확인 ( `4.6.0` 사용 )
-```py
-import cv2
-
-# 설치된 cv2 버젼 출력
-# OpenCV 버젼이 화면에 출력되면 정상적으로 설치가 완료된 것입니다.
-print(cv2.__version__)
+#### 3. MYSQL 설치
+```
+sudo apt-get install mysql
 ```
 <br/>
 
