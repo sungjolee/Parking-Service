@@ -7,16 +7,16 @@ function SearchPage() {
   //string은 map을 사용 할 수 없기때문에 object 형태로 변환 시키기 위해 parsing을 해줘야함
   const [keywords, setKeywords] = useState(
     JSON.parse(localStorage.getItem('keywords') || '[]'),
-    )
-    
-    //keyword에 변화가 일어날때만 랜더링
-    useEffect(() => {
-      //array 타입을 string형태로 바꾸기 위해 json.stringfy를 사용한다.
-      localStorage.setItem('keywords', JSON.stringify(keywords))
-    }, [keywords]);
-    
-    //state를 다루는 함수는 handle 보통 많이 붙인다.
-  
+  )
+
+  //keyword에 변화가 일어날때만 랜더링
+  useEffect(() => {
+    //array 타입을 string형태로 바꾸기 위해 json.stringfy를 사용한다.
+    localStorage.setItem('keywords', JSON.stringify(keywords))
+  }, [keywords]);
+
+  //state를 다루는 함수는 handle 보통 많이 붙인다.
+
   const BASE_URL = "http://i7c103.p.ssafy.io:8000/totaldata/"; // 기본 url
   const [datas, setDatas] = useState([]); // useState를 통한 값 저장
 
