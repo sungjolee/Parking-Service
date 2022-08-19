@@ -2,3 +2,4 @@
 nohup.out
 webtest/djtest/nohup.out
 bootstrap-4.6.1-dist/
+settings.py
