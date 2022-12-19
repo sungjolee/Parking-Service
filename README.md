@@ -1,9 +1,21 @@
 # 여기댈까
+<img src="./logo.png" width="300" height="300"/>
+
+
 1. [Frontend (React)](./front_main/)
 2. [Backend (Django)](./Backend/)
 3. [Embedded (Python)](./Embedded/)
 ---
 <br/>
+
+## 서비스컷
+<img src="./ServiceCut.png" width="50%" />
+<br/>
+
+## 주차장 인식 원리
+<img src="./Parking.png" width="50%" />
+<br/>
+
 
 ## 사용한 기술 스택
 <br/>
